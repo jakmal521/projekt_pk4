@@ -1,0 +1,5 @@
+﻿  Game.cpp
+C:\Users\Kuba\source\repos\total_war\projekt\projekt\Game.h(3,10): fatal error C1083: Nie można otworzyć pliku dołącz: 'SFML/Audio.hpp': No such file or directory
+  projekt.cpp
+C:\Users\Kuba\source\repos\total_war\projekt\projekt\Game.h(3,10): fatal error C1083: Nie można otworzyć pliku dołącz: 'SFML/Audio.hpp': No such file or directory
+  Generowanie kodu...
