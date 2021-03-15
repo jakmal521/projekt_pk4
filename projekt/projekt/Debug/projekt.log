@@ -1,2 +1,5 @@
 ﻿  Game.cpp
-  projekt.vcxproj -> C:\Users\Kuba\source\repos\pk_4_projekt\projekt\Debug\projekt.exe
+  projekt.cpp
+  Generowanie kodu...
+  LINK : nie znaleziono elementu C:\Users\Kuba\source\repos\total_war\projekt\Debug\projekt.exe ani nie został on skompilowany podczas ostatniego konsolidowania przyrostowego; zostanie wykonana pełna konsolidacja
+  projekt.vcxproj -> C:\Users\Kuba\source\repos\total_war\projekt\Debug\projekt.exe
