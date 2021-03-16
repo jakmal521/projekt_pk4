@@ -1,5 +1,5 @@
 
-#include "Game.h"
+#include "Headers/Game.h"
 //Konstruktor i destruktor
 Game::Game()
 {
