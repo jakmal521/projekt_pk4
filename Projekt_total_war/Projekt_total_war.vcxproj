@@ -89,6 +89,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>c:\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -122,6 +123,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>c:\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,11 +151,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Projekt_total_war.cpp" />
+    <ClCompile Include="Resources\Button.cpp" />
+    <ClCompile Include="Resources\District.cpp" />
+    <ClCompile Include="Resources\Game.cpp" />
+    <ClCompile Include="Resources\GameState.cpp" />
+    <ClCompile Include="Resources\MainMenu.cpp" />
+    <ClCompile Include="Resources\State.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
+    <ClInclude Include="Headers\Button.h" />
+    <ClInclude Include="Headers\District.h" />
+    <ClInclude Include="Headers\Game.h" />
+    <ClInclude Include="Headers\GameState.h" />
+    <ClInclude Include="Headers\MainMenu.h" />
+    <ClInclude Include="Headers\State.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 #include <vector>
+#include "..\Headers\MainMenu.h"
 using namespace std;
 using namespace sf;
 class Game
@@ -21,10 +22,13 @@ private:
 
 	//Funckje inicjalizacyjne
 	void initWindow();
+	void initStates();
 	//void initVariables();
 
 	//Funcje do zmiany zawartoœci ekranu
 	void uptade();
 	void render();
+	//Przechowywanie stanów gry (menu, gra itp)
+	stack<State*> states;
 };
 

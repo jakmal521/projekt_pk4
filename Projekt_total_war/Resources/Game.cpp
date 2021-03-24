@@ -1,13 +1,15 @@
-
-#include "Headers/Game.h"
+#include "..\Headers\Game.h"
 //Konstruktor i destruktor
 Game::Game()
 {
-	initWindow();
+	this->initWindow();
+	this->initStates();
 }
 Game::~Game()
 {
 	delete this->window;
+	while (!this->states.empty())
+		this->states.pop();
 }
 //funkcja uruchamiaj¹ca gre
 void Game::play()
@@ -29,21 +31,38 @@ void Game::initWindow()
 	this->window->setFramerateLimit(144);
 
 }
+void Game::initStates()
+{
+	this->states.push(new MainMenu(this->window));
+	
+}
 //Funcje do zmiany zawartoœci ekranu
 void Game::uptade()
 {
 	Event event;
-	//zamkniêcie gry przy wciscniesciu esc lub tego krzy¿yka ugóry XD
+	//zamkniêcie gry przy wciscniesciu tego krzy¿yka ugóry XD
 	while (this->window->pollEvent(event))
 	{
-		if ((event.type == Event::Closed) || (event.key.code == Keyboard::Escape))
+		if (event.type == Event::Closed)
 			this->window->close();
 	}
+	if (!this->states.empty())
+	{
+		this->states.top()->uptade();
+		if (this->states.top()->ifending())
+
+		{
+			this->states.pop();
+		}
+	}
+	else this->window->close();
 }
 
 void Game::render()
 {
 	this->window->clear();
+	if (!this->states.empty())
+		this->states.top()->render();
 	this->window->display();
 }
 
