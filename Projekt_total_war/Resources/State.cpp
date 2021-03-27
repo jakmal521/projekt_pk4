@@ -1,8 +1,9 @@
 
 #include "..\Headers\State.h"
 //Konstruktor i destruktor
-State::State(RenderWindow* window)
+State::State(RenderWindow* window, stack<State*>* _states)
 {
+	this->states = _states;
 	this->window = window;
 	this->ifend = false;
 }

@@ -7,7 +7,7 @@ class MainMenu :
 {
 public:
     //Konstruktor i  destruktor
-    MainMenu(RenderWindow* window);
+    MainMenu(RenderWindow* window, stack<State*>* _states);
 
     virtual ~MainMenu();
 
@@ -20,10 +20,10 @@ private:
     //Przyciski
     map<string, Button*>buttons;
     void initButtons();
-    void uptadeButtons();
+    void updateButtons();
     void renderButtons(RenderTarget* target);
-    //Wyœwietlanie i uptade ekranu
-    void uptade();
+    //Wyœwietlanie i update ekranu
+    void update();
     void render(RenderTarget* target = nullptr);
     //Inicjacja t³a
     void initBackground();

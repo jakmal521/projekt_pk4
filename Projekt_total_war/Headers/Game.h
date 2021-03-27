@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 #include <vector>
+#include <stack>
 #include "..\Headers\MainMenu.h"
 using namespace std;
 using namespace sf;
@@ -26,7 +27,7 @@ private:
 	//void initVariables();
 
 	//Funcje do zmiany zawartoœci ekranu
-	void uptade();
+	void update();
 	void render();
 	//Przechowywanie stanów gry (menu, gra itp)
 	stack<State*> states;

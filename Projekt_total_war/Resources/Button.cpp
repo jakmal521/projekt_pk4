@@ -14,6 +14,7 @@ Button::Button(float x, float y, float width, float height, Font* _font, string 
 	this->button.setFillColor(this->color);
 	this->button.setOutlineThickness(2);
 	this->button.setOutlineColor(this->color);
+	this->pressed = false;
 
 }
 
@@ -27,9 +28,25 @@ void Button::render(RenderTarget* target)
 	target->draw(this->text);
 }
 //Aktualizowanie przycisku
-void Button::uptade(Vector2f mpos)
+void Button::update(Vector2f mpos)
 {	//Przy najezdzie czarna ramka
+	
 	this->button.setOutlineColor(this->color);
+	this->pressed = false;
 	if (this->button.getGlobalBounds().contains(mpos))
+
+	{
 		this->button.setOutlineColor(Color::Black);
+		if (Mouse::isButtonPressed(Mouse::Left))
+		{
+			this->pressed = true;
+		}
+	}
+}
+
+bool Button::press()
+{
+	if (this->pressed == true)
+		return true;
+	return false;
 }

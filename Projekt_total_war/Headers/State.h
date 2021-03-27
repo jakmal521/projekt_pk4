@@ -17,27 +17,30 @@ public:
 	//Okno
 	RenderWindow* window;
 	//kontruktor i destruktor
-	State(RenderWindow * window);
+	State(RenderWindow * window, stack<State*>* _states);
 	~State();
 	//Metody
-	virtual void uptade()= 0;
+	virtual void update()= 0;
 	virtual void render(RenderTarget* target = nullptr) =0;
 	virtual void end();
 	//Akcesorry i settery
 	const bool ifending();
+	
+	
+
+protected: 
+	//Zmienne
+	vector<Texture*> textures;
+	
+	bool ifend;
+	//Przechowywanie innych stanów
+	stack<State*>* states;
+	
 	//Pozycja myszki
 	Vector2i mouseposscreen;
 	Vector2i mouseposwindow;
 	Vector2f mouseposview;
 	virtual void mousepos();
-
-private: 
-	//Zmienne
-	vector<Texture*> textures;
-	
-	bool ifend;
-	//Funkcje wirtualne potrzebne w pochodnych
-	
 
 };
 

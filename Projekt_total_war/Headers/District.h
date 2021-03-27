@@ -4,20 +4,26 @@
 #include <SFML/Network.hpp>
 
 using namespace sf;
+using namespace std;
 class District
 
 {
 public:
 	//Kontruktor destruktor
-	District();
+	District(string name);
 	~District();
 
 	//Settery
 	void setColor();
+ConvexShape shape;
+	//Wyœwietlanie i updatowanie
+	void update(Vector2f mpos);
+	void render(RenderTarget* target = nullptr);
 private:
-	//Kszta³t obszaru
-	CircleShape shape;
-	void initShape();
-
+	//Nazwa obszaru
+	string name;
+	protected:
+//Kszta³t obszaru
+	
 };
 

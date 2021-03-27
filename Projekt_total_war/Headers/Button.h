@@ -12,7 +12,9 @@ public:
 	//wyswietlanie na ekranie
 	void render(RenderTarget* target);
 	//Aktualizowanie przycisku
-	void uptade(Vector2f mpos);
+	void update(Vector2f mpos);
+	//Akcesor
+	bool press();
 private: 
 	//Wzor przycisku
 	RectangleShape button;
@@ -22,6 +24,7 @@ private:
 	Font* font;
 	Color color;
 	Color hover;
-
+//Czy ktoœ nacisn¹³
+	bool pressed;
 };
 

@@ -57,4 +57,9 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\districts.txt">
+      <Filter>Pliki źródłowe</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

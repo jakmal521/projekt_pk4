@@ -167,6 +167,9 @@
     <ClInclude Include="Headers\MainMenu.h" />
     <ClInclude Include="Headers\State.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\districts.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

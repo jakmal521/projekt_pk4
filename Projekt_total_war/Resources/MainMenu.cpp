@@ -2,7 +2,7 @@
 #include "..\Headers\MainMenu.h"
 
 //Konstruktory i destruktory
-MainMenu::MainMenu(RenderWindow* window) : State(window)
+MainMenu::MainMenu(RenderWindow* window, stack<State*>* _states) : State(window, _states)
 {
 this->initBackground();
 this->initFont();
@@ -12,16 +12,16 @@ this->initButtons();
 
 MainMenu::~MainMenu()
 {
-	for (auto i = this->buttons.begin(); i != this->buttons.end(); ++i)
+	for (auto &i: this->buttons)
 	{
-		delete i->second;
+		delete i.second;
 	}
 }
-//Wyœwietlanie i uptade ekranu
-void MainMenu::uptade()
+//Wyœwietlanie i updatowanie ekranu
+void MainMenu::update()
 {
 	this->mousepos();
-	this->uptadeButtons();
+	this->updateButtons();
 	this->end();
 }
 
@@ -56,10 +56,12 @@ void MainMenu::initButtons()
 
 }
 
-void MainMenu::uptadeButtons()
+void MainMenu::updateButtons()
 {
 	for (auto& i : this->buttons)
-		i.second->uptade(this->mouseposview);
+		i.second->update(this->mouseposview);
+	if (this->buttons["Menu"]->press())
+		this->states->push(new GameState(this->window, this->states)); 
 }
 
 void MainMenu::renderButtons(RenderTarget* target)

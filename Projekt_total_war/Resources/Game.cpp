@@ -16,7 +16,7 @@ void Game::play()
 {
 	while (this->window->isOpen())
 	{
-		this->uptade();
+		this->update();
 		this->render();
 	}
 }
@@ -33,11 +33,11 @@ void Game::initWindow()
 }
 void Game::initStates()
 {
-	this->states.push(new MainMenu(this->window));
+	this->states.push(new MainMenu(this->window, &this->states));
 	
 }
 //Funcje do zmiany zawartoœci ekranu
-void Game::uptade()
+void Game::update()
 {
 	Event event;
 	//zamkniêcie gry przy wciscniesciu tego krzy¿yka ugóry XD
@@ -48,7 +48,7 @@ void Game::uptade()
 	}
 	if (!this->states.empty())
 	{
-		this->states.top()->uptade();
+		this->states.top()->update();
 		if (this->states.top()->ifending())
 
 		{
