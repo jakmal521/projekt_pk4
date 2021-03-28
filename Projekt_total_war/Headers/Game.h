@@ -1,5 +1,3 @@
-
-
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -24,12 +22,17 @@ private:
 	//Funckje inicjalizacyjne
 	void initWindow();
 	void initStates();
+	void initView();
 	//void initVariables();
+	void updateView();
 
 	//Funcje do zmiany zawartoœci ekranu
 	void update();
 	void render();
 	//Przechowywanie stanów gry (menu, gra itp)
 	stack<State*> states;
-};
 
+	//Przechowuje pozycje i view
+	View view1;
+	stack<Position*> position;
+};

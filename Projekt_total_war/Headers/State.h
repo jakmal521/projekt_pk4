@@ -1,4 +1,3 @@
-
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -13,34 +12,30 @@ using namespace sf;
 
 class State
 {
-public: 
+public:
 	//Okno
 	RenderWindow* window;
 	//kontruktor i destruktor
-	State(RenderWindow * window, stack<State*>* _states);
+	State(RenderWindow* window, stack<State*>* _states);
 	~State();
 	//Metody
-	virtual void update()= 0;
-	virtual void render(RenderTarget* target = nullptr) =0;
+	virtual void update() = 0;
+	virtual void render(RenderTarget* target = nullptr) = 0;
 	virtual void end();
 	//Akcesorry i settery
 	const bool ifending();
-	
-	
 
-protected: 
+protected:
 	//Zmienne
 	vector<Texture*> textures;
-	
+
 	bool ifend;
 	//Przechowywanie innych stanów
 	stack<State*>* states;
-	
+
 	//Pozycja myszki
 	Vector2i mouseposscreen;
 	Vector2i mouseposwindow;
 	Vector2f mouseposview;
 	virtual void mousepos();
-
 };
-
