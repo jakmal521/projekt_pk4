@@ -1,7 +1,7 @@
 #include "..\Headers\MainMenu.h"
 //Kontruktory i destruktory
 Button::Button(float x, float y, float width, float height, Font* _font, string _text, Color _color)
-{	
+{
 	this->button.setPosition(x, y);
 	this->button.setSize(Vector2f(width, height));
 	this->font = _font;
@@ -9,13 +9,12 @@ Button::Button(float x, float y, float width, float height, Font* _font, string 
 	this->text.setString(_text);
 	this->text.setFillColor(Color::White);
 	this->text.setCharacterSize(18);
-	this->text.setPosition(this->button.getPosition().x+ (this->button.getGlobalBounds().width/2) - this->text.getGlobalBounds().width/2, this->button.getPosition().y  + (this->button.getGlobalBounds().height / 2) - this->text.getGlobalBounds().height / 2);
+	this->text.setPosition(this->button.getPosition().x + (this->button.getGlobalBounds().width / 2) - this->text.getGlobalBounds().width / 2, this->button.getPosition().y + (this->button.getGlobalBounds().height / 2) - this->text.getGlobalBounds().height / 2);
 	this->color = _color;
 	this->button.setFillColor(this->color);
 	this->button.setOutlineThickness(2);
 	this->button.setOutlineColor(this->color);
 	this->pressed = false;
-
 }
 
 Button::~Button()
@@ -30,7 +29,6 @@ void Button::render(RenderTarget* target)
 //Aktualizowanie przycisku
 void Button::update(Vector2f mpos)
 {	//Przy najezdzie czarna ramka
-	
 	this->button.setOutlineColor(this->color);
 	this->pressed = false;
 	if (this->button.getGlobalBounds().contains(mpos))
