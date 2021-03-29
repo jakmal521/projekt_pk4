@@ -160,6 +160,7 @@
     <ClCompile Include="Resources\GameState.cpp" />
     <ClCompile Include="Resources\MainMenu.cpp" />
     <ClCompile Include="Resources\Player.cpp" />
+    <ClCompile Include="Resources\Position.cpp" />
     <ClCompile Include="Resources\Settlement.cpp" />
     <ClCompile Include="Resources\State.cpp" />
     <ClCompile Include="Resources\Town.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Headers\GameState.h" />
     <ClInclude Include="Headers\MainMenu.h" />
     <ClInclude Include="Headers\Player.h" />
+    <ClInclude Include="Headers\Position.h" />
     <ClInclude Include="Headers\Settlement.h" />
     <ClInclude Include="Headers\State.h" />
     <ClInclude Include="Headers\Town.h" />

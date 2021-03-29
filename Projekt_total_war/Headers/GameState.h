@@ -4,6 +4,7 @@
 #include "..\Headers\State.h"
 #include "..\Headers\District.h"
 #include "..\Headers\Player.h"
+#include "..\Headers\Position.h"
 class GameState : 
     public State
 {
@@ -29,5 +30,9 @@ private:
     void end();
     //Klasa gracza
     Player player;
+    //Przechowuje pozycje i view
+    View view1;
+    Position* position;
+    void initView();
 };
 

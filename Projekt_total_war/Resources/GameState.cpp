@@ -4,6 +4,7 @@ GameState::GameState(RenderWindow* window, stack<State*>* _states) : State(windo
 {
 	this->initDis();
 	this->initBackground();
+	this->initView();
 }
 
 GameState::~GameState()
@@ -16,6 +17,7 @@ void GameState::update()
 	this->end();
 	for (auto& i : this->districts)
 		i.second->update(mouseposview);
+	position->update();
 }
 
 void GameState::render(RenderTarget* target)
@@ -25,6 +27,8 @@ void GameState::render(RenderTarget* target)
 	target->draw(this->background);
 	for (auto& i : this->districts)
 		i.second->render(this->window);
+	this->view1.setCenter(position->GetPosition());
+	this->window->setView(view1);
 }
 //Inicjalizacja regionów
 void GameState::initDis()
@@ -48,7 +52,7 @@ void GameState::initDis()
 
 		}
 		//this->districts[name]->shape.scale(0.5, 0.5);
-		this->districts[name]->shape.setFillColor(Color::Blue);
+		this->districts[name]->shape.setFillColor(Color::Black);
 		this->districts[name]->shape.setOutlineThickness(2);
 		this->districts[name]->shape.setOutlineColor(Color(0, 0, 0, 0));
 	}
@@ -70,4 +74,10 @@ void GameState::end()
 		this->ifend = true;
 
 	}
+}
+//
+void GameState::initView()
+{
+	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(400.f, 300.f));
+	this->position = new Position();
 }
