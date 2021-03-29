@@ -1,10 +1,17 @@
 #include "..\Headers\Position.h"
 
-Position::Position(float speed, float pos)
+Position::Position()
 {
-	this->speed = speed;
+	/*
+		@param Position
+
+		Konstruktor kwadratu, jako widok dla u¿ytkownika
+		-setSize	-rozmiar kwadratu
+		-setPosition	-ustawienie pozycji kwadratu
+
+	*/
 	this->shape.setSize(sf::Vector2f(100.0f, 100.0f));
-	this->shape.setOrigin(shape.getSize() / 2.0f);
+	this->shape.setOrigin(shape.getSize() / 2.0f); //Ustawienie miejsca w kwadracie dla którego bêdzie relatywny (œrodek kwadratu)
 	this->shape.setPosition(400.0f, 300.0f);
 	this->shape.setFillColor(sf::Color(255, 255, 255, 255));
 }
@@ -15,7 +22,13 @@ Position::~Position()
 
 void Position::update()
 {
-	sf::Vector2f movement(0.0f, 0.0f);
+	/*
+		@param void
+
+		Funkcja aktualizuj¹ca pozycjê ekranu
+		-float speed - prêdkoœæ przewijania kamery
+
+	*/
 	float speed = 2.f;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
@@ -28,8 +41,8 @@ void Position::update()
 		this->shape.move(0, speed);
 }
 
-void Position::render(sf::RenderWindow& window)
+/*void Position::render(sf::RenderWindow& window)
 {
 	//this->window->draw;
 	//window.draw(shape);
-}
+}*/

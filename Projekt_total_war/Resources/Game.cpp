@@ -39,7 +39,7 @@ void Game::initStates()
 void Game::initView()
 {
 	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(400.f, 300.f));
-	this->position = new Position(100.f, 2.f);
+	this->position = new Position();
 }
 
 //Funcje do zmiany zawartoœci ekranu

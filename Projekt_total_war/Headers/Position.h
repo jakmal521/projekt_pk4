@@ -14,19 +14,21 @@ public:
 
 	//Konstruktor i destruktor
 	Position();
-	Position(float pos, float speed);
 	~Position();
 
 	//Metody
 	void update();
-	void render(RenderWindow& window);
+	//void render(RenderWindow& window); //na razie zbêdny
 
 	Vector2f GetPosition() {
+		/*
+			@param void
+
+			Zwraca Vector pozycji kwadratu
+		*/
 		return this->shape.getPosition();
 	}
 protected:
-	//Kszta³t w oknie
+	//Kszta³t kwadratu w oknie
 	sf::RectangleShape shape;
-	float speed;
-	float pos;
 };
