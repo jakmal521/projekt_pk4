@@ -5,6 +5,7 @@
 #include <vector>
 #include <stack>
 #include "..\Headers\MainMenu.h"
+#include "..\Headers\Position.h"
 using namespace std;
 using namespace sf;
 class Game
@@ -34,5 +35,5 @@ private:
 
 	//Przechowuje pozycje i view
 	View view1;
-	stack<Position*> position;
+	Position* position;
 };

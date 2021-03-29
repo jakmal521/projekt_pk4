@@ -28,9 +28,7 @@ void Game::play()
 void Game::initWindow()
 {
 	float a = 800;
-	float aa = 0.5 * a;
 	float b = 600;
-	float bb = 0.5 * b;
 	this->window = new RenderWindow(VideoMode(a, b), "Total War - wersja studencka", Style::Close | Style::Titlebar);
 	this->window->setFramerateLimit(60);
 }
@@ -41,16 +39,20 @@ void Game::initStates()
 void Game::initView()
 {
 	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(400.f, 300.f));
-	this->position.push(new Position(100.f, 2.f));
+	this->position = new Position(100.f, 2.f);
 }
 
 //Funcje do zmiany zawartoœci ekranu
 void Game::update()
 {
+	float dTime = 0.0f;
+	sf::Clock clock;
+
 	Event event;
 	//zamkniêcie gry przy wciscniesciu tego krzy¿yka u góry XD
 	while (this->window->pollEvent(event))
 	{
+		dTime = clock.restart().asSeconds();
 		if (event.type == Event::Closed)
 			this->window->close();
 	}
@@ -65,10 +67,7 @@ void Game::update()
 	}
 	else this->window->close();
 
-	/*position.update(pos, speed);
-	view.setCenter(position.GetPosition());
-
-	position.render(*window);*/
+	position->update();
 }
 
 void Game::render()
@@ -76,6 +75,10 @@ void Game::render()
 	this->window->clear();
 	if (!this->states.empty())
 		this->states.top()->render();
-	this->view1.setCenter(position.top()->GetPosition());
+	//this->position->render(*this->window);
+
+	//Ustawianie widoku wzglêdem poruszaj¹cego siê kwadratu
+	this->view1.setCenter(position->GetPosition());
+	this->window->setView(view1);
 	this->window->display();
 }

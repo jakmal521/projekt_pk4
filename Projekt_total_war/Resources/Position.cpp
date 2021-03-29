@@ -13,22 +13,23 @@ Position::~Position()
 {
 }
 
-/*void Position::update(float pos, float speed)
+void Position::update()
 {
 	sf::Vector2f movement(0.0f, 0.0f);
+	float speed = 2.f;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		movement.x -= speed * pos;
+		this->shape.move(-speed, 0);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		movement.x -= speed * pos;
+		this->shape.move(speed, 0);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		movement.x -= speed * pos;
+		this->shape.move(0, -speed);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		movement.x -= speed * pos;
-}*/
+		this->shape.move(0, speed);
+}
 
-/*void Position::render(sf::RenderWindow& window)
+void Position::render(sf::RenderWindow& window)
 {
 	//this->window->draw;
 	//window.draw(shape);
-}*/
+}

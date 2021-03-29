@@ -1,3 +1,4 @@
+#pragma once
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -17,10 +18,10 @@ public:
 	~Position();
 
 	//Metody
-	//virtual void update(float pos, float speed) = 0;
-	//virtual void render(RenderWindow& window);
+	void update();
+	void render(RenderWindow& window);
 
-	virtual Vector2f GetPosition() {
+	Vector2f GetPosition() {
 		return this->shape.getPosition();
 	}
 protected:

@@ -25,6 +25,7 @@ public:
 	//Akcesorry i settery
 	const bool ifending();
 
+	Vector2f mouseposview;
 protected:
 	//Zmienne
 	vector<Texture*> textures;
@@ -36,6 +37,5 @@ protected:
 	//Pozycja myszki
 	Vector2i mouseposscreen;
 	Vector2i mouseposwindow;
-	Vector2f mouseposview;
 	virtual void mousepos();
 };

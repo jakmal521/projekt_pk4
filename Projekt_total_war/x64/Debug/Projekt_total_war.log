@@ -1,13 +1,6 @@
-﻿  Projekt_total_war.cpp
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Headers\Game.h(37,8): error C2065: "Position": niezadeklarowany identyfikator
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Headers\Game.h(37,17): error C2059: błąd składniowy: „>”
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Projekt_total_war.cpp(5,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
-  Game.cpp
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Headers\Game.h(37,8): error C2065: "Position": niezadeklarowany identyfikator
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Headers\Game.h(37,17): error C2059: błąd składniowy: „>”
+﻿  Game.cpp
 C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Game.cpp(31,11): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
 C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Game.cpp(33,11): warning C4244: "inicjowanie": konwersja z "double" do "float", możliwa utrata danych
 C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Game.cpp(34,47): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
 C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Game.cpp(34,44): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
-  Position.cpp
-  Generowanie kodu...
+  Projekt_total_war.vcxproj -> C:\Users\krzys\source\repos\projekt_pk4_total_war\x64\Debug\Projekt_total_war.exe
