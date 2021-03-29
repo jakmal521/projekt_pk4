@@ -22,7 +22,7 @@ void MainMenu::update()
 {
 	this->mousepos();
 	this->updateButtons();
-	this->end();
+	//this->end();
 }
 
 void MainMenu::render(RenderTarget* target)
@@ -48,11 +48,16 @@ void MainMenu::initFont()
 {
 	this->font.loadFromFile("Fonts/RomanSD.ttf");
 }
+void MainMenu::end()
+{
+	;
+}
 //Przyciski
 void MainMenu::initButtons()
 {
-	this->buttons["Menu"] = new Button(500, 250, 200, 100, &this->font, "Nowa Gra", Color(0, 0, 0, 0));
-	this->buttons["Opcje"] = new Button(500, 400, 200, 100, &this->font, "Opcje", Color(0, 0, 0, 0));
+
+	this->buttons["Menu"] = new Button(this->window->getSize().x*0.625 , this->window->getSize().y * 0.42, 200, 100, &this->font, "Nowa Gra", Color(0, 0, 0, 0));
+	this->buttons["Opcje"] = new Button(this->window->getSize().x * 0.625, this->window->getSize().y * 0.66, 200, 100, &this->font, "Opcje", Color(0, 0, 0, 0));
 
 }
 
@@ -69,4 +74,3 @@ void MainMenu::renderButtons(RenderTarget* target)
 	for (auto& i : this->buttons)
 		i.second->render(target);
 }
-

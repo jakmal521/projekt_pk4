@@ -3,6 +3,7 @@
 #include <sstream>
 #include "..\Headers\State.h"
 #include "..\Headers\District.h"
+#include "..\Headers\Player.h"
 class GameState : 
     public State
 {
@@ -24,5 +25,9 @@ private:
     RectangleShape background;
     Texture texture;
     void initBackground();
+    //Wychodzenie z rozgrywki
+    void end();
+    //Klasa gracza
+    Player player;
 };
 

@@ -153,19 +153,29 @@
   <ItemGroup>
     <ClCompile Include="Projekt_total_war.cpp" />
     <ClCompile Include="Resources\Button.cpp" />
+    <ClCompile Include="Resources\City.cpp" />
     <ClCompile Include="Resources\District.cpp" />
     <ClCompile Include="Resources\Game.cpp" />
     <ClCompile Include="Resources\GameState.cpp" />
     <ClCompile Include="Resources\MainMenu.cpp" />
+    <ClCompile Include="Resources\Player.cpp" />
+    <ClCompile Include="Resources\Settlement.cpp" />
     <ClCompile Include="Resources\State.cpp" />
+    <ClCompile Include="Resources\Town.cpp" />
+    <ClCompile Include="Resources\Village.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Button.h" />
+    <ClInclude Include="Headers\City.h" />
     <ClInclude Include="Headers\District.h" />
     <ClInclude Include="Headers\Game.h" />
     <ClInclude Include="Headers\GameState.h" />
     <ClInclude Include="Headers\MainMenu.h" />
+    <ClInclude Include="Headers\Player.h" />
+    <ClInclude Include="Headers\Settlement.h" />
     <ClInclude Include="Headers\State.h" />
+    <ClInclude Include="Headers\Town.h" />
+    <ClInclude Include="Headers\Village.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\districts.txt" />

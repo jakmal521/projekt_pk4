@@ -17,6 +17,9 @@ void District::setColor()
 //Wyœwietlanie i updatowanie
 void District::update(Vector2f mpos)
 {
+	if (!this->cities.empty())
+		for (auto& i : this->cities)
+			i->update();
 	this->shape.setOutlineColor(Color(1,2,3,0));
 	this->shape.setOutlineThickness(0);
 	if (this->shape.getGlobalBounds().contains(mpos))
@@ -35,5 +38,8 @@ void District::update(Vector2f mpos)
 void District::render(RenderTarget* target)
 {
 	target->draw(this->shape);
+	if (!this->cities.empty())
+		for (auto& i : this->cities)
+			i->render();
 }
 //Inicjowanie kszta³tu

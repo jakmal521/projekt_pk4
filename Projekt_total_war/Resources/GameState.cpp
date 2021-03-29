@@ -43,10 +43,13 @@ void GameState::initDis()
 		{
 			float x, y;
 			plik >> x >> y;
+			x = this->window->getSize().x * (x / 800);
+			y = this->window->getSize().y * (y / 600);
+
 			this->districts[name]->shape.setPoint(i, Vector2f(x,y));
 
 		}
-
+		//this->districts[name]->shape.scale(0.5, 0.5);
 		this->districts[name]->shape.setFillColor(Color::Blue);
 		this->districts[name]->shape.setOutlineThickness(2);
 		this->districts[name]->shape.setOutlineColor(Color(0,0,0,0));
@@ -62,4 +65,13 @@ void GameState::initBackground()
 	this->texture.loadFromFile("JPG/sea_texture.jpg");
 	this->background.setSize(Vector2f(window->getSize().x, window->getSize().y));
 	this->background.setTexture(&this->texture);
+}
+//Wychodzenie z rozgrywki
+void GameState::end()
+{
+	if (Keyboard::isKeyPressed(Keyboard::Escape))
+	{
+		this->ifend = true;
+
+	}
 }

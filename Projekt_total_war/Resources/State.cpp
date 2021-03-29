@@ -13,14 +13,7 @@ State::~State()
 	delete this->window;
 }
 
-void State::end()
-{
-	if (Keyboard::isKeyPressed(Keyboard::Escape))
-	{
-		this->ifend = true;
 
-	}
-}
 
 const bool State::ifending()
 {

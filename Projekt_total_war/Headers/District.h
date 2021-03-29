@@ -2,6 +2,8 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
+#include <vector>
+#include "..\Headers\City.h"
 
 using namespace sf;
 using namespace std;
@@ -23,7 +25,8 @@ private:
 	//Nazwa obszaru
 	string name;
 	protected:
-//Kszta³t obszaru
+	//Miasta w obrêbie regionu
+		vector< City*>cities;
 	
 };
 

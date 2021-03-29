@@ -15,7 +15,6 @@ public:
 	//Konstruktor i destruktor
 	Game();
 	~Game();
-
 	void play();
 private:
 	//Okno g³ówne
@@ -31,5 +30,7 @@ private:
 	void render();
 	//Przechowywanie stanów gry (menu, gra itp)
 	stack<State*> states;
+	//Wektor wielkoœci okna
+	vector<VideoMode> videoMode;
 };
 

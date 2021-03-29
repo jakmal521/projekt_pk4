@@ -26,8 +26,9 @@ void Game::play()
 
 void Game::initWindow()
 {
-
-	this->window = new RenderWindow(VideoMode(800, 600), "Total War - wersja studencka", Style::Close | Style::Titlebar);
+	this->videoMode = VideoMode::getFullscreenModes();
+	VideoMode windowsize = VideoMode::getDesktopMode();
+	this->window = new RenderWindow(VideoMode(800,600), "Total War - wersja studencka", Style::Close | Style::Titlebar);
 	this->window->setFramerateLimit(144);
 
 }
@@ -46,11 +47,11 @@ void Game::update()
 		if (event.type == Event::Closed)
 			this->window->close();
 	}
+
 	if (!this->states.empty())
 	{
 		this->states.top()->update();
 		if (this->states.top()->ifending())
-
 		{
 			this->states.pop();
 		}

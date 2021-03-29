@@ -28,6 +28,8 @@ private:
     //Inicjacja t³a
     void initBackground();
     void initFont();
+    //
+    void end();
     
 };
 

@@ -30,7 +30,7 @@ void Button::render(RenderTarget* target)
 //Aktualizowanie przycisku
 void Button::update(Vector2f mpos)
 {	//Przy najezdzie czarna ramka
-	
+	//Todo bool czy jest w obrêbie..
 	this->button.setOutlineColor(this->color);
 	this->pressed = false;
 	if (this->button.getGlobalBounds().contains(mpos))
