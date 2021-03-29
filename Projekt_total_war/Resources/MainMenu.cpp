@@ -1,18 +1,16 @@
-
 #include "..\Headers\MainMenu.h"
 
 //Konstruktory i destruktory
 MainMenu::MainMenu(RenderWindow* window, stack<State*>* _states) : State(window, _states)
 {
-this->initBackground();
-this->initFont();
-this->initButtons();
-
+	this->initBackground();
+	this->initFont();
+	this->initButtons();
 }
 
 MainMenu::~MainMenu()
 {
-	for (auto &i: this->buttons)
+	for (auto& i : this->buttons)
 	{
 		delete i.second;
 	}
@@ -38,7 +36,7 @@ void MainMenu::initBackground()
 {
 	stringstream ss;
 	int random = rand() % 4 + 1;
-	ss << "JPG/background_menu_" << random<<".jpg";
+	ss << "JPG/background_menu_" << random << ".jpg";
 	this->texture.loadFromFile(ss.str());
 	this->background.setSize(Vector2f(window->getSize().x, window->getSize().y));
 	this->background.setTexture(&this->texture);
@@ -66,11 +64,11 @@ void MainMenu::updateButtons()
 	for (auto& i : this->buttons)
 		i.second->update(this->mouseposview);
 	if (this->buttons["Menu"]->press())
-		this->states->push(new GameState(this->window, this->states)); 
+		this->states->push(new GameState(this->window, this->states));
 }
 
 void MainMenu::renderButtons(RenderTarget* target)
-{ 
+{
 	for (auto& i : this->buttons)
 		i.second->render(target);
 }

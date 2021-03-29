@@ -21,7 +21,6 @@ void Game::play()
 	}
 }
 
-
 //Funkcje inicjalizacyjne
 
 void Game::initWindow()
@@ -30,12 +29,10 @@ void Game::initWindow()
 	VideoMode windowsize = VideoMode::getDesktopMode();
 	this->window = new RenderWindow(VideoMode(800,600), "Total War - wersja studencka", Style::Close | Style::Titlebar);
 	this->window->setFramerateLimit(144);
-
 }
 void Game::initStates()
 {
 	this->states.push(new MainMenu(this->window, &this->states));
-	
 }
 //Funcje do zmiany zawartoœci ekranu
 void Game::update()
@@ -66,4 +63,3 @@ void Game::render()
 		this->states.top()->render();
 	this->window->display();
 }
-

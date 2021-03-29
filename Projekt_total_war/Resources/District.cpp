@@ -3,7 +3,6 @@
 District::District(string _name)
 {
 	this->name = _name;
-
 }
 
 District::~District()
@@ -26,14 +25,13 @@ void District::update(Vector2f mpos)
 
 	{
 		this->shape.setOutlineThickness(1);
-		
+
 		this->shape.setOutlineColor(Color::White);
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
 			//this->pressed = true;
 		}
 	}
-
 }
 void District::render(RenderTarget* target)
 {

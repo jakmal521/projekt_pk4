@@ -1,15 +1,13 @@
 #include "..\Headers\GameState.h"
 //Konstruktory i destruktory
-GameState::GameState(RenderWindow* window,stack<State*>* _states): State(window, _states)
+GameState::GameState(RenderWindow* window, stack<State*>* _states) : State(window, _states)
 {
-
 	this->initDis();
 	this->initBackground();
 }
 
 GameState::~GameState()
 {
-
 }
 //Wyœwietlanie i update ekranu
 void GameState::update()
@@ -20,7 +18,7 @@ void GameState::update()
 		i.second->update(mouseposview);
 }
 
-void GameState::render(RenderTarget* target )
+void GameState::render(RenderTarget* target)
 {
 	if (!target)
 		target = this->window;
@@ -36,7 +34,7 @@ void GameState::initDis()
 	fstream plik("Resources/districts.txt");
 	while (plik >> name)
 	{
-		this->districts[name]=new District(name);
+		this->districts[name] = new District(name);
 		plik >> points;
 		this->districts[name]->shape.setPointCount(points);
 		for (int i = 0; i < points; i++)
@@ -52,16 +50,14 @@ void GameState::initDis()
 		//this->districts[name]->shape.scale(0.5, 0.5);
 		this->districts[name]->shape.setFillColor(Color::Blue);
 		this->districts[name]->shape.setOutlineThickness(2);
-		this->districts[name]->shape.setOutlineColor(Color(0,0,0,0));
+		this->districts[name]->shape.setOutlineColor(Color(0, 0, 0, 0));
 	}
 	cout << this->districts.size();
 	plik.close();
-
 }
 //Inicjacja t³a
 void GameState::initBackground()
 {
-	
 	this->texture.loadFromFile("JPG/sea_texture.jpg");
 	this->background.setSize(Vector2f(window->getSize().x, window->getSize().y));
 	this->background.setTexture(&this->texture);

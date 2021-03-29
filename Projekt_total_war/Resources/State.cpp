@@ -1,4 +1,3 @@
-
 #include "..\Headers\State.h"
 //Konstruktor i destruktor
 State::State(RenderWindow* window, stack<State*>* _states)
@@ -24,5 +23,5 @@ void State::mousepos()
 {
 	this->mouseposscreen = Mouse::getPosition();
 	this->mouseposwindow = Mouse::getPosition(*this->window);
-	this->mouseposview =this->window->mapPixelToCoords( Mouse::getPosition(*this->window));
+	this->mouseposview = this->window->mapPixelToCoords(Mouse::getPosition(*this->window));
 }
