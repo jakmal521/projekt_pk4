@@ -5,6 +5,7 @@ GameState::GameState(RenderWindow* window, stack<State*>* _states) : State(windo
 	this->initDis();
 	this->initBackground();
 	this->initView();
+	this->initPlayer();
 }
 
 GameState::~GameState()
@@ -17,6 +18,7 @@ void GameState::update()
 	this->end();
 	for (auto& i : this->districts)
 		i.second->update(mouseposview);
+	this->player.back()->update();
 	position->update();
 }
 
@@ -27,6 +29,8 @@ void GameState::render(RenderTarget* target)
 	target->draw(this->background);
 	for (auto& i : this->districts)
 		i.second->render(this->window);
+	for (auto& j : this->player)
+		j->render(this->window);
 	this->view1.setCenter(position->GetPosition());
 	this->window->setView(view1);
 }
@@ -48,12 +52,11 @@ void GameState::initDis()
 			x = this->window->getSize().x * (x / 800);
 			y = this->window->getSize().y * (y / 600);
 
-			this->districts[name]->shape.setPoint(i, Vector2f(x,y));
-
+			this->districts[name]->shape.setPoint(i, Vector2f(x, y));
 		}
 		//this->districts[name]->shape.scale(0.5, 0.5);
 		this->districts[name]->shape.setFillColor(Color::Black);
-		this->districts[name]->shape.setOutlineThickness(2);
+		this->districts[name]->shape.setOutlineThickness(0);
 		this->districts[name]->shape.setOutlineColor(Color(0, 0, 0, 0));
 	}
 	cout << this->districts.size();
@@ -72,10 +75,23 @@ void GameState::end()
 	if (Keyboard::isKeyPressed(Keyboard::Escape))
 	{
 		this->ifend = true;
-
 	}
 }
-//
+
+//Inicjalizacja gracza
+void GameState::initPlayer()
+{
+	//sf::Texture = texture.loadFromFile("JPG/knight.png");
+	this->player.push_back(new Player());
+	this->player.back()->initPla(sf::Color::Red, Vector2f(100.f, 100.f));
+
+	//this->playerTexture.loadFromFile("JPG/knight.png");
+	/*this->playerShape.setSize(sf::Vector2f(100.f, 100.f));
+	this->playerShape.setFillColor(sf::Color::Red);
+	this->player->playerShape.set*/
+}
+
+//Incjalizacja widoku
 void GameState::initView()
 {
 	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(400.f, 300.f));

@@ -27,7 +27,7 @@ void Game::initWindow()
 {
 	this->videoMode = VideoMode::getFullscreenModes();
 	VideoMode windowsize = VideoMode::getDesktopMode();
-	this->window = new RenderWindow(VideoMode(800,600), "Total War - wersja studencka", Style::Close | Style::Titlebar);
+	this->window = new RenderWindow(VideoMode(800, 600), "Total War - wersja studencka", Style::Close | Style::Titlebar);
 	this->window->setFramerateLimit(144);
 }
 void Game::initStates()
@@ -38,7 +38,7 @@ void Game::initStates()
 void Game::update()
 {
 	Event event;
-	//zamkniêcie gry przy wciscniesciu tego krzy¿yka ugóry XD
+	//zamkniêcie gry przy wciscniesciu tego krzy¿yka u góry XD
 	while (this->window->pollEvent(event))
 	{
 		if (event.type == Event::Closed)

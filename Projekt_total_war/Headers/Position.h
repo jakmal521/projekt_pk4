@@ -20,11 +20,11 @@ public:
 	void update();
 	//void render(RenderWindow& window); //na razie zbêdny
 
-	Vector2f GetPosition() {
 		/*
 			@param void
 			Zwraca Vector pozycji kwadratu
 		*/
+	Vector2f GetPosition() {
 		return this->shape.getPosition();
 	}
 protected:

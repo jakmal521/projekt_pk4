@@ -9,7 +9,7 @@ Position::Position()
 		-setPosition	-ustawienie pozycji kwadratu
 	*/
 	this->shape.setSize(sf::Vector2f(100.0f, 100.0f));
-	this->shape.setOrigin(shape.getSize() / 2.0f); //Ustawienie miejsca w kwadracie dla którego bêdzie relatywny (œrodek kwadratu)
+	this->shape.setOrigin(shape.getSize() / 2.0f); //Ustawienie miejsca w kwadracie dla którego bedzie relatywny (srodek kwadratu)
 	this->shape.setPosition(400.0f, 300.0f);
 	this->shape.setFillColor(sf::Color(255, 255, 255, 255));
 }
@@ -22,8 +22,8 @@ void Position::update()
 {
 	/*
 		@param void
-		Funkcja aktualizuj¹ca pozycjê ekranu
-		-float speed - prêdkoœæ przewijania kamery
+		Funkcja aktualizujaca pozycjê ekranu
+		-float speed - predkosc przewijania kamery
 	*/
 	float speed = 2.f;
 
