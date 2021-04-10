@@ -1,3 +1,4 @@
+#pragma once
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -31,4 +32,3 @@ private:
 	//Wektor wielkoœci okna
 	vector<VideoMode> videoMode;
 };
-

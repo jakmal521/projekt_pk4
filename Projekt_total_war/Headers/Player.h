@@ -3,8 +3,11 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
-
-#include "..\Headers\District.h"
+#include <vector>
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include "../Headers/District.h"
 
 class Player
 {
@@ -13,17 +16,20 @@ public:
 	Player();
 	~Player();
 
-	void initPla(sf::Color color, sf::Vector2f vec);
-
 	//Metody
-	void update();
+	void update(sf::Vector2f mpos, District* districts);
 	void render(sf::RenderTarget* target);
+	void initPla(sf::Color color, sf::Vector2f vec, map<string, District*> districts);
 
 private:
 	//Wyglad
-	sf::RectangleShape playerShape;
+	sf::RectangleShape playerShape;	//Kwadrat gracza
 	sf::Texture playerTexture;
+	sf::RectangleShape moveShape;	//Kwadrat kursora poruszania siê po 1 klikniêciu
+
+	//Sprawdzenie czy przycisk myszy nie jest przytrzymywany
+	bool mouseHeld;
 
 	//Parametry
-	//int attack;
+	float movespeed;
 };

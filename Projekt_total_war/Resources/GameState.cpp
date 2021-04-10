@@ -18,7 +18,8 @@ void GameState::update()
 	this->end();
 	for (auto& i : this->districts)
 		i.second->update(mouseposview);
-	this->player.back()->update();
+	for (auto& i : this->districts)
+		this->player.back()->update(mouseposview, i.second);
 	position->update();
 }
 
@@ -83,7 +84,7 @@ void GameState::initPlayer()
 {
 	//sf::Texture = texture.loadFromFile("JPG/knight.png");
 	this->player.push_back(new Player());
-	this->player.back()->initPla(sf::Color::Red, Vector2f(100.f, 100.f));
+	this->player.back()->initPla(sf::Color::Red, Vector2f(100.f, 100.f), this->districts);
 
 	//this->playerTexture.loadFromFile("JPG/knight.png");
 	/*this->playerShape.setSize(sf::Vector2f(100.f, 100.f));

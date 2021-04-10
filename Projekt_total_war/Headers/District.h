@@ -6,7 +6,6 @@
 #include <vector>
 #include <iostream>
 #include "..\Headers\City.h"
-#include "..\Headers\Player.h"
 
 using namespace sf;
 using namespace std;
@@ -23,26 +22,22 @@ public:
 	ConvexShape shape; //Kszta³t dystryktu
 
 	//Zwraca 0 albo 1 w zale¿noœci czy jest gracz czy go nie ma
-	int returnIsPlayer();
+	bool returnIsPlayer();
 
 	//Wyœwietlanie i updatowanie
 	void update(Vector2f mpos);
 	void render(RenderTarget* target = nullptr);
-
-private:
+	sf::Vector2f returnPosition();
 
 	//Nazwa obszaru
 	string name;
+private:
 
-	//Czy gracz jest na tym polu
-	int isPlayer;
+	//Czy kursor znajduje siê na dystrykcie
+	bool isCursor;
 
 	//Sprawdzenie czy przycisk myszy nie jest przytrzymywany
 	bool mouseHeld;
-
-	/*// Wyglad gracza
-	sf::RectangleShape playerShape;
-	sf::Texture playerTexture;*/
 
 protected:
 	//Miasta w obrêbie regionu

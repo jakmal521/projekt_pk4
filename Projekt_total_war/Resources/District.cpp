@@ -16,9 +16,11 @@ void District::setColor()
 	//this->shape.setFillColor(Color());
 }
 
-int District::returnIsPlayer()
+/// <summary>Zwraca isCursor.</summary>
+/// <returns>Bool</returns>
+bool District::returnIsPlayer()
 {
-	return this->isPlayer;
+	return this->isCursor;
 }
 //Wyœwietlanie i updatowanie
 void District::update(Vector2f mpos)
@@ -28,19 +30,19 @@ void District::update(Vector2f mpos)
 			i->update();
 	this->shape.setOutlineColor(Color(1, 2, 3, 0));
 	this->shape.setOutlineThickness(0);
-	if (this->shape.getGlobalBounds().contains(mpos))
+	if (this->shape.getGlobalBounds().contains(mpos)) // Trzeba potem to zmieniæ - convex nie wspiera GlobalBounds i trzeba u¿yæ coœ innego albo jakoœ sprawdzaæ inaczej
 	{
 		this->shape.setOutlineThickness(1);
 		this->shape.setOutlineColor(Color::White);
+
+		this->isCursor = true;	//Jeœli nad dystryktem to true
 
 		//SprawdŸ czy zosta³ klikniêty
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
 			if (this->mouseHeld == false) {
 				this->mouseHeld = true;
-				this->isPlayer = 1;
 				std::cout << "Elo";
-				//this->pressed = true;
 			}
 		}
 		else
@@ -48,11 +50,10 @@ void District::update(Vector2f mpos)
 			this->mouseHeld = false;
 		}
 	}
-
-	/*if (this->isPlayer) {
-		this->
-	}*/
-	//this->playerShape.setPosition();
+	else
+	{
+		this->isCursor = false;
+	}
 }
 void District::render(RenderTarget* target)
 {
@@ -61,4 +62,16 @@ void District::render(RenderTarget* target)
 		for (auto& i : this->cities)
 			i->render();
 }
+
+/*
+	@return Vector2f
+
+	Zwraca po³o¿enie dystryktu - na razie nie dzia³a i zwraca po³o¿enie 1 punktu tego dystryktu
+
+*/
+sf::Vector2f District::returnPosition()
+{
+	return sf::Vector2f(this->shape.getPoint(1));
+}
+
 //Inicjowanie kszta³tu

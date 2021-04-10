@@ -1,2 +1,52 @@
-﻿  District.cpp
+﻿  Projekt_total_war.cpp
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Projekt_total_war.cpp(5,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+  Button.cpp
+  District.cpp
+  Game.cpp
+  GameState.cpp
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\GameState.cpp(70,74): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\GameState.cpp(70,53): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+  MainMenu.cpp
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\MainMenu.cpp(41,74): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\MainMenu.cpp(41,53): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\MainMenu.cpp(57,97): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\MainMenu.cpp(57,62): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\MainMenu.cpp(58,99): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\MainMenu.cpp(58,64): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+  Player.cpp
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Player.cpp(22,47): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Player.cpp(22,34): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+  Generowanie kodu...
   Projekt_total_war.vcxproj -> C:\Users\krzys\source\repos\projekt_pk4_total_war\x64\Debug\Projekt_total_war.exe
