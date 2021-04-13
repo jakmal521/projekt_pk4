@@ -19,17 +19,18 @@ public:
 	//Metody
 	void update(sf::Vector2f mpos, District* districts);
 	void render(sf::RenderTarget* target);
-	void initPla(sf::Color color, sf::Vector2f vec, map<string, District*> districts);
+	void initPla(map<string, District*> districts);
 
 private:
 	//Wyglad
 	sf::RectangleShape playerShape;	//Kwadrat gracza
 	sf::Texture playerTexture;
 	sf::RectangleShape moveShape;	//Kwadrat kursora poruszania siê po 1 klikniêciu
+	sf::Texture moveTexture;
 
 	//Sprawdzenie czy przycisk myszy nie jest przytrzymywany
 	bool mouseHeld;
 
 	//Parametry
-	float movespeed;
+	float moveSpeed;
 };

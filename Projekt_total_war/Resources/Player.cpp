@@ -15,21 +15,29 @@ Player::~Player()
 }
 
 //Inicjalizacja gracza
-void Player::initPla(sf::Color color, sf::Vector2f vec, map<string, District*> districts)
+void Player::initPla(map<string, District*> districts)
 {
-	this->playerShape.setFillColor(color);
-	this->playerShape.setSize(vec);
-	this->playerShape.setOrigin(0.5 * vec.x, 0.5 * vec.y);
-	this->playerShape.setPosition(districts["Calabria"]->returnPosition());
 	this->mouseHeld = false;
+	//Obrazek gracza
+	//this->playerShape.setFillColor(sf::Color::Red);
+	this->playerTexture.loadFromFile("JPG/knight.png");
+	this->playerShape.setTexture(&this->playerTexture);
+	this->playerShape.setSize(Vector2f(100.f, 100.f));
+	this->playerShape.setOrigin(0.5 * this->playerShape.getSize().x, 1 * this->playerShape.getSize().y);
+	this->playerShape.setPosition(districts["Calabria"]->returnPosition());
+	//Obrazek poruszania siê
+	this->moveTexture.loadFromFile("JPG/x.png");
+	this->moveShape.setTexture(&this->moveTexture);
+	this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f));
 	this->moveShape.setSize(sf::Vector2f(50.f, 50.f));
 	this->moveShape.setOrigin(sf::Vector2f(25.f, 25.f));
-	this->moveShape.setFillColor(sf::Color::Blue);
+	//Atrybuty gracza
+	this->moveSpeed = 600;
 }
 
 // TODO:
 
-/// <summary>Wykorzystuje funkcje z district.h ¿eby sprawdziæ czy kursor znajduje siê nad dystryktem, po klikniêciu prawym przyciskiem myszy pojawia siê niebieski kwadrat a po klikniêciu w ten kwadrat pojawia siê czerwony kwadrat(gracz).</summary>
+/// <summary>Wykorzystuje funkcje z district.h ¿eby sprawdziæ czy kursor znajduje siê nad dystryktem, po klikniêciu prawym przyciskiem myszy pojawia siê X, po czym klikaj¹c w niego pojawia siê tekstura gracza.</summary>
 /// <param name="">Pozycja kursora | WskaŸnik na dystrykt</param>
 /// <returns>Void</returns>
 void Player::update(sf::Vector2f mpos, District* districts)
@@ -42,10 +50,10 @@ void Player::update(sf::Vector2f mpos, District* districts)
 			{
 				this->mouseHeld = true;
 				std::cout << "Ruszam z kurwami na " << districts->name << "\n";
-
 				if (this->moveShape.getGlobalBounds().contains(mpos))
 				{
-					this->playerShape.setPosition(mpos);	//mpos czy pozycja moveShpae???
+					this->playerShape.setPosition(mpos);	//mpos czy pozycja moveShape???
+					this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f)); //Wyrzucenie go poza mapê
 				}
 				else
 				{

@@ -58,7 +58,7 @@ void GameState::initDis()
 		//this->districts[name]->shape.scale(0.5, 0.5);
 		this->districts[name]->shape.setFillColor(Color::Black);
 		this->districts[name]->shape.setOutlineThickness(0);
-		this->districts[name]->shape.setOutlineColor(Color(0, 0, 0, 0));
+		this->districts[name]->shape.setOutlineColor(Color::Transparent);
 	}
 	cout << this->districts.size();
 	plik.close();
@@ -84,7 +84,7 @@ void GameState::initPlayer()
 {
 	//sf::Texture = texture.loadFromFile("JPG/knight.png");
 	this->player.push_back(new Player());
-	this->player.back()->initPla(sf::Color::Red, Vector2f(100.f, 100.f), this->districts);
+	this->player.back()->initPla(this->districts);
 
 	//this->playerTexture.loadFromFile("JPG/knight.png");
 	/*this->playerShape.setSize(sf::Vector2f(100.f, 100.f));
