@@ -35,28 +35,27 @@ void Player::initPla(map<string, District*> districts)
 	this->moveSpeed = 600;
 }
 
-// TODO:
-
 /// <summary>Wykorzystuje funkcje z district.h ¿eby sprawdziæ czy kursor znajduje siê nad dystryktem, po klikniêciu prawym przyciskiem myszy pojawia siê X, po czym klikaj¹c w niego pojawia siê tekstura gracza.</summary>
 /// <param name="">Pozycja kursora | WskaŸnik na dystrykt</param>
 /// <returns>Void</returns>
 void Player::update(sf::Vector2f mpos, District* districts)
 {
-	if (districts->returnIsPlayer())
+	if (districts->returnIsCursorOnDistrict())
 	{
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
 			if (this->mouseHeld == false)
 			{
 				this->mouseHeld = true;
-				std::cout << "Ruszam z kurwami na " << districts->name << "\n";
 				if (this->moveShape.getGlobalBounds().contains(mpos))
 				{
+					std::cout << "Kurwy dotarly na " << districts->name << "\n";
 					this->playerShape.setPosition(mpos);	//mpos czy pozycja moveShape???
-					this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f)); //Wyrzucenie go poza mapê
+					this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f)); //Wyrzucenie X-sa poza mapê
 				}
 				else
 				{
+					std::cout << "Ruszam z kurwami na " << districts->name << "\n";
 					this->moveShape.setPosition(mpos);
 				}
 			}
