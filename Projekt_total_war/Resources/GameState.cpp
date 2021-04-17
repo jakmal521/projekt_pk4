@@ -61,13 +61,13 @@ void GameState::initDis()
 		this->districts[name]->shape.setOutlineColor(Color::Transparent);
 
 		//Zainicjowanie miasta w dystrykcie
-		string name;
+		string city_name;
 		int pop;
-		plik >> name;
+		plik >> city_name;
 		plik >> pop;
-		//this->districts[name]->initCity(name, pop);
+		this->districts[name]->cities.push_back(new City(city_name, pop));
 	}
-	cout << this->districts.size();
+	//cout << this->districts.size();
 
 	plik.close();
 }

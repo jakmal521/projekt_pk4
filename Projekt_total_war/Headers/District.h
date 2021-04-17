@@ -6,7 +6,7 @@
 
 #include <vector>
 #include <iostream>
-#include "../Headers/City.h"
+#include "..\Headers\City.h"
 
 using namespace sf;
 using namespace std;
@@ -34,8 +34,6 @@ public:
 	string name;
 
 	//Miasta
-	void initCity(string name, int popMax);
-
 	//Miasta w obrêbie regionu
 	vector<City*> cities;
 

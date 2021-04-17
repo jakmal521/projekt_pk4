@@ -4,7 +4,7 @@ class Settlement : public City
 {
 public:
 	//Konstruktor i destruktor
-	Settlement(int popMax);
+	Settlement(std::string name, int popMax);
 	~Settlement();
 	//Wyœwietlanie i updatowanie miasta
 	void update();

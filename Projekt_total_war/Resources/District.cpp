@@ -76,12 +76,5 @@ sf::Vector2f District::returnPosition()
 	return sf::Vector2f(this->shape.getPoint(1));
 }
 
-//Inicjowanie miasta
-void District::initCity(string name, int popMax)
-{
-	City* temp = new City();
-	this->cities.push_back(temp);
-	this->cities.back()->initCity(name, popMax);
-}
 
 //Inicjowanie kszta³tu

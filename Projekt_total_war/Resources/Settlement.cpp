@@ -1,7 +1,7 @@
 
 #include "..\Headers\Settlement.h"
 //Konstruktor i destruktor
-Settlement::Settlement(int popMax):City(popMax)
+Settlement::Settlement(std::string name,int popMax):City(name,popMax)
 {
 }
 

@@ -8,16 +8,13 @@
 City::City()
 {
 }
-City::City(int popMax)
-{
-}
 //Konstruktor i destruktor
-/*City::City(std::string name, int popMax)
+City::City(std::string name, int popMax)
 {
 	this->cityName = name;
 	this->populationMax = popMax;
 	this->population = rand() % popMax + 1;
-}*/
+}
 
 City::~City()
 {

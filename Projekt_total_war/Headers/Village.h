@@ -4,7 +4,7 @@ class Village :
 {
 public:
     //konstruktor i destruktor
-    Village(int popMax);
+    Village(std::string name, int popMax);
     ~Village();
     //Wyœwietlanie i updatowanie miasta
     void update();

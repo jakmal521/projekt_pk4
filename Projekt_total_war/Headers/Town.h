@@ -4,7 +4,7 @@ class Town :
 {
     //Konstruktor i destruktor
 public: 
-    Town(int popMax);
+    Town(std::string name, int popMax);
     ~Town();
     //Wyœwietlanie i updatowanie miasta
     void update();

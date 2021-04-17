@@ -15,7 +15,7 @@ class City
 public:
 	//Konstruktor i destruktor
 	City();
-	City(int popMax);
+	City(std::string name, int popMax);
 	~City();
 
 	void initCity(std::string name, int popMax);

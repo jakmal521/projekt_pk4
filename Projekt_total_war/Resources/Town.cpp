@@ -1,7 +1,7 @@
 
 #include "..\Headers\Town.h"
 //konstruktor i destruktor
-Town::Town(int popMax):City(popMax)
+Town::Town(std::string name, int popMax):City(name, popMax)
 {
 }
 

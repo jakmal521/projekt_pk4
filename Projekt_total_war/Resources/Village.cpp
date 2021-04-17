@@ -2,7 +2,7 @@
 //konstruktor i destruktor
 
 
-Village::Village(int popMax):City(popMax)
+Village::Village(std::string name, int popMax):City(name,popMax)
 {
 }
 
