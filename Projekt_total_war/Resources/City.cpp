@@ -1,16 +1,43 @@
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+#include <SFML/Network.hpp>
+
+#include <iostream>
 #include "..\Headers\City.h"
-#include <stdlib.h>
-//Konstruktor i destruktor
-City::City( int popMax)
+City::City()
 {
+}
+City::City(int popMax)
+{
+}
+//Konstruktor i destruktor
+/*City::City(std::string name, int popMax)
+{
+	this->cityName = name;
+	this->populationMax = popMax;
+	this->population = rand() % popMax + 1;
+}*/
+
+City::~City()
+{
+}
+
+void City::initCity(std::string name, int popMax)
+{
+	this->cityName = name;
 	this->populationMax = popMax;
 	this->population = rand() % popMax + 1;
 }
 
-City::~City()
+void City::update()
 {
-
 }
+
+void City::render()
+{
+}
+
 //Zmiany w populacji
 void City::updatePopulation()
 {

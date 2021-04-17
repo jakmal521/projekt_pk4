@@ -59,8 +59,16 @@ void GameState::initDis()
 		this->districts[name]->shape.setFillColor(Color::Black);
 		this->districts[name]->shape.setOutlineThickness(0);
 		this->districts[name]->shape.setOutlineColor(Color::Transparent);
+
+		//Zainicjowanie miasta w dystrykcie
+		string name;
+		int pop;
+		plik >> name;
+		plik >> pop;
+		//this->districts[name]->initCity(name, pop);
 	}
 	cout << this->districts.size();
+
 	plik.close();
 }
 //Inicjacja t³a
@@ -82,14 +90,8 @@ void GameState::end()
 //Inicjalizacja gracza
 void GameState::initPlayer()
 {
-	//sf::Texture = texture.loadFromFile("JPG/knight.png");
 	this->player.push_back(new Player());
 	this->player.back()->initPla(this->districts);
-
-	//this->playerTexture.loadFromFile("JPG/knight.png");
-	/*this->playerShape.setSize(sf::Vector2f(100.f, 100.f));
-	this->playerShape.setFillColor(sf::Color::Red);
-	this->player->playerShape.set*/
 }
 
 //Incjalizacja widoku

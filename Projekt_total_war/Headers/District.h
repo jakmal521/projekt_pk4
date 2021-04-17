@@ -3,9 +3,10 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
+
 #include <vector>
 #include <iostream>
-#include "..\Headers\City.h"
+#include "../Headers/City.h"
 
 using namespace sf;
 using namespace std;
@@ -22,7 +23,7 @@ public:
 	ConvexShape shape; //Kszta³t dystryktu
 
 	//Zwraca 0 albo 1 w zale¿noœci czy jest gracz czy go nie ma
-	bool returnIsPlayer();
+	bool returnIsCursorOnDistrict();
 
 	//Wyœwietlanie i updatowanie
 	void update(Vector2f mpos);
@@ -31,6 +32,13 @@ public:
 
 	//Nazwa obszaru
 	string name;
+
+	//Miasta
+	void initCity(string name, int popMax);
+
+	//Miasta w obrêbie regionu
+	vector<City*> cities;
+
 private:
 
 	//Czy kursor znajduje siê na dystrykcie
@@ -40,6 +48,4 @@ private:
 	bool mouseHeld;
 
 protected:
-	//Miasta w obrêbie regionu
-	vector< City*>cities;
 };

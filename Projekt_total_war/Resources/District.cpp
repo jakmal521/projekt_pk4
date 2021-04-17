@@ -18,7 +18,7 @@ void District::setColor()
 
 /// <summary>Zwraca isCursor.</summary>
 /// <returns>Bool</returns>
-bool District::returnIsPlayer()
+bool District::returnIsCursorOnDistrict()
 {
 	return this->isCursor;
 }
@@ -55,12 +55,14 @@ void District::update(Vector2f mpos)
 		this->isCursor = false;
 	}
 }
+
+//Rysowanie dystryktów
 void District::render(RenderTarget* target)
 {
 	target->draw(this->shape);
-	if (!this->cities.empty())
+	/**if (!this->cities.empty())
 		for (auto& i : this->cities)
-			i->render();
+			i->render();*/
 }
 
 /*
@@ -72,6 +74,14 @@ void District::render(RenderTarget* target)
 sf::Vector2f District::returnPosition()
 {
 	return sf::Vector2f(this->shape.getPoint(1));
+}
+
+//Inicjowanie miasta
+void District::initCity(string name, int popMax)
+{
+	City* temp = new City();
+	this->cities.push_back(temp);
+	this->cities.back()->initCity(name, popMax);
 }
 
 //Inicjowanie kszta³tu
