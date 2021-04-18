@@ -1,4 +1,9 @@
-#pragma once
+/*#pragma once
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+#include <SFML/Network.hpp>
+
 #include "..\Headers\City.h"
 class Settlement : public City
 {
@@ -10,3 +15,4 @@ public:
 	void update();
 	void render(RenderTarget* target);
 };
+*/

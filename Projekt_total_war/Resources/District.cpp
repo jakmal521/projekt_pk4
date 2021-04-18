@@ -27,7 +27,7 @@ void District::update(Vector2f mpos)
 {
 	if (!this->cities.empty())
 		for (auto& i : this->cities)
-			i->update();
+			i->update(mpos);
 	this->shape.setOutlineColor(Color(1, 2, 3, 0));
 	this->shape.setOutlineThickness(0);
 	if (this->shape.getGlobalBounds().contains(mpos)) // Trzeba potem to zmieniæ - convex nie wspiera GlobalBounds i trzeba u¿yæ coœ innego albo jakoœ sprawdzaæ inaczej
@@ -42,7 +42,7 @@ void District::update(Vector2f mpos)
 		{
 			if (this->mouseHeld == false) {
 				this->mouseHeld = true;
-				std::cout << "Elo";
+				//std::cout << "Elo\n";
 			}
 		}
 		else
@@ -60,9 +60,9 @@ void District::update(Vector2f mpos)
 void District::render(RenderTarget* target)
 {
 	target->draw(this->shape);
-	/**if (!this->cities.empty())
+	if (!this->cities.empty())
 		for (auto& i : this->cities)
-			i->render();*/
+			i->render(target);
 }
 
 /*
@@ -76,5 +76,15 @@ sf::Vector2f District::returnPosition()
 	return sf::Vector2f(this->shape.getPoint(1));
 }
 
+//Inicjowanie miasta
+void District::initCity(string line)
+{
+	stringstream stream(line);
+	string city_name;
+	int pop, pointA, pointB;
+	stream >> city_name >> pop >> pointA >> pointB;
+	this->cities.push_back(new City(city_name, pop, sf::Vector2f(pointA, pointB)));
+	this->cities.back()->initCity(sf::Vector2f(pointA, pointB));
+}
 
 //Inicjowanie kszta³tu

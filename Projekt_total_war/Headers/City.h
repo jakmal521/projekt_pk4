@@ -15,18 +15,36 @@ class City
 public:
 	//Konstruktor i destruktor
 	City();
-	City(std::string name, int popMax);
+	City(std::string name, int popMax, sf::Vector2f cityPoints);
 	~City();
 
-	void initCity(std::string name, int popMax);
-
 	//Wyœwietlenie na ekranie
-	void update();
-	void render();
+	void update(Vector2f mposC);
+	void render(RenderTarget* target);
 
-	//protected:
-		//Tekstura
-	sf::Texture cityTexture;
+	//Inicjowanie miasta
+	void initCity(sf::Vector2f cityPos);
+
+protected:
+
+	/*Mechanika*/
+	//Zegar potrzebny do sprawdzenia czy by³ double click
+	sf::Clock clickClock;
+	//Czy mysz jest przytrzymywana
+	bool mouseHeld;
+	//Po³o¿enie
+	sf::Vector2f cityPos;
+
+	/*Wygl¹d*/
+	//Tekstury
+	sf::Texture cityIconTexture;
+	sf::Color cityIconColor;
+	sf::Texture insideCityTexture;
+	//Wygl¹d miasta
+	RectangleShape cityIcon;
+	Sprite sprite;
+
+	/*Wartoœci w grze*/
 	//Nazwa
 	std::string cityName;
 	//Iloœæ ludzi
@@ -35,6 +53,4 @@ public:
 	int populationMax;
 	//zmiany w populacji
 	void updatePopulation();
-	//Wygl¹d miasta
-	Sprite sprite;
 };

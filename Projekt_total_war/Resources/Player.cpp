@@ -28,6 +28,7 @@ void Player::initPla(map<string, District*> districts)
 	//Obrazek poruszania siê
 	this->moveTexture.loadFromFile("JPG/x.png");
 	this->moveShape.setTexture(&this->moveTexture);
+	this->moveShapeColor = this->moveShape.getFillColor(); //Pobranie koloru X-sa
 	this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f));
 	this->moveShape.setSize(sf::Vector2f(50.f, 50.f));
 	this->moveShape.setOrigin(sf::Vector2f(25.f, 25.f));
@@ -51,12 +52,14 @@ void Player::update(sf::Vector2f mpos, District* districts)
 				{
 					std::cout << "Kurwy dotarly na " << districts->name << "\n";
 					this->playerShape.setPosition(mpos);	//mpos czy pozycja moveShape???
-					this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f)); //Wyrzucenie X-sa poza mapê
+					this->moveShape.setFillColor(sf::Color::Transparent); //X znika
+					this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f)); //Wyrzucenie X-sa poza mapê aby nie da³o siê go klikn¹æ ponownie
 				}
 				else
 				{
 					std::cout << "Ruszam z kurwami na " << districts->name << "\n";
 					this->moveShape.setPosition(mpos);
+					this->moveShape.setFillColor(moveShapeColor);
 				}
 			}
 		}

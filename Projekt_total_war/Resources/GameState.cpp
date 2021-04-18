@@ -21,6 +21,8 @@ void GameState::update()
 	for (auto& i : this->districts)
 		this->player.back()->update(mouseposview, i.second);
 	position->update();
+	//Wyœwietlanie pozycji myszki (czasem przydatne)
+	//cout << this->mouseposwindow.x << " " << this->mouseposwindow.y << "\n";
 }
 
 void GameState::render(RenderTarget* target)
@@ -35,7 +37,7 @@ void GameState::render(RenderTarget* target)
 	this->view1.setCenter(position->GetPosition());
 	this->window->setView(view1);
 }
-//Inicjalizacja regionów
+//Inicjalizacja regionów i miast
 void GameState::initDis()
 {
 	string name;
@@ -61,11 +63,9 @@ void GameState::initDis()
 		this->districts[name]->shape.setOutlineColor(Color::Transparent);
 
 		//Zainicjowanie miasta w dystrykcie
-		string city_name;
-		int pop;
-		plik >> city_name;
-		plik >> pop;
-		this->districts[name]->cities.push_back(new City(city_name, pop));
+		string line;
+		getline(plik, line);
+		this->districts[name]->initCity(line);
 	}
 	//cout << this->districts.size();
 

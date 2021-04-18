@@ -1,4 +1,4 @@
-
+/*
 #include "..\Headers\Town.h"
 //konstruktor i destruktor
 Town::Town(std::string name, int popMax):City(name, popMax)
@@ -17,3 +17,4 @@ void Town::update()
 void Town::render(RenderTarget* target)
 {
 }
+*/

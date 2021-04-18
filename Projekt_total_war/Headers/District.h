@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <iostream>
+#include <sstream>
 #include "..\Headers\City.h"
 
 using namespace sf;
@@ -29,6 +30,7 @@ public:
 	void update(Vector2f mpos);
 	void render(RenderTarget* target = nullptr);
 	sf::Vector2f returnPosition();
+	void initCity(string line);
 
 	//Nazwa obszaru
 	string name;
