@@ -5,9 +5,6 @@
 
 #include <iostream>
 #include "..\Headers\City.h"
-City::City()
-{
-}
 //Konstruktor i destruktor
 City::City(std::string name, int popMax, sf::Vector2f cityPoints)
 {
@@ -31,6 +28,12 @@ void City::initCity(sf::Vector2f cityPos)
 	this->cityIcon.setPosition(cityPos);
 
 	this->mouseHeld = false;
+	this->doubleClicked = false;
+}
+
+bool City::isInCity()
+{
+	return this->doubleClicked;
 }
 
 /// <summary>Wykorzystuje funkcje z district.h ¿eby sprawdziæ czy kursor znajduje siê nad miastem, po najechaniu zmienia siê kolor miasta na czerwony, a po podwójnym klikniêciu TODO: ma pojawiaæ siê menu miasta</summary>
@@ -54,6 +57,8 @@ void City::update(Vector2f mpos)
 				if (clickClock.getElapsedTime() <= sf::milliseconds(600.f))
 				{
 					std::cout << "Double click \n";
+
+					this->doubleClicked = true;
 				}
 				else
 				{

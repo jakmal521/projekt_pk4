@@ -1,4 +1,5 @@
 #include "..\Headers\GameState.h"
+
 //Konstruktory i destruktory
 GameState::GameState(RenderWindow* window, stack<State*>* _states) : State(window, _states)
 {
@@ -17,10 +18,19 @@ void GameState::update()
 	this->mousepos();
 	this->end();
 	for (auto& i : this->districts)
+	{
+		if (i.second->cities.back()->isInCity())
+		{
+			//this->view1 = View(Vector2f(0.f, 0.f), Vector2f(800.f, 600.f));
+			this->states->push(new CityState(this->window, this->states));
+		}
+	}
+	for (auto& i : this->districts)
 		i.second->update(mouseposview);
 	for (auto& i : this->districts)
 		this->player.back()->update(mouseposview, i.second);
 	position->update();
+
 	//Wyœwietlanie pozycji myszki (czasem przydatne)
 	//cout << this->mouseposwindow.x << " " << this->mouseposwindow.y << "\n";
 }

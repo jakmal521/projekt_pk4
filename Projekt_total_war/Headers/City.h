@@ -25,6 +25,9 @@ public:
 	//Inicjowanie miasta
 	void initCity(sf::Vector2f cityPos);
 
+	//Zwracanie czy wejœæ do miasta
+	bool isInCity();
+
 protected:
 
 	/*Mechanika*/
@@ -34,6 +37,8 @@ protected:
 	bool mouseHeld;
 	//Po³o¿enie
 	sf::Vector2f cityPos;
+	//Czy wejœæ do miasta
+	bool doubleClicked;
 
 	/*Wygl¹d*/
 	//Tekstury

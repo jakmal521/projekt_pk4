@@ -2,11 +2,12 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include "..\Headers\State.h"
+//#include "..\Headers\State.h"
 #include "..\Headers\District.h"
 #include "..\Headers\Player.h"
 #include "..\Headers\Position.h"
-//#include "..\Headers\City.h"
+#include "..\Headers\City.h"
+#include "..\Headers\CityState.h"
 class GameState :
 	public State
 {

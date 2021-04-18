@@ -155,6 +155,7 @@
     <ClCompile Include="Projekt_total_war.cpp" />
     <ClCompile Include="Resources\Button.cpp" />
     <ClCompile Include="Resources\City.cpp" />
+    <ClCompile Include="Resources\CityState.cpp" />
     <ClCompile Include="Resources\District.cpp" />
     <ClCompile Include="Resources\Game.cpp" />
     <ClCompile Include="Resources\GameState.cpp" />
@@ -169,6 +170,7 @@
   <ItemGroup>
     <ClInclude Include="Headers\Button.h" />
     <ClInclude Include="Headers\City.h" />
+    <ClInclude Include="Headers\CityState.h" />
     <ClInclude Include="Headers\District.h" />
     <ClInclude Include="Headers\Game.h" />
     <ClInclude Include="Headers\GameState.h" />
