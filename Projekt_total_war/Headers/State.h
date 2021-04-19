@@ -17,14 +17,18 @@ public:
 	//Okno
 	RenderWindow* window;
 	//kontruktor i destruktor
-	State(RenderWindow* window, stack<State*>* _states);
-	~State();
+	State(RenderWindow* window, stack<State*>*& _states);
+	virtual ~State();
 	//Metody
 	virtual void update() = 0;
 	virtual void render(RenderTarget* target = nullptr) = 0;
 	virtual void end() = 0;
 	//Akcesorry i settery
 	const bool ifending();
+	void endState()
+	{
+		this->ifend = true;
+	}
 
 protected:
 	//Zmienne

@@ -1,10 +1,61 @@
 ﻿  Projekt_total_war.cpp
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(8,1): error C2011: "Button'': "class" wpisz ponownie definicję
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(7): message : zobacz deklarację „Button”
 C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Projekt_total_war.cpp(5,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
   Button.cpp
-  District.cpp
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(8,1): error C2011: "Button'': "class" wpisz ponownie definicję
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(7): message : zobacz deklarację „Button”
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(3,9): error C2027: wykorzystanie niezdefiniowanego przez użytkownika typu "Button"
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(7): message : zobacz deklarację „Button”
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(4,1): error C4430: brak specyfikatora typu - założono, że int. Uwaga: C++ nie obsługuje domyślnie typu int
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(5,2): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(6,2): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(7,2): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(8,2): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(8,22): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(9,2): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(10,2): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(11,2): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(12,2): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(12,25): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(12,57): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(12,101): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(12,141): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(12,173): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(12,218): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(13,2): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(14,2): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(14,28): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(15,2): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(16,2): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(16,31): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(17,2): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(18,1): warning C4508: "{ctor}": funkcja powinna zwrócić wartość; założono typ zwracany "void"
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(20,10): error C2027: wykorzystanie niezdefiniowanego przez użytkownika typu "Button"
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(7): message : zobacz deklarację „Button”
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(21,1): error C4430: brak specyfikatora typu - założono, że int. Uwaga: C++ nie obsługuje domyślnie typu int
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(22,1): warning C4508: "{dtor}": funkcja powinna zwrócić wartość; założono typ zwracany "void"
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(24,14): error C2027: wykorzystanie niezdefiniowanego przez użytkownika typu "Button"
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(7): message : zobacz deklarację „Button”
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(26,15): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(27,15): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(30,14): error C2027: wykorzystanie niezdefiniowanego przez użytkownika typu "Button"
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(7): message : zobacz deklarację „Button”
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(33,2): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(33,31): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(34,2): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(35,6): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(38,3): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(41,4): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(46,14): error C2027: wykorzystanie niezdefiniowanego przez użytkownika typu "Button"
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(7): message : zobacz deklarację „Button”
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Button.cpp(48,6): error C2355: „this”: Można tworzyć odwołania wyłącznie wewnątrz niestatycznych funkcji składowych lub niestatycznych inicjatorów składowych danych
+  CityState.cpp
   Game.cpp
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(8,1): error C2011: "Button'': "class" wpisz ponownie definicję
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(7): message : zobacz deklarację „Button”
   GameState.cpp
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(78,74): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(96,74): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
           with
           [
               T=unsigned int
@@ -13,7 +64,7 @@ C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(7
           [
               T=float
           ]
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(78,53): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(96,53): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
           with
           [
               T=unsigned int
@@ -23,7 +74,11 @@ C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(7
               T=float
           ]
   MainMenu.cpp
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\MainMenu.cpp(41,74): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(8,1): error C2011: "Button'': "class" wpisz ponownie definicję
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(7): message : zobacz deklarację „Button”
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\MainMenu.cpp(16,18): warning C4150: usunięcie wskaźnika do niekompletnego typu "Button"; brak wywołania destruktora
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(7): message : zobacz deklarację „Button”
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\MainMenu.cpp(42,74): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
           with
           [
               T=unsigned int
@@ -32,7 +87,7 @@ C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\MainMenu.cpp(41
           [
               T=float
           ]
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\MainMenu.cpp(41,53): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\MainMenu.cpp(42,53): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
           with
           [
               T=unsigned int
@@ -41,11 +96,14 @@ C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\MainMenu.cpp(41
           [
               T=float
           ]
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\MainMenu.cpp(57,97): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\MainMenu.cpp(57,62): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\MainMenu.cpp(58,99): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\MainMenu.cpp(58,64): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-  Player.cpp
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\Player.cpp(26,34): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\MainMenu.cpp(57,159): error C2027: wykorzystanie niezdefiniowanego przez użytkownika typu "Button"
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(7): message : zobacz deklarację „Button”
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\MainMenu.cpp(59,43): error C2027: wykorzystanie niezdefiniowanego przez użytkownika typu "Button"
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(7): message : zobacz deklarację „Button”
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\MainMenu.cpp(65,11): error C2027: wykorzystanie niezdefiniowanego przez użytkownika typu "Button"
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(7): message : zobacz deklarację „Button”
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\MainMenu.cpp(66,5): error C2027: wykorzystanie niezdefiniowanego przez użytkownika typu "Button"
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(7): message : zobacz deklarację „Button”
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\MainMenu.cpp(73,11): error C2027: wykorzystanie niezdefiniowanego przez użytkownika typu "Button"
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Headers\Button.h(7): message : zobacz deklarację „Button”
   Generowanie kodu...
-  Projekt_total_war.vcxproj -> C:\Users\Kuba\source\repos\total_war\Debug\Projekt_total_war.exe

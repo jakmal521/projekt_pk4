@@ -10,6 +10,7 @@
 #include <fstream>
 
 using namespace sf;
+using namespace std;
 class City
 {
 public:
@@ -27,7 +28,13 @@ public:
 
 	//Zwracanie czy wejœæ do miasta
 	bool isInCity();
-
+	//
+	void setNotInCity();
+	//Akcesory
+	/*string CityName();
+	int Population();
+	int PopulationMax();
+	*/
 protected:
 
 	/*Mechanika*/
@@ -58,4 +65,5 @@ protected:
 	int populationMax;
 	//zmiany w populacji
 	void updatePopulation();
+	friend class CityState;
 };

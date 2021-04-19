@@ -1,5 +1,7 @@
 #pragma once
 #include "..\Headers\State.h"
+#include "..\Headers\City.h"
+
 
 #include <sstream>
 #include <fstream>
@@ -8,13 +10,13 @@ class CityState :
 	public State
 {
 public:
-	CityState(RenderWindow* window, stack<State*>* _states);
+	CityState(RenderWindow* window, Font _font,stack<State*>* _states, City & city);
 	virtual ~CityState();
 
 	void update();
 	void render(RenderTarget* target = nullptr);
 	void end();
-
+	
 private:
 	//t³o
 	RectangleShape background;
@@ -30,5 +32,11 @@ private:
 
 	//Inicjacja t³a
 	void initBackground(sf::RenderWindow* window);
-	void initFont();
+	//Inicjalizacja tekstu i przycisków
+	void initText(Font font, City& city);
+	void initButtons();
+	//Nazwa miasta
+	Text cityName;
+	//Czcionka 
+	
 };

@@ -43,17 +43,27 @@ void Game::update()
 	{
 		if (event.type == Event::Closed)
 			this->window->close();
+		
 	}
-
 	if (!this->states.empty())
 	{
-		this->states.top()->update();
-		if (this->states.top()->ifending())
+		if (this->window->hasFocus())
 		{
-			this->states.pop();
+			this->states.top()->update();
+
+			if (this->states.top()->ifending())
+		{
+				this->states.top()->endState();
+				delete this->states.top();
+				this->states.pop();
+			}
 		}
 	}
-	else this->window->close();
+	//Application end
+	else
+	{
+		this->window->close();
+	}
 }
 
 void Game::render()

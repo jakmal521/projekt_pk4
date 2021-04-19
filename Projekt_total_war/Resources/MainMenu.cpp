@@ -1,5 +1,6 @@
 #include "..\Headers\MainMenu.h"
 
+
 //Konstruktory i destruktory
 MainMenu::MainMenu(RenderWindow* window, stack<State*>* _states) : State(window, _states)
 {
@@ -53,8 +54,9 @@ void MainMenu::end()
 //Przyciski
 void MainMenu::initButtons()
 {
-	this->buttons["Menu"] = new Button(this->window->getSize().x * 0.625, this->window->getSize().y * 0.42, 200, 100, &this->font, "Nowa Gra", Color(0, 0, 0, 0));
-	this->buttons["Opcje"] = new Button(this->window->getSize().x * 0.625, this->window->getSize().y * 0.66, 200, 100, &this->font, "Opcje", Color(0, 0, 0, 0));
+	this->buttons["Menu"] = new Button(this->window->getSize().x * 0.625, this->window->getSize().y * 0.42, 200, 100,& this->font, "Nowa Gra", Color(0, 0, 0, 0));
+	this->buttons["Opcje"] = new Button(this->window->getSize().x * 0.625, this->window->getSize().y * 0.66, 200, 100, 
+		&this->font, "Opcje", Color(0, 0, 0, 0));
 }
 
 void MainMenu::updateButtons()
@@ -62,7 +64,7 @@ void MainMenu::updateButtons()
 	for (auto& i : this->buttons)
 		i.second->update(this->mouseposview);
 	if (this->buttons["Menu"]->press())
-		this->states->push(new GameState(this->window, this->states));
+		this->states->push(new GameState(this->window, this->states,this->font));
 }
 
 void MainMenu::renderButtons(RenderTarget* target)

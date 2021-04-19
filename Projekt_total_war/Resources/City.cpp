@@ -36,6 +36,12 @@ bool City::isInCity()
 	return this->doubleClicked;
 }
 
+void City::setNotInCity()
+{
+	this->doubleClicked = false;
+}
+
+
 /// <summary>Wykorzystuje funkcje z district.h ¿eby sprawdziæ czy kursor znajduje siê nad miastem, po najechaniu zmienia siê kolor miasta na czerwony, a po podwójnym klikniêciu TODO: ma pojawiaæ siê menu miasta</summary>
 /// <param name="">Pozycja kursora</param>
 /// <returns>Void</returns>

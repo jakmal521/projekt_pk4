@@ -13,7 +13,7 @@ class GameState :
 {
 public:
 	//Konstruktor i  destruktor
-	GameState(RenderWindow* window, stack<State*>* _states);
+	GameState(RenderWindow* window, stack<State*>* _states,	Font font);
 
 	virtual ~GameState();
 
@@ -36,6 +36,9 @@ private:
 	void initPlayer();
 	//Przechowuje pozycje i view
 	View view1;
+	View view2;
 	Position* position;
 	void initView();
+	//Czcionka
+	Font font;
 };

@@ -1,16 +1,21 @@
 #include "..\Headers\GameState.h"
 
 //Konstruktory i destruktory
-GameState::GameState(RenderWindow* window, stack<State*>* _states) : State(window, _states)
+GameState::GameState(RenderWindow* window, stack<State*>* _states, Font _font) : State(window, _states)
 {
 	this->initDis();
 	this->initBackground();
 	this->initView();
 	this->initPlayer();
+	this->font = _font;
 }
 
 GameState::~GameState()
 {
+	this->window->setView(this->view2);
+	delete this->position;
+	
+	
 }
 //Wyœwietlanie i update ekranu
 void GameState::update()
@@ -21,8 +26,10 @@ void GameState::update()
 	{
 		if (i.second->cities.back()->isInCity())
 		{
-			//this->view1 = View(Vector2f(0.f, 0.f), Vector2f(800.f, 600.f));
-			this->states->push(new CityState(this->window, this->states));
+			this->window->setView(this->view2);
+			
+			this->states->push(new CityState(this->window, this->font,this->states,i.second->cities.back()[0]));
+			i.second->cities.back()->setNotInCity();
 		}
 	}
 	for (auto& i : this->districts)
@@ -45,6 +52,7 @@ void GameState::render(RenderTarget* target)
 	for (auto& j : this->player)
 		j->render(this->window);
 	this->view1.setCenter(position->GetPosition());
+	
 	this->window->setView(view1);
 }
 //Inicjalizacja regionów i miast
@@ -91,7 +99,7 @@ void GameState::initBackground()
 //Wychodzenie z rozgrywki
 void GameState::end()
 {
-	if (Keyboard::isKeyPressed(Keyboard::Escape))
+	if (Keyboard::isKeyPressed(Keyboard::Delete))
 	{
 		this->ifend = true;
 	}
@@ -107,6 +115,7 @@ void GameState::initPlayer()
 //Incjalizacja widoku
 void GameState::initView()
 {
+	this->view2 = window->getDefaultView();
 	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(400.f, 300.f));
 	this->position = new Position();
 }
