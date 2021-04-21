@@ -3,18 +3,17 @@
 #include <iostream>
 #include <sstream>
 //#include "..\Headers\State.h"
-#include "..\Headers\District.h"
-#include "..\Headers\Unit.h"
-#include "..\Headers\Position.h"
-#include "..\Headers\City.h"
-#include "..\Headers\CityState.h"
-#include "..\Headers\HeadBar.h"
+#include "..\Headers\District.h"	//Wyœwietlanie i zarz¹dzanie dystryktami
+#include "..\Headers\Unit.h"		//Wyœwietlanie i zarz¹dzanie jednostkami (graczem)
+#include "..\Headers\Position.h"	//Pozycja view i headBar
+#include "..\Headers\City.h"		//Wyœwietlanie miast
+#include "..\Headers\CityState.h"	//Wyœwietlanie menu miasta i jego zarz¹dzanie
 class GameState :
 	public State
 {
 public:
 	//Konstruktor i  destruktor
-	GameState(RenderWindow* window, stack<State*>* _states,	Font font);
+	GameState(RenderWindow* window, stack<State*>* _states, Font font);
 
 	virtual ~GameState();
 
@@ -42,8 +41,4 @@ private:
 	void initView();
 	//Czcionka
 	Font font;
-	//Header
-	HeadBar* headBar;
-	void initHeadBar();
-	
 };

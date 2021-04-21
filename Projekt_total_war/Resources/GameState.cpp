@@ -7,7 +7,8 @@ GameState::GameState(RenderWindow* window, stack<State*>* _states, Font _font) :
 	this->initBackground();
 	this->initView();
 	this->initUnit();
-	this->initHeadBar();
+	this->position->initHeadBar();
+	//this->initHeadBar();
 	this->font = _font;
 }
 
@@ -35,8 +36,7 @@ void GameState::update()
 		i.second->update(mouseposview);
 	for (auto& i : this->districts)
 		this->unit.back()->update(mouseposview, i.second);
-	position->update();
-	this->headBar->setPos(this->view1.getCenter(), this->view1.getSize()); //pobiera œrodek wiêc trzeba trochê zmodyfikowaæ w funkcji
+	position->update(); //update pozycji view i headBar
 
 	//Wyœwietlanie pozycji myszki (czasem przydatne)
 	//cout << this->mouseposwindow.x << " " << this->mouseposwindow.y << "\n";
@@ -55,7 +55,7 @@ void GameState::render(RenderTarget* target)
 	this->view1.setCenter(position->GetPosition());
 
 	this->window->setView(view1);
-	this->headBar->render(window);
+	this->position->render(window);
 }
 //Inicjalizacja regionów i miast
 void GameState::initDis()
@@ -119,10 +119,5 @@ void GameState::initView()
 {
 	this->view2 = window->getDefaultView();
 	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(400.f, 300.f));
-	this->position = new Position();
-}
-//Head bar
-void GameState::initHeadBar()
-{
-	this->headBar = new HeadBar(this->view1.getSize().x, this->view1.getSize().y);
+	this->position = new Position(this->view1.getSize());
 }

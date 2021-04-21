@@ -14,9 +14,9 @@ public:
 	~HeadBar();
 	//updatowanie i wyœwietlanie na ekranie
 	void update();
-	void render(RenderTarget* target);
+	void render(sf::RenderWindow* window);
 
-	void setPos(sf::Vector2f viewPos, sf::Vector2f viewSize);
+	void setPos(sf::Vector2f viewPos, sf::Vector2f viewOrigin);
 private:
 	//Kszta³t
 	RectangleShape barShape;

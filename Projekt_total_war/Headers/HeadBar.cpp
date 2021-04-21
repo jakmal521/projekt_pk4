@@ -4,7 +4,6 @@ HeadBar::HeadBar(float x, float y)
 {
 	this->barShape.setSize(Vector2f(x, y * 0.04));
 	this->barShape.setFillColor(Color(128, 128, 128, 200));
-	this->barShape.setPosition(0, 0);
 }
 
 HeadBar::~HeadBar()
@@ -14,14 +13,14 @@ HeadBar::~HeadBar()
 void HeadBar::update()
 {
 }
-void HeadBar::render(RenderTarget* target)
+
+void HeadBar::render(sf::RenderWindow* window)
 {
-	target->draw(this->barShape);
+	window->draw(barShape);
 }
 
-void HeadBar::setPos(sf::Vector2f viewPos, sf::Vector2f viewSize)
+void HeadBar::setPos(sf::Vector2f viewPos, sf::Vector2f viewOrigin)
 {
-	viewPos.x -= viewSize.x / 2;
-	viewPos.y -= viewSize.y / 2;
+	viewPos -= viewOrigin;
 	this->barShape.setPosition(viewPos);
 }

@@ -5,6 +5,8 @@
 #include <SFML/Network.hpp>
 #include <vector>
 
+#include "..\Headers\HeadBar.h"	//Wyświetlanie headBar
+
 using namespace std;
 using namespace sf;
 
@@ -14,20 +16,26 @@ public:
 
 	//Konstruktor i destruktor
 	Position();
+	Position(sf::Vector2f viewSize);
 	~Position();
 
 	//Metody
 	void update();
-	//void render(RenderWindow& window); //na razie zbêdny
+	void render(sf::RenderWindow* window);
 
-		/*
-			@param void
-			Zwraca Vector pozycji kwadratu
-		*/
+	//Inicjalizacja headBar
+	void initHeadBar();
+
+	/*
+		@param void
+		Zwraca Vector pozycji kwadratu
+	*/
 	Vector2f GetPosition() {
 		return this->shape.getPosition();
 	}
 protected:
 	//Kształt kwadratu w oknie
 	sf::RectangleShape shape;
+	//HeaderBar
+	HeadBar* headBar;
 };
