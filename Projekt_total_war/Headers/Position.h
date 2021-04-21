@@ -24,7 +24,7 @@ public:
 	void render(sf::RenderWindow* window);
 
 	//Inicjalizacja headBar
-	void initHeadBar();
+	void initHeadBar(Font* font, Player* player);
 
 	/*
 		@param void

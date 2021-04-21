@@ -7,7 +7,8 @@ GameState::GameState(RenderWindow* window, stack<State*>* _states, Font _font) :
 	this->initBackground();
 	this->initView();
 	this->initUnit();
-	this->position->initHeadBar();
+	this->initPlayer();
+	this->position->initHeadBar(&_font, this->player);
 	//this->initHeadBar();
 	this->font = _font;
 }
@@ -120,4 +121,9 @@ void GameState::initView()
 	this->view2 = window->getDefaultView();
 	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(400.f, 300.f));
 	this->position = new Position(this->view1.getSize());
+}
+
+void GameState::initPlayer()
+{
+	this->player = new Player();
 }

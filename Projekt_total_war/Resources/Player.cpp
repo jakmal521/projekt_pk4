@@ -3,6 +3,7 @@
 //Kontruktor i destruktor
 Player::Player()
 {
+	this->gold = 0;
 }
 
 Player::~Player()

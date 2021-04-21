@@ -41,4 +41,7 @@ private:
 	void initView();
 	//Czcionka
 	Font font;
+	//Gracz
+	Player* player;
+	void initPlayer();
 };
