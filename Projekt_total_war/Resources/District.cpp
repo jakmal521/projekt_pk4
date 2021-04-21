@@ -1,5 +1,5 @@
 #include "..\Headers\District.h"
-#include "..\Headers\Player.h"
+#include "..\Headers\Unit.h"
 //konstruktor i destruktor
 District::District(string _name)
 {
@@ -28,12 +28,10 @@ void District::update(Vector2f mpos)
 	if (!this->cities.empty())
 		for (auto& i : this->cities)
 			i->update(mpos);
-	this->shape.setOutlineColor(Color(1, 2, 3, 0));
-	this->shape.setOutlineThickness(0);
+	
 	if (this->shape.getGlobalBounds().contains(mpos)) // Trzeba potem to zmieniæ - convex nie wspiera GlobalBounds i trzeba u¿yæ coœ innego albo jakoœ sprawdzaæ inaczej
 	{
-		this->shape.setOutlineThickness(1);
-		this->shape.setOutlineColor(Color::White);
+		
 
 		this->isCursor = true;	//Jeœli nad dystryktem to true
 

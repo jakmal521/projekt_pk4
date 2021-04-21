@@ -1,3 +1,4 @@
+#pragma once
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -16,6 +17,12 @@ public:
 	void update(Vector2f mpos);
 	//Akcesor
 	bool press();
+	//akcesory
+	float getPosX();
+	float getPosY();
+	float getHeight();
+	float getWidth();
+
 private: 
 	//Wzor przycisku
 	RectangleShape button;

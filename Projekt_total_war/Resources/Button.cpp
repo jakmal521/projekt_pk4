@@ -49,3 +49,23 @@ bool Button::press()
 		return true;
 	return false;
 }
+//Akcesory
+float Button::getPosX()
+{
+	return this->button.getGlobalBounds().left;
+}
+
+float Button::getPosY()
+{
+	return this->button.getGlobalBounds().top;
+}
+
+float Button::getHeight()
+{
+	return this->button.getGlobalBounds().height;
+}
+
+float Button::getWidth()
+{
+	return this->button.getGlobalBounds().width;
+}

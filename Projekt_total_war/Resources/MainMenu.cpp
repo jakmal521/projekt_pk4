@@ -51,6 +51,7 @@ void MainMenu::end()
 {
 	;
 }
+
 //Przyciski
 void MainMenu::initButtons()
 {

@@ -6,7 +6,8 @@ GameState::GameState(RenderWindow* window, stack<State*>* _states, Font _font) :
 	this->initDis();
 	this->initBackground();
 	this->initView();
-	this->initPlayer();
+	this->initUnit();
+	this->initHeadBar();
 	this->font = _font;
 }
 
@@ -35,8 +36,9 @@ void GameState::update()
 	for (auto& i : this->districts)
 		i.second->update(mouseposview);
 	for (auto& i : this->districts)
-		this->player.back()->update(mouseposview, i.second);
+		this->unit.back()->update(mouseposview, i.second);
 	position->update();
+
 
 	//Wyœwietlanie pozycji myszki (czasem przydatne)
 	//cout << this->mouseposwindow.x << " " << this->mouseposwindow.y << "\n";
@@ -49,11 +51,14 @@ void GameState::render(RenderTarget* target)
 	target->draw(this->background);
 	for (auto& i : this->districts)
 		i.second->render(this->window);
-	for (auto& j : this->player)
+	for (auto& j : this->unit)
 		j->render(this->window);
+
 	this->view1.setCenter(position->GetPosition());
 	
 	this->window->setView(view1);
+	this->headBar->render(window);
+	
 }
 //Inicjalizacja regionów i miast
 void GameState::initDis()
@@ -77,8 +82,8 @@ void GameState::initDis()
 		}
 		//this->districts[name]->shape.scale(0.5, 0.5);
 		this->districts[name]->shape.setFillColor(Color::Black);
-		this->districts[name]->shape.setOutlineThickness(0);
-		this->districts[name]->shape.setOutlineColor(Color::Transparent);
+		this->districts[name]->shape.setOutlineThickness(2);
+		this->districts[name]->shape.setOutlineColor(Color(222, 184, 135, 160));
 
 		//Zainicjowanie miasta w dystrykcie
 		string line;
@@ -106,10 +111,10 @@ void GameState::end()
 }
 
 //Inicjalizacja gracza
-void GameState::initPlayer()
+void GameState::initUnit()
 {
-	this->player.push_back(new Player());
-	this->player.back()->initPla(this->districts);
+	this->unit.push_back(new Unit());
+	this->unit.back()->initPla(this->districts);
 }
 
 //Incjalizacja widoku
@@ -118,4 +123,9 @@ void GameState::initView()
 	this->view2 = window->getDefaultView();
 	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(400.f, 300.f));
 	this->position = new Position();
+}
+//Head bar
+void GameState::initHeadBar()
+{
+	this->headBar = new HeadBar(this->window->getSize().x,this->window->getSize().y);
 }

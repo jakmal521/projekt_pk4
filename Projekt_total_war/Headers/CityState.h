@@ -1,11 +1,15 @@
 #pragma once
+
 #include "..\Headers\State.h"
 #include "..\Headers\City.h"
+#include "..\Headers\Button.h"
+
 
 
 #include <sstream>
 #include <fstream>
 #include <iostream>
+#include <iomanip>
 class CityState :
 	public State
 {
@@ -24,8 +28,8 @@ private:
 	//Czcionka
 	Font font;
 	//Przyciski
-   // map<string, Button*>buttons;
-	/*void initButtons();
+    map<string, Button*>buttons;
+	void initButtons();
 	void updateButtons();
 	void renderButtons(RenderTarget* target);
 	//Wyœwietlanie i update ekranu*/
@@ -34,9 +38,14 @@ private:
 	void initBackground(sf::RenderWindow* window);
 	//Inicjalizacja tekstu i przycisków
 	void initText(Font font, City& city);
-	void initButtons();
+	
 	//Nazwa miasta
-	Text cityName;
-	//Czcionka 
+	Text greeting;
+	//Informacje o mieœcie
+	RectangleShape infoShape;
+	void initInfo();
+	Text info;
+	//Miasto 
+	City* city;
 	
 };

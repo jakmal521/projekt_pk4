@@ -4,10 +4,11 @@
 #include <sstream>
 //#include "..\Headers\State.h"
 #include "..\Headers\District.h"
-#include "..\Headers\Player.h"
+#include "..\Headers\Unit.h"
 #include "..\Headers\Position.h"
 #include "..\Headers\City.h"
 #include "..\Headers\CityState.h"
+#include "..\Headers\HeadBar.h"
 class GameState :
 	public State
 {
@@ -32,8 +33,8 @@ private:
 	//Wychodzenie z rozgrywki
 	void end();
 	//Klasa gracza
-	vector<Player*> player;
-	void initPlayer();
+	vector<Unit*> unit;
+	void initUnit();
 	//Przechowuje pozycje i view
 	View view1;
 	View view2;
@@ -41,4 +42,8 @@ private:
 	void initView();
 	//Czcionka
 	Font font;
+	//Header
+	HeadBar* headBar;
+	void initHeadBar();
+	
 };

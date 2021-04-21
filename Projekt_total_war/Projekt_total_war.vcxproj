@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Headers\HeadBar.cpp" />
     <ClCompile Include="Projekt_total_war.cpp" />
     <ClCompile Include="Resources\Button.cpp" />
     <ClCompile Include="Resources\City.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="Resources\GameState.cpp" />
     <ClCompile Include="Resources\MainMenu.cpp" />
     <ClCompile Include="Resources\Player.cpp" />
+    <ClCompile Include="Resources\Unit.cpp" />
     <ClCompile Include="Resources\Position.cpp" />
     <ClCompile Include="Resources\Settlement.cpp" />
     <ClCompile Include="Resources\State.cpp" />
@@ -174,8 +176,10 @@
     <ClInclude Include="Headers\District.h" />
     <ClInclude Include="Headers\Game.h" />
     <ClInclude Include="Headers\GameState.h" />
+    <ClInclude Include="Headers\HeadBar.h" />
     <ClInclude Include="Headers\MainMenu.h" />
     <ClInclude Include="Headers\Player.h" />
+    <ClInclude Include="Headers\Unit.h" />
     <ClInclude Include="Headers\Position.h" />
     <ClInclude Include="Headers\Settlement.h" />
     <ClInclude Include="Headers\State.h" />

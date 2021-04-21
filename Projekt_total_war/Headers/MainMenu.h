@@ -29,8 +29,9 @@ private:
     //Inicjacja t³a
     void initBackground();
     void initFont();
-    //
+    //Sprawdzanie czy koniec stanu
     void end();
+   
     
 };
 
