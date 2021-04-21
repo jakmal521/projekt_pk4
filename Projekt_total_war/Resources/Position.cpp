@@ -4,7 +4,7 @@ Position::Position()
 {
 	/*
 		@param Position
-		Konstruktor kwadratu, jako widok dla u¿ytkownika
+		Konstruktor kwadratu, jako widok dla uzytkownika
 		-setSize	-rozmiar kwadratu
 		-setPosition	-ustawienie pozycji kwadratu
 	*/
