@@ -17,7 +17,7 @@ public:
 	~HeadBar();
 	//updatowanie i wyœwietlanie na ekranie
 	void update();
-	void render(sf::RenderWindow* window);
+	void render(sf::RenderTarget* window);
 
 	void setPos(sf::Vector2f viewPos, sf::Vector2f viewOrigin);
 private:

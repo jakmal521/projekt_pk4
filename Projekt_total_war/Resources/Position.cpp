@@ -43,12 +43,12 @@ void Position::update()
 		this->shape.move(0, -speed);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		this->shape.move(0, speed);
-	this->headBar->update();
-	this->headBar->setPos(this->shape.getPosition(), this->shape.getOrigin());
 	
+	this->headBar->setPos(this->shape.getPosition(), this->shape.getOrigin());
+	this->headBar->update();
 }
 
-void Position::render(sf::RenderWindow* window)
+void Position::render(sf::RenderTarget* window)
 {
 	this->headBar->render(window);
 	//this->window->draw;

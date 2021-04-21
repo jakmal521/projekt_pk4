@@ -26,7 +26,7 @@ void HeadBar::update()
 }
 
 
-void HeadBar::render(sf::RenderWindow* window)
+void HeadBar::render(sf::RenderTarget* window)
 {
 	window->draw(this->barShape);
 	window->draw(this->text);

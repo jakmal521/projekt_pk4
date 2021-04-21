@@ -7,10 +7,10 @@ GameState::GameState(RenderWindow* window, stack<State*>* _states, Font _font) :
 	this->initBackground();
 	this->initView();
 	this->initUnit();
-	this->initPlayer();
-	this->position->initHeadBar(&_font, this->player);
+	this->initPlayer();this->font = _font;
+	this->position->initHeadBar(&this->font, this->player);
 	//this->initHeadBar();
-	this->font = _font;
+	
 }
 
 GameState::~GameState()
@@ -56,7 +56,7 @@ void GameState::render(RenderTarget* target)
 	this->view1.setCenter(position->GetPosition());
 
 	this->window->setView(view1);
-	this->position->render(window);
+	this->position->render(target);
 }
 //Inicjalizacja regionów i miast
 void GameState::initDis()
@@ -110,7 +110,7 @@ void GameState::end()
 
 //Inicjalizacja gracza
 void GameState::initUnit()
-{
+{ 
 	this->unit.push_back(new Unit());
 	this->unit.back()->initPla(this->districts);
 }

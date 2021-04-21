@@ -21,7 +21,7 @@ public:
 
 	//Metody
 	void update();
-	void render(sf::RenderWindow* window);
+	void render(sf::RenderTarget* window);
 
 	//Inicjalizacja headBar
 	void initHeadBar(Font* font, Player* player);
