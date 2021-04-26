@@ -146,7 +146,7 @@ void GameState::initUnit()
 void GameState::changeUnit()
 {
 	int a = this->whichUnit;
-	if (Keyboard::isKeyPressed(Keyboard::Num1))
+	/*if (Keyboard::isKeyPressed(Keyboard::Num1))
 	{
 		this->whichUnit = 0;
 	}
@@ -181,6 +181,16 @@ void GameState::changeUnit()
 	else if (Keyboard::isKeyPressed(Keyboard::Num9))
 	{
 		this->whichUnit = 8;
+	}*/
+	for (int i = 0; i < this->unit.size(); i++)
+	{
+
+		if (this->unit[i]->UnitShape.getGlobalBounds().contains(this->mouseposview) && Mouse::isButtonPressed(Mouse::Left))
+		{
+			this->whichUnit = i;
+			break;
+		}
+
 	}
 
 	if (this->whichUnit >= this->unit.size())

@@ -51,4 +51,5 @@ private:
 
 	//Parametry
 	float moveSpeed;
+	friend class GameState;
 };

@@ -8,6 +8,10 @@
 
 Unit::Unit()
 {
+this->newUnit = false;
+
+	this->mouseRightHeld = false;
+	this->mouseLeftHeld = false;
 }
 
 Unit::~Unit()
@@ -21,6 +25,7 @@ void Unit::initUnit(map<string, District*> districts)
 
 	this->mouseRightHeld = false;
 	this->mouseLeftHeld = false;
+
 
 	//Obrazek gracza
 	this->UnitTexture.loadFromFile("JPG/knight.png");
@@ -145,6 +150,7 @@ bool Unit::ifNewUnit()
 		this->drawButton = false;
 		return true;
 	}
+	else return false;
 }
 
 void Unit::showButtons()
