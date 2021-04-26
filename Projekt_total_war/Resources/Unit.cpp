@@ -38,6 +38,17 @@ void Unit::initUnit(map<string, District*> districts)
 	this->moveShape.setSize(sf::Vector2f(50.f, 50.f));
 	this->moveShape.setOrigin(sf::Vector2f(25.f, 25.f));
 
+	//Przyciski
+	this->buttonsFont.loadFromFile("Fonts/RomanSD.ttf");
+	this->buttonBackground.setSize(sf::Vector2f(100.f, 100.f));
+	this->buttonBackground.setFillColor(sf::Color(127, 127, 127, 127));
+	this->buttonBackground.setOutlineColor(sf::Color::Black);
+	this->buttonBackground.setOrigin(0, this->buttonBackground.getSize().y);
+	this->buttonSplit.setSize(sf::Vector2f(40.f, 20.f));
+	this->buttonSplit.setFillColor(sf::Color::Black);
+	this->buttonCancel.setSize(sf::Vector2f(40.f, 20.f));
+	this->buttonCancel.setFillColor(sf::Color::Black);
+
 	//Atrybuty gracza
 	this->moveSpeed = 600;
 }
@@ -52,6 +63,8 @@ void Unit::update(sf::Vector2f mpos, District* districts)
 	{
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
+			this->hideButtons();
+
 			if (this->mouseRightHeld == false)
 			{
 				this->mouseRightHeld = true;
@@ -85,7 +98,24 @@ void Unit::update(sf::Vector2f mpos, District* districts)
 			if (this->UnitShape.getGlobalBounds().contains(mpos))
 			{
 				std::cout << "Kliknales go lewym mordo\n";
-				newUnit = true;
+
+				this->showButtons();
+			}
+
+			if (this->drawButton)
+			{
+				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+				{
+					if (this->buttonCancel.getGlobalBounds().contains(mpos))
+					{
+						this->hideButtons();
+					}
+					if (this->buttonSplit.getGlobalBounds().contains(mpos))
+					{
+						this->hideButtons();
+						this->newUnit = true;
+					}
+				}
 			}
 		}
 	}
@@ -99,6 +129,12 @@ void Unit::render(sf::RenderTarget* target)
 {
 	target->draw(this->UnitShape);
 	target->draw(this->moveShape);
+	if (this->drawButton)
+	{
+		target->draw(this->buttonBackground);
+		target->draw(this->buttonSplit);
+		target->draw(this->buttonCancel);
+	}
 }
 
 bool Unit::ifNewUnit()
@@ -106,6 +142,33 @@ bool Unit::ifNewUnit()
 	if (this->newUnit)
 	{
 		this->newUnit = false;
+		this->drawButton = false;
 		return true;
 	}
+}
+
+void Unit::showButtons()
+{
+	this->drawButton = true;
+	this->buttonBackground.setFillColor(sf::Color(127, 127, 127, 127));
+	this->buttonBackground.setPosition(sf::Vector2f(this->UnitShape.getPosition().x + (this->UnitShape.getSize().x / 2), this->UnitShape.getPosition().y));
+
+	this->buttonCancel.setFillColor(sf::Color::Black);
+	this->buttonCancel.setPosition(sf::Vector2f(this->buttonBackground.getPosition().x + 5, this->buttonBackground.getPosition().y - 25));
+
+	this->buttonSplit.setFillColor(sf::Color::Black);
+	this->buttonSplit.setPosition(sf::Vector2f(this->buttonBackground.getPosition().x + 55, this->buttonBackground.getPosition().y - 25));
+}
+
+void Unit::hideButtons()
+{
+	this->drawButton = false;
+	this->buttonBackground.setFillColor(sf::Color::Transparent);
+	this->buttonBackground.setPosition(sf::Vector2f(-100.f, -100.f));
+
+	this->buttonCancel.setFillColor(sf::Color::Transparent);
+	this->buttonCancel.setPosition(sf::Vector2f(-100.f, -100.f));
+
+	this->buttonSplit.setFillColor(sf::Color::Transparent);
+	this->buttonSplit.setPosition(sf::Vector2f(-100.f, -100.f));
 }

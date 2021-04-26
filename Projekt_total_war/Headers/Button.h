@@ -3,13 +3,13 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
-#include <sstream>  
+#include <sstream>
 using namespace sf;
 class Button
 {
 public:
 	//Konstruktory i destruktory
-	Button(float x, float y, float width, float height, Font *_font, string text, Color _color);
+	Button(float x, float y, float width, float height, Font* _font, string text, Color _color);
 	~Button();
 	//wyswietlanie na ekranie
 	void render(RenderTarget* target);
@@ -23,7 +23,7 @@ public:
 	float getHeight();
 	float getWidth();
 
-private: 
+private:
 	//Wzor przycisku
 	RectangleShape button;
 	//Tresc na przycisku
@@ -32,7 +32,6 @@ private:
 	Font* font;
 	Color color;
 	Color hover;
-//Czy ktoœ nacisn¹³
+	//Czy ktoœ nacisn¹³
 	bool pressed;
 };
-

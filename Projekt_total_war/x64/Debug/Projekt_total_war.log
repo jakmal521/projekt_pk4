@@ -1,4 +1,27 @@
-﻿  GameState.cpp
+﻿  Button.cpp
+  District.cpp
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\District.cpp(84,71): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\District.cpp(84,63): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\District.cpp(85,53): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\District.cpp(85,45): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+  Game.cpp
+  GameState.cpp
 C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\GameState.cpp(127,74): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
           with
           [
@@ -17,4 +40,32 @@ C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Ga
           [
               T=float
           ]
+  MainMenu.cpp
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\MainMenu.cpp(42,74): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\MainMenu.cpp(42,53): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\MainMenu.cpp(58,98): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\MainMenu.cpp(58,63): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\MainMenu.cpp(59,99): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\MainMenu.cpp(59,64): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+  Player.cpp
+  Unit.cpp
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(29,32): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+  Generowanie kodu...
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(148): warning C4715: "Unit::ifNewUnit”: niewszystkie ścieżki kodu zwracają wartość
   Projekt_total_war.vcxproj -> C:\Users\krzys\source\repos\projekt_pk4_total_war\x64\Debug\Projekt_total_war.exe

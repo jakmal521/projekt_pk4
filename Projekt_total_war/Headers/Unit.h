@@ -33,11 +33,20 @@ private:
 	sf::Texture moveTexture;
 	sf::Color moveShapeColor;		//Kolor X-sa
 
+	//Przyciski
+	RectangleShape buttonBackground;
+	RectangleShape buttonSplit;
+	RectangleShape buttonCancel;
+	sf::Font buttonsFont;
+	void showButtons();
+	void hideButtons();
+
 	//Sprawdzenie czy przycisk myszy nie jest przytrzymywany
 	bool mouseRightHeld;
 	bool mouseLeftHeld;
 
 	//Sprawdzenie czy chcemy stworzyæ now¹ jednostke na mapie
+	bool drawButton;
 	bool newUnit;
 
 	//Parametry
