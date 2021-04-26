@@ -10,7 +10,6 @@ HeadBar::HeadBar(float x, float y, Font* font, Player* player)
 	this->text.setCharacterSize(8);
 	this->text.setPosition(this->barShape.getSize().x + (this->barShape.getGlobalBounds().width / 2) - this->text.getGlobalBounds().width / 2, this->barShape.getPosition().y + (this->barShape.getGlobalBounds().height / 2) - this->text.getGlobalBounds().height / 2);
 	this->player = player;
-	
 }
 
 HeadBar::~HeadBar()
@@ -25,12 +24,10 @@ void HeadBar::update()
 	this->text.setPosition(this->barShape.getPosition().x + (this->barShape.getGlobalBounds().width / 2) - this->text.getGlobalBounds().width / 2, this->barShape.getPosition().y + (this->barShape.getGlobalBounds().height / 2) - this->text.getGlobalBounds().height / 2);
 }
 
-
 void HeadBar::render(sf::RenderTarget* window)
 {
 	window->draw(this->barShape);
 	window->draw(this->text);
-
 }
 
 void HeadBar::setPos(sf::Vector2f viewPos, sf::Vector2f viewOrigin)

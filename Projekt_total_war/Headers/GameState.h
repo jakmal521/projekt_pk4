@@ -21,26 +21,37 @@ private:
 	//Wyœwietlanie i update ekranu
 	void update();
 	void render(RenderTarget* target = nullptr);
-	//Wektor regionów
-	map<string, District*> districts;
-	//Inicjalizacja regionów
-	void initDis();
-	//T³o
-	RectangleShape background;
-	Texture texture;
-	void initBackground();
+
 	//Wychodzenie z rozgrywki
 	void end();
-	//Klasa gracza
-	vector<Unit*> unit;
-	void initUnit();
+
 	//Przechowuje pozycje i view
 	View view1;
 	View view2;
 	Position* position;
 	void initView();
+
 	//Czcionka
 	Font font;
+
+	//T³o
+	RectangleShape background;
+	Texture texture;
+	void initBackground();
+
+	//Wektor regionów
+	map<string, District*> districts;
+
+	//Inicjalizacja regionów
+	void initDis();
+
+	//Klasa jednostki
+	vector<Unit*> unit;
+	void initUnit();
+	int howManyUnitsOnMap;
+	int whichUnit = 0;
+	void changeUnit();
+
 	//Gracz
 	Player* player;
 	void initPlayer();

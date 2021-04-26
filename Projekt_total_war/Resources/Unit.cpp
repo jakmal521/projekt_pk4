@@ -15,23 +15,29 @@ Unit::~Unit()
 }
 
 //Inicjalizacja gracza
-void Unit::initPla(map<string, District*> districts)
+void Unit::initUnit(map<string, District*> districts)
 {
-	this->mouseHeld = false;
+	this->newUnit = false;
+
+	this->mouseRightHeld = false;
+	this->mouseLeftHeld = false;
+
 	//Obrazek gracza
-	//this->UnitShape.setFillColor(sf::Color::Red);
 	this->UnitTexture.loadFromFile("JPG/knight.png");
 	this->UnitShape.setTexture(&this->UnitTexture);
 	this->UnitShape.setSize(Vector2f(100.f, 100.f));
 	this->UnitShape.setOrigin(0.5 * this->UnitShape.getSize().x, 1 * this->UnitShape.getSize().y);
 	this->UnitShape.setPosition(districts["Calabria"]->returnPosition());
+
 	//Obrazek poruszania siê
 	this->moveTexture.loadFromFile("JPG/x.png");
 	this->moveShape.setTexture(&this->moveTexture);
-	this->moveShapeColor = this->moveShape.getFillColor(); //Pobranie koloru X-sa
-	this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f));
+	this->moveShapeColor = this->moveShape.getFillColor();	//Pobranie koloru X-sa
+	this->moveShape.setFillColor(sf::Color::Transparent);	//Zabranie mu koloru
+	this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f));	//Pozycja pocz¹tkowa poza map¹
 	this->moveShape.setSize(sf::Vector2f(50.f, 50.f));
 	this->moveShape.setOrigin(sf::Vector2f(25.f, 25.f));
+
 	//Atrybuty gracza
 	this->moveSpeed = 600;
 }
@@ -41,13 +47,14 @@ void Unit::initPla(map<string, District*> districts)
 /// <returns>Void</returns>
 void Unit::update(sf::Vector2f mpos, District* districts)
 {
+	//Event po klikniêciu na dystrykt prawym przyciskiem
 	if (districts->returnIsCursorOnDistrict())
 	{
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
-			if (this->mouseHeld == false)
+			if (this->mouseRightHeld == false)
 			{
-				this->mouseHeld = true;
+				this->mouseRightHeld = true;
 				if (this->moveShape.getGlobalBounds().contains(mpos))
 				{
 					std::cout << "Kurwy dotarly na " << districts->name << "\n";
@@ -65,8 +72,26 @@ void Unit::update(sf::Vector2f mpos, District* districts)
 		}
 		else
 		{
-			this->mouseHeld = false;
+			this->mouseRightHeld = false;
 		}
+	}
+
+	//Event po klikniêciu jednostki lewym przyciskiem
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		if (this->mouseLeftHeld == false)
+		{
+			this->mouseLeftHeld = true;
+			if (this->UnitShape.getGlobalBounds().contains(mpos))
+			{
+				std::cout << "Kliknales go lewym mordo\n";
+				newUnit = true;
+			}
+		}
+	}
+	else
+	{
+		this->mouseLeftHeld = false;
 	}
 }
 
@@ -74,4 +99,13 @@ void Unit::render(sf::RenderTarget* target)
 {
 	target->draw(this->UnitShape);
 	target->draw(this->moveShape);
+}
+
+bool Unit::ifNewUnit()
+{
+	if (this->newUnit)
+	{
+		this->newUnit = false;
+		return true;
+	}
 }

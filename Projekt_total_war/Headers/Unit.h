@@ -11,20 +11,21 @@
 #include "../Headers/District.h"
 
 class Unit
-
 {
 public:
-	//Konstruktor i destrukto
+	//Konstruktor i destruktor
 	Unit();
 	~Unit();
 
 	//Metody
 	void update(sf::Vector2f mpos, District* districts);
 	void render(sf::RenderTarget* target);
-	void initPla(map<string, District*> districts);
+	void initUnit(map<string, District*> districts);
+
+	bool ifNewUnit();
 
 private:
-	//Wyglad
+	//Wyglad gracza i X-sa poruszania
 	sf::RectangleShape UnitShape;	//Kwadrat gracza
 	sf::Texture UnitTexture;
 	sf::Color UnitShapeColor;		//Kolor gracza
@@ -33,7 +34,11 @@ private:
 	sf::Color moveShapeColor;		//Kolor X-sa
 
 	//Sprawdzenie czy przycisk myszy nie jest przytrzymywany
-	bool mouseHeld;
+	bool mouseRightHeld;
+	bool mouseLeftHeld;
+
+	//Sprawdzenie czy chcemy stworzyæ now¹ jednostke na mapie
+	bool newUnit;
 
 	//Parametry
 	float moveSpeed;
