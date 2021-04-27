@@ -25,7 +25,7 @@ void GameState::update()
 	this->end();
 
 	//update pozycji view i headBar
-	position->update();
+	position->update(this->amountOfdistricts());
 
 	//podœwietlanie dystryktów po najechaniu myszk¹
 	for (auto& i : this->districts)
@@ -37,12 +37,12 @@ void GameState::update()
 	for (auto& i : this->districts)
 	{
 		//for (int j = 0; j < unit.size(); j++)
-		this->unit[this->whichUnit]->update(mouseposview, i.second);
+		this->unit[this->whichUnit]->update(mouseposview, i.second->returnIsCursorOnDistrict());
 		if (this->unit[this->whichUnit]->ifNewUnit())
 		{
 			if (this->unit.size() >= howManyUnitsOnMap)
 			{
-				cout << "Nie mozna miec na raz wiecej niz howManyUnitsOnMap(5) jednostek na mapie\n";
+				//cout << "Nie mozna miec na raz wiecej niz howManyUnitsOnMap(5) jednostek na mapie\n";
 			}
 			else
 			{
@@ -210,5 +210,15 @@ void GameState::initView()
 //Inicjalizacja danych gracza(z³oto itp.)
 void GameState::initPlayer()
 {
-	this->player = new Player();
+	this->player = new Player(Color::Black);
+}
+//Ile regionów ma gracz
+int GameState::amountOfdistricts()
+{	
+	int sum = 0;
+	for (auto& i : this->districts)
+		if (i.second->shape.getFillColor() == this->player->playerColor())
+			sum++;
+
+	return sum;
 }

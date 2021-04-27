@@ -20,7 +20,7 @@ public:
 	~Position();
 
 	//Metody
-	void update();
+	void update(int amountOfDistricts);
 	void render(sf::RenderTarget* window);
 
 	//Inicjalizacja headBar

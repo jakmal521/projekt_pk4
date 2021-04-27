@@ -26,7 +26,7 @@ Position::~Position()
 {
 }
 
-void Position::update()
+void Position::update(int amountOfDistricts)
 {
 	/*
 		@param void
@@ -45,7 +45,7 @@ void Position::update()
 		this->shape.move(0, speed);
 	
 	this->headBar->setPos(this->shape.getPosition(), this->shape.getOrigin());
-	this->headBar->update();
+	this->headBar->update(amountOfDistricts);
 }
 
 void Position::render(sf::RenderTarget* window)

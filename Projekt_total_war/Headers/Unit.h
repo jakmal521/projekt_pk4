@@ -9,6 +9,7 @@
 #include <sstream>
 #include <fstream>
 #include "../Headers/District.h"
+#include "../Headers/Button.h"
 
 class Unit
 {
@@ -18,7 +19,7 @@ public:
 	~Unit();
 
 	//Metody
-	void update(sf::Vector2f mpos, District* districts);
+	void update(sf::Vector2f mpos, bool iCOD);
 	void render(sf::RenderTarget* target);
 	void initUnit(map<string, District*> districts);
 
@@ -40,7 +41,8 @@ private:
 	sf::Font buttonsFont;
 	void showButtons();
 	void hideButtons();
-
+	//Sprawdzenie czy nie jest klikniêty
+	bool clicked;
 	//Sprawdzenie czy przycisk myszy nie jest przytrzymywany
 	bool mouseRightHeld;
 	bool mouseLeftHeld;

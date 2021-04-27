@@ -55,4 +55,6 @@ private:
 	//Gracz
 	Player* player;
 	void initPlayer();
+	//Ile regionów ma gracz
+	int amountOfdistricts();
 };

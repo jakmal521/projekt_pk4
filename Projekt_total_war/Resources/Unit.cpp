@@ -8,10 +8,7 @@
 
 Unit::Unit()
 {
-this->newUnit = false;
 
-	this->mouseRightHeld = false;
-	this->mouseLeftHeld = false;
 }
 
 Unit::~Unit()
@@ -25,7 +22,7 @@ void Unit::initUnit(map<string, District*> districts)
 
 	this->mouseRightHeld = false;
 	this->mouseLeftHeld = false;
-
+	this->clicked = false;
 
 	//Obrazek gracza
 	this->UnitTexture.loadFromFile("JPG/knight.png");
@@ -33,6 +30,7 @@ void Unit::initUnit(map<string, District*> districts)
 	this->UnitShape.setSize(Vector2f(100.f, 100.f));
 	this->UnitShape.setOrigin(0.5 * this->UnitShape.getSize().x, 1 * this->UnitShape.getSize().y);
 	this->UnitShape.setPosition(districts["Calabria"]->returnPosition());
+	this->UnitShapeColor = this->UnitShape.getFillColor();
 
 	//Obrazek poruszania siê
 	this->moveTexture.loadFromFile("JPG/x.png");
@@ -43,7 +41,7 @@ void Unit::initUnit(map<string, District*> districts)
 	this->moveShape.setSize(sf::Vector2f(50.f, 50.f));
 	this->moveShape.setOrigin(sf::Vector2f(25.f, 25.f));
 
-	//Przyciski
+	//Przyciski 
 	this->buttonsFont.loadFromFile("Fonts/RomanSD.ttf");
 	this->buttonBackground.setSize(sf::Vector2f(100.f, 100.f));
 	this->buttonBackground.setFillColor(sf::Color(127, 127, 127, 127));
@@ -61,73 +59,90 @@ void Unit::initUnit(map<string, District*> districts)
 /// <summary>Wykorzystuje funkcje z district.h ¿eby sprawdziæ czy kursor znajduje siê nad dystryktem, po klikniêciu prawym przyciskiem myszy pojawia siê X, po czym klikaj¹c w niego pojawia siê tekstura gracza.</summary>
 /// <param name="">Pozycja kursora | WskaŸnik na dystrykt</param>
 /// <returns>Void</returns>
-void Unit::update(sf::Vector2f mpos, District* districts)
+void Unit::update(sf::Vector2f mpos, bool iCOD)
 {
-	//Event po klikniêciu na dystrykt prawym przyciskiem
-	if (districts->returnIsCursorOnDistrict())
+	if(!this->clicked)
+	this->UnitShape.setFillColor(this->UnitShapeColor);
+	if (this->UnitShape.getGlobalBounds().contains(mpos))
 	{
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+		this->UnitShape.setFillColor(Color::Red);
+	}
+	//Event po klikniêciu na dystrykt prawym przyciskiem
+		if (iCOD)
 		{
-			this->hideButtons();
-
-			if (this->mouseRightHeld == false)
+			
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
 			{
-				this->mouseRightHeld = true;
-				if (this->moveShape.getGlobalBounds().contains(mpos))
+				this->hideButtons();
+
+				if (this->mouseRightHeld == false)
 				{
-					std::cout << "Kurwy dotarly na " << districts->name << "\n";
-					this->UnitShape.setPosition(mpos);	//mpos czy pozycja moveShape???
-					this->moveShape.setFillColor(sf::Color::Transparent); //X znika
-					this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f)); //Wyrzucenie X-sa poza mapê aby nie da³o siê go klikn¹æ ponownie
+					this->mouseRightHeld = true;
+					if (this->moveShape.getGlobalBounds().contains(mpos))
+					{
+						this->UnitShape.setPosition(mpos);	//mpos czy pozycja moveShape???
+						this->moveShape.setFillColor(sf::Color::Transparent); //X znika
+						this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f)); //Wyrzucenie X-sa poza mapê aby nie da³o siê go klikn¹æ ponownie
+						this->clicked = false;
+					}
+					else
+					{
+
+						this->moveShape.setPosition(mpos);
+						this->moveShape.setFillColor(moveShapeColor);
+					}
 				}
-				else
+			}
+			else
+			{
+				this->mouseRightHeld = false;
+			}
+		}
+		
+		//Event po klikniêciu jednostki lewym przyciskiem
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			
+			if (this->mouseLeftHeld == false)
+			{this->clicked = true;
+				this->mouseLeftHeld = true;
+				if (this->UnitShape.getGlobalBounds().contains(mpos))
 				{
-					std::cout << "Ruszam z kurwami na " << districts->name << "\n";
-					this->moveShape.setPosition(mpos);
-					this->moveShape.setFillColor(moveShapeColor);
+					std::cout << "Kliknales go lewym mordo\n";
+
+					this->showButtons();
+				}
+
+				if (this->drawButton)
+				{
+					if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+					{
+						if (this->buttonCancel.getGlobalBounds().contains(mpos))
+						{
+							this->hideButtons();
+							this->clicked = false;
+						}
+						else if (this->buttonSplit.getGlobalBounds().contains(mpos))
+						{
+							this->hideButtons();
+							this->newUnit = true;
+							this->clicked = false;
+						}
+						else if(!this->buttonBackground.getGlobalBounds().contains(mpos)&&!this->UnitShape.getGlobalBounds().contains(mpos))
+							{
+							this->hideButtons(); this->clicked = false;
+						}
+					
+					}
 				}
 			}
 		}
+	
 		else
 		{
-			this->mouseRightHeld = false;
+			this->mouseLeftHeld = false;
 		}
-	}
-
-	//Event po klikniêciu jednostki lewym przyciskiem
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-	{
-		if (this->mouseLeftHeld == false)
-		{
-			this->mouseLeftHeld = true;
-			if (this->UnitShape.getGlobalBounds().contains(mpos))
-			{
-				std::cout << "Kliknales go lewym mordo\n";
-
-				this->showButtons();
-			}
-
-			if (this->drawButton)
-			{
-				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-				{
-					if (this->buttonCancel.getGlobalBounds().contains(mpos))
-					{
-						this->hideButtons();
-					}
-					if (this->buttonSplit.getGlobalBounds().contains(mpos))
-					{
-						this->hideButtons();
-						this->newUnit = true;
-					}
-				}
-			}
-		}
-	}
-	else
-	{
-		this->mouseLeftHeld = false;
-	}
+///	}
 }
 
 void Unit::render(sf::RenderTarget* target)

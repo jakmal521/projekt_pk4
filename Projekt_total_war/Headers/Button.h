@@ -34,4 +34,5 @@ private:
 	Color hover;
 	//Czy ktoœ nacisn¹³
 	bool pressed;
+	friend class Unit;
 };

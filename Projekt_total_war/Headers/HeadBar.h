@@ -16,7 +16,7 @@ public:
 	HeadBar(float x, float y, Font* font, Player* player);
 	~HeadBar();
 	//updatowanie i wyœwietlanie na ekranie
-	void update();
+	void update(int amountOfDistricts);
 	void render(sf::RenderTarget* window);
 
 	void setPos(sf::Vector2f viewPos, sf::Vector2f viewOrigin);

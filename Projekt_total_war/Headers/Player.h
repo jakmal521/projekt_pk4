@@ -15,8 +15,10 @@ class Player
 {
 public: 
 	//Konstruktor i destruktor
-	Player();
+	Player(Color color=Color::Black);
 	~Player();
+	//zwraca kolor gracza
+	Color playerColor();
 private:
 	//Atrybuty
 	Color color;
@@ -24,5 +26,6 @@ private:
 	int gold;
 
 	friend class HeadBar;
+	
 };
 
