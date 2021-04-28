@@ -1,4 +1,20 @@
-﻿  Unit.cpp
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(29,32): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(148): warning C4715: "Unit::ifNewUnit”: niewszystkie ścieżki kodu zwracają wartość
+﻿  GameState.cpp
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\GameState.cpp(135,74): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\GameState.cpp(135,53): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
   Projekt_total_war.vcxproj -> C:\Users\krzys\source\repos\projekt_pk4_total_war\x64\Debug\Projekt_total_war.exe

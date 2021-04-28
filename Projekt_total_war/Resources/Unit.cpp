@@ -8,7 +8,6 @@
 
 Unit::Unit()
 {
-
 }
 
 Unit::~Unit()
@@ -16,7 +15,7 @@ Unit::~Unit()
 }
 
 //Inicjalizacja gracza
-void Unit::initUnit(map<string, District*> districts)
+void Unit::initUnit()
 {
 	this->newUnit = false;
 
@@ -29,7 +28,7 @@ void Unit::initUnit(map<string, District*> districts)
 	this->UnitShape.setTexture(&this->UnitTexture);
 	this->UnitShape.setSize(Vector2f(100.f, 100.f));
 	this->UnitShape.setOrigin(0.5 * this->UnitShape.getSize().x, 1 * this->UnitShape.getSize().y);
-	this->UnitShape.setPosition(districts["Calabria"]->returnPosition());
+	this->UnitShape.setPosition(sf::Vector2f(550.f, 350.f));
 	this->UnitShapeColor = this->UnitShape.getFillColor();
 
 	//Obrazek poruszania siê
@@ -41,7 +40,7 @@ void Unit::initUnit(map<string, District*> districts)
 	this->moveShape.setSize(sf::Vector2f(50.f, 50.f));
 	this->moveShape.setOrigin(sf::Vector2f(25.f, 25.f));
 
-	//Przyciski 
+	//Przyciski
 	this->buttonsFont.loadFromFile("Fonts/RomanSD.ttf");
 	this->buttonBackground.setSize(sf::Vector2f(100.f, 100.f));
 	this->buttonBackground.setFillColor(sf::Color(127, 127, 127, 127));
@@ -56,93 +55,101 @@ void Unit::initUnit(map<string, District*> districts)
 	this->moveSpeed = 600;
 }
 
-/// <summary>Wykorzystuje funkcje z district.h ¿eby sprawdziæ czy kursor znajduje siê nad dystryktem, po klikniêciu prawym przyciskiem myszy pojawia siê X, po czym klikaj¹c w niego pojawia siê tekstura gracza.</summary>
-/// <param name="">Pozycja kursora | WskaŸnik na dystrykt</param>
+/// <summary>Wykorzystuje funkcje z district.h ¿eby sprawdziæ czy kursor znajduje siê nad dystryktem, po klikniêciu prawym przyciskiem myszy pojawia siê X, po czym klikaj¹c w niego pojawia siê tekstura gracza, klikaj¹c dwa razy lewym przyciskiem pojawia siê okno split umo¿liwiaj¹ce rozdzelenie jednostki na dwie.</summary>
+/// <param name="">Pozycja kursora | bool Czy kursor nad dystryktem</param>
 /// <returns>Void</returns>
-void Unit::update(sf::Vector2f mpos, bool iCOD)
+void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD)
 {
-	if(!this->clicked)
-	this->UnitShape.setFillColor(this->UnitShapeColor);
+	//Event po klikniêciu na dystrykt prawym przyciskiem
+	if (iCOD)
+	{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+		{
+			this->hideButtons();
+			this->clicked = false;
+
+			if (this->mouseRightHeld == false)
+			{
+				this->mouseRightHeld = true;
+				if (this->moveShape.getGlobalBounds().contains(mpos))
+				{
+					this->UnitShape.setPosition(mpos);	//mpos czy pozycja moveShape???
+					this->moveShape.setFillColor(sf::Color::Transparent); //X znika
+					this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f)); //Wyrzucenie X-sa poza mapê aby nie da³o siê go klikn¹æ ponownie
+					this->clicked = false;
+				}
+				else
+				{
+					this->moveShape.setPosition(mpos);
+					this->moveShape.setFillColor(moveShapeColor);
+				}
+			}
+		}
+		else
+		{
+			this->mouseRightHeld = false;
+		}
+	}
+
+	//Event po klikniêciu jednostki lewym przyciskiem
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		if (this->mouseLeftHeld == false)
+		{
+			this->mouseLeftHeld = true;
+			if (this->UnitShape.getGlobalBounds().contains(mpos))
+			{
+				if (this->clickClock.getElapsedTime() <= sf::milliseconds(600.f))
+				{
+					std::cout << "Kliknales go lewym mordo\n";
+
+					this->clicked = true;
+					this->UnitShape.setFillColor(sf::Color::Red);
+					this->showButtons();
+				}
+				else
+				{
+					clickClock.restart();
+				}
+			}
+
+			if (this->drawButton)
+			{
+				if (this->buttonCancel.getGlobalBounds().contains(mpos))
+				{
+					this->hideButtons();
+					this->clicked = false;
+				}
+				else if (this->buttonSplit.getGlobalBounds().contains(mpos))
+				{
+					this->hideButtons();
+					this->newUnit = true;
+					this->clicked = false;
+				}
+				else if (!this->buttonBackground.getGlobalBounds().contains(mpos) && !this->UnitShape.getGlobalBounds().contains(mpos))
+				{
+					this->hideButtons();
+					this->clicked = false;
+				}
+			}
+		}
+	}
+	else
+	{
+		this->mouseLeftHeld = false;
+	}
+}
+
+//Podœwietla jednostkê po najechaniu
+void Unit::updateAll(sf::Vector2f mpos, bool iCOD)
+{
+	//Podœwietlenie jednostki po najechaniu lub podwójnym klikniêciu
+	if (!this->clicked)
+		this->UnitShape.setFillColor(this->UnitShapeColor);
 	if (this->UnitShape.getGlobalBounds().contains(mpos))
 	{
 		this->UnitShape.setFillColor(Color::Red);
 	}
-	//Event po klikniêciu na dystrykt prawym przyciskiem
-		if (iCOD)
-		{
-			
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
-			{
-				this->hideButtons();
-
-				if (this->mouseRightHeld == false)
-				{
-					this->mouseRightHeld = true;
-					if (this->moveShape.getGlobalBounds().contains(mpos))
-					{
-						this->UnitShape.setPosition(mpos);	//mpos czy pozycja moveShape???
-						this->moveShape.setFillColor(sf::Color::Transparent); //X znika
-						this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f)); //Wyrzucenie X-sa poza mapê aby nie da³o siê go klikn¹æ ponownie
-						this->clicked = false;
-					}
-					else
-					{
-
-						this->moveShape.setPosition(mpos);
-						this->moveShape.setFillColor(moveShapeColor);
-					}
-				}
-			}
-			else
-			{
-				this->mouseRightHeld = false;
-			}
-		}
-		
-		//Event po klikniêciu jednostki lewym przyciskiem
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-		{
-			
-			if (this->mouseLeftHeld == false)
-			{this->clicked = true;
-				this->mouseLeftHeld = true;
-				if (this->UnitShape.getGlobalBounds().contains(mpos))
-				{
-					std::cout << "Kliknales go lewym mordo\n";
-
-					this->showButtons();
-				}
-
-				if (this->drawButton)
-				{
-					if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-					{
-						if (this->buttonCancel.getGlobalBounds().contains(mpos))
-						{
-							this->hideButtons();
-							this->clicked = false;
-						}
-						else if (this->buttonSplit.getGlobalBounds().contains(mpos))
-						{
-							this->hideButtons();
-							this->newUnit = true;
-							this->clicked = false;
-						}
-						else if(!this->buttonBackground.getGlobalBounds().contains(mpos)&&!this->UnitShape.getGlobalBounds().contains(mpos))
-							{
-							this->hideButtons(); this->clicked = false;
-						}
-					
-					}
-				}
-			}
-		}
-	
-		else
-		{
-			this->mouseLeftHeld = false;
-		}
-///	}
 }
 
 void Unit::render(sf::RenderTarget* target)

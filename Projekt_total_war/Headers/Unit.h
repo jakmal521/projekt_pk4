@@ -8,7 +8,6 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include "../Headers/District.h"
 #include "../Headers/Button.h"
 
 class Unit
@@ -19,9 +18,10 @@ public:
 	~Unit();
 
 	//Metody
-	void update(sf::Vector2f mpos, bool iCOD);
+	void updateChoosen(sf::Vector2f mpos, bool iCOD);
+	void updateAll(sf::Vector2f mpos, bool iCOD);
 	void render(sf::RenderTarget* target);
-	void initUnit(map<string, District*> districts);
+	void initUnit();
 
 	bool ifNewUnit();
 
@@ -41,8 +41,10 @@ private:
 	sf::Font buttonsFont;
 	void showButtons();
 	void hideButtons();
-	//Sprawdzenie czy nie jest klikniêty
+
+	//Sprawdzenie czy jednostka jest podwójnie klikniêta lewym przyciskiem myszy
 	bool clicked;
+
 	//Sprawdzenie czy przycisk myszy nie jest przytrzymywany
 	bool mouseRightHeld;
 	bool mouseLeftHeld;
@@ -50,6 +52,9 @@ private:
 	//Sprawdzenie czy chcemy stworzyæ now¹ jednostke na mapie
 	bool drawButton;
 	bool newUnit;
+
+	//Clock
+	sf::Clock clickClock;
 
 	//Parametry
 	float moveSpeed;

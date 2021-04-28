@@ -33,16 +33,24 @@ void GameState::update()
 
 	//Sprawdzenie czy gracz zmieni³ obs³ugiwan¹ jednostkê
 	this->changeUnit();
+
 	//wyœwietlanie X-sa i jednostek na mapie
 	for (auto& i : this->districts)
 	{
-		//for (int j = 0; j < unit.size(); j++)
-		this->unit[this->whichUnit]->update(mouseposview, i.second->returnIsCursorOnDistrict());
+		//Update wszystkich jednostek (bez mechaniki gry)
+		for (int j = 0; j < unit.size(); j++)
+		{
+			this->unit[j]->updateAll(mouseposview, i.second->returnIsCursorOnDistrict());
+		}
+
+		//Update jednostki która zosta³a wybrana
+		this->unit[this->whichUnit]->updateChoosen(mouseposview, i.second->returnIsCursorOnDistrict());
+
 		if (this->unit[this->whichUnit]->ifNewUnit())
 		{
 			if (this->unit.size() >= howManyUnitsOnMap)
 			{
-				//cout << "Nie mozna miec na raz wiecej niz howManyUnitsOnMap(5) jednostek na mapie\n";
+				cout << "Nie mozna miec na raz wiecej niz howManyUnitsOnMap(5) jednostek na mapie\n";
 			}
 			else
 			{
@@ -140,13 +148,27 @@ void GameState::end()
 void GameState::initUnit()
 {
 	this->unit.push_back(new Unit());
-	this->unit.back()->initUnit(this->districts);
+	this->unit.back()->initUnit();
 }
 
+//Zmienia wybran¹ jednostkê po klikniêciu na ni¹ lewym przyciskiem myszy i schowanie okienka split jeœli zosta³a wybrana inna
 void GameState::changeUnit()
 {
+	for (int i = 0; i < this->unit.size(); i++)
+	{
+		if (this->unit[i]->UnitShape.getGlobalBounds().contains(this->mouseposview) && Mouse::isButtonPressed(Mouse::Left) && this->whichUnit != i)
+		{
+			this->unit[this->whichUnit]->clicked = false;
+			this->unit[this->whichUnit]->hideButtons();
+
+			this->whichUnit = i;
+			break;
+		}
+	}
+
+	/*
 	int a = this->whichUnit;
-	/*if (Keyboard::isKeyPressed(Keyboard::Num1))
+	if (Keyboard::isKeyPressed(Keyboard::Num1))
 	{
 		this->whichUnit = 0;
 	}
@@ -181,22 +203,13 @@ void GameState::changeUnit()
 	else if (Keyboard::isKeyPressed(Keyboard::Num9))
 	{
 		this->whichUnit = 8;
-	}*/
-	for (int i = 0; i < this->unit.size(); i++)
-	{
-
-		if (this->unit[i]->UnitShape.getGlobalBounds().contains(this->mouseposview) && Mouse::isButtonPressed(Mouse::Left))
-		{
-			this->whichUnit = i;
-			break;
-		}
-
 	}
 
 	if (this->whichUnit >= this->unit.size())
 	{
 		this->whichUnit = a;
 	}
+	*/
 }
 
 //Incjalizacja widoku
@@ -214,7 +227,7 @@ void GameState::initPlayer()
 }
 //Ile regionów ma gracz
 int GameState::amountOfdistricts()
-{	
+{
 	int sum = 0;
 	for (auto& i : this->districts)
 		if (i.second->shape.getFillColor() == this->player->playerColor())

@@ -4,7 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 #include <sstream>
+#include <string>
 using namespace sf;
+using namespace std;
 class Button
 {
 public:

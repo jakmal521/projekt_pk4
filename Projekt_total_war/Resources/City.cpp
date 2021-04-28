@@ -41,7 +41,6 @@ void City::setNotInCity()
 	this->doubleClicked = false;
 }
 
-
 /// <summary>Wykorzystuje funkcje z district.h ¿eby sprawdziæ czy kursor znajduje siê nad miastem, po najechaniu zmienia siê kolor miasta na czerwony, a po podwójnym klikniêciu TODO: ma pojawiaæ siê menu miasta</summary>
 /// <param name="">Pozycja kursora</param>
 /// <returns>Void</returns>
@@ -60,7 +59,7 @@ void City::update(Vector2f mpos)
 				this->mouseHeld = true;
 
 				//Sprawdzenie czy nie minê³o za du¿o czasu od 1 klikniêcia na miasto
-				if (clickClock.getElapsedTime() <= sf::milliseconds(600.f))
+				if (this->clickClock.getElapsedTime() <= sf::milliseconds(600.f))
 				{
 					std::cout << "Double click \n";
 
@@ -70,7 +69,7 @@ void City::update(Vector2f mpos)
 				{
 					std::cout << "Witamy w miescie " << this->cityName << "\n";
 					std::cout << "Single click\n";
-					clickClock.restart();	//Zrestartowanie zegara (start zegara)
+					this->clickClock.restart();	//Zrestartowanie zegara (start zegara)
 				}
 			}
 		}
