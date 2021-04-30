@@ -8,6 +8,10 @@
 
 Unit::Unit()
 {
+	this->knights = 1; 
+	this->horses = 1; 
+	this->archers = 1; 
+	this->to_delete = false;
 }
 
 Unit::~Unit()
@@ -50,7 +54,10 @@ void Unit::initUnit()
 	this->buttonSplit.setFillColor(sf::Color::Black);
 	this->buttonCancel.setSize(sf::Vector2f(40.f, 20.f));
 	this->buttonCancel.setFillColor(sf::Color::Black);
-
+	this->font.loadFromFile("Fonts/RomanSD.ttf");
+	this->buttonBackgroundText.setFont(this->font);
+	this->buttonBackgroundText.setFillColor(Color::White);
+	this->buttonBackgroundText.setCharacterSize(8);
 	//Atrybuty gracza
 	this->moveSpeed = 600;
 }
@@ -58,7 +65,7 @@ void Unit::initUnit()
 /// <summary>Wykorzystuje funkcje z district.h ¿eby sprawdziæ czy kursor znajduje siê nad dystryktem, po klikniêciu prawym przyciskiem myszy pojawia siê X, po czym klikaj¹c w niego pojawia siê tekstura gracza, klikaj¹c dwa razy lewym przyciskiem pojawia siê okno split umo¿liwiaj¹ce rozdzelenie jednostki na dwie.</summary>
 /// <param name="">Pozycja kursora | bool Czy kursor nad dystryktem</param>
 /// <returns>Void</returns>
-void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD)
+void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units)
 {
 	//Event po klikniêciu na dystrykt prawym przyciskiem
 	if (iCOD)
@@ -73,6 +80,20 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD)
 				this->mouseRightHeld = true;
 				if (this->moveShape.getGlobalBounds().contains(mpos))
 				{
+					int thisone=-1;
+					int tojoin = -1;
+					for (int i = 0; i < units.size(); i++)
+					{
+						 if (units[i]->UnitShape.getGlobalBounds().contains(mpos))
+						{
+							units[i]->archers += this->archers;
+						units[i]->knights += this->knights;
+						units[i]->horses += this->horses;
+						this->to_delete = true;
+						return;
+						}
+					}
+				
 					this->UnitShape.setPosition(mpos);	//mpos czy pozycja moveShape???
 					this->moveShape.setFillColor(sf::Color::Transparent); //X znika
 					this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f)); //Wyrzucenie X-sa poza mapê aby nie da³o siê go klikn¹æ ponownie
@@ -159,6 +180,7 @@ void Unit::render(sf::RenderTarget* target)
 	if (this->drawButton)
 	{
 		target->draw(this->buttonBackground);
+		target->draw(this->buttonBackgroundText);
 		target->draw(this->buttonSplit);
 		target->draw(this->buttonCancel);
 	}
@@ -186,6 +208,10 @@ void Unit::showButtons()
 
 	this->buttonSplit.setFillColor(sf::Color::Black);
 	this->buttonSplit.setPosition(sf::Vector2f(this->buttonBackground.getPosition().x + 55, this->buttonBackground.getPosition().y - 25));
+	stringstream ss;
+	ss<<"Licznosc jednostki\n\n" << "Rycerze: " << this->knights << "\nKonni: " << this->horses << "\nLucznicy: " << this->archers;
+	this->buttonBackgroundText.setString(ss.str());
+	this->buttonBackgroundText.setPosition(this->buttonBackground.getPosition().x + (this->buttonBackground.getGlobalBounds().width / 2) - this->buttonBackgroundText.getGlobalBounds().width / 2, this->buttonBackground.getPosition().y -100 );
 }
 
 void Unit::hideButtons()

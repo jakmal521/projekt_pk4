@@ -44,19 +44,28 @@ void GameState::update()
 		}
 
 		//Update jednostki która zosta³a wybrana
-		this->unit[this->whichUnit]->updateChoosen(mouseposview, i.second->returnIsCursorOnDistrict());
-
-		if (this->unit[this->whichUnit]->ifNewUnit())
+		if (this->whichUnit >= this->unit.size())
+			this->whichUnit = 0;
+		this->unit[this->whichUnit]->updateChoosen(mouseposview, i.second->returnIsCursorOnDistrict(), this->unit);
+		if (this->unit[whichUnit])
 		{
-			if (this->unit.size() >= howManyUnitsOnMap)
+			if (this->unit[this->whichUnit]->ifNewUnit())
 			{
-				cout << "Nie mozna miec na raz wiecej niz howManyUnitsOnMap(5) jednostek na mapie\n";
-			}
-			else
-			{
-				initUnit();
+				if (this->unit.size() >= howManyUnitsOnMap)
+				{
+					cout << "Nie mozna miec na raz wiecej niz howManyUnitsOnMap(5) jednostek na mapie\n";
+				}
+				else
+				{
+					initUnit();
+				}
 			}
 		}
+		if (this->unit[whichUnit]->to_delete)
+	{
+		this->unit.erase(this->unit.begin() + this->whichUnit);
+
+	}
 	}
 
 	//Wyœwieltanie menu miasta po podwójnym klikniêciu
@@ -71,6 +80,7 @@ void GameState::update()
 		}
 	}
 
+	
 	//Wyœwietlanie pozycji myszki (czasem przydatne)
 	//cout << this->mouseposwindow.x << " " << this->mouseposwindow.y << "\n";
 }

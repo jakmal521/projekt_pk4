@@ -18,7 +18,7 @@ public:
 	~Unit();
 
 	//Metody
-	void updateChoosen(sf::Vector2f mpos, bool iCOD);
+	void updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*> &units);
 	void updateAll(sf::Vector2f mpos, bool iCOD);
 	void render(sf::RenderTarget* target);
 	void initUnit();
@@ -33,7 +33,10 @@ private:
 	sf::RectangleShape moveShape;	//Kwadrat kursora (czerwony X) poruszania siê po 1 klikniêciu
 	sf::Texture moveTexture;
 	sf::Color moveShapeColor;		//Kolor X-sa
-
+	//Ilosc wojska
+	int knights;
+	int horses; //lol
+	int archers;
 	//Przyciski
 	RectangleShape buttonBackground;
 	RectangleShape buttonSplit;
@@ -41,7 +44,8 @@ private:
 	sf::Font buttonsFont;
 	void showButtons();
 	void hideButtons();
-
+	Text buttonBackgroundText;
+	Font font;
 	//Sprawdzenie czy jednostka jest podwójnie klikniêta lewym przyciskiem myszy
 	bool clicked;
 
@@ -59,4 +63,5 @@ private:
 	//Parametry
 	float moveSpeed;
 	friend class GameState;
+	bool to_delete;
 };
