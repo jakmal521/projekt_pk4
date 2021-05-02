@@ -68,7 +68,7 @@ void Game::update()
 
 void Game::render()
 {
-	this->window->clear();
+	this->window->clear(Color::Color(4,146,194));
 	if (!this->states.empty())
 		this->states.top()->render();
 	this->window->display();

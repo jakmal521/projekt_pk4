@@ -7,8 +7,8 @@ GameState::GameState(RenderWindow* window, stack<State*>* _states, Font _font)
 	this->initDis();
 	this->initBackground();
 	this->initView();
-	this->initUnit();
 	this->initPlayer();
+	this->initUnit();
 	this->font = _font;
 	this->position->initHeadBar(&this->font, this->player);
 }
@@ -29,45 +29,50 @@ void GameState::update()
 
 	//podœwietlanie dystryktów po najechaniu myszk¹
 	for (auto& i : this->districts)
+	{	
 		i.second->update(mouseposview);
-
+	}
 	//Sprawdzenie czy gracz zmieni³ obs³ugiwan¹ jednostkê
 	this->changeUnit();
 
 	//wyœwietlanie X-sa i jednostek na mapie
 	for (auto& i : this->districts)
 	{
-		//Update wszystkich jednostek (bez mechaniki gry)
-		for (int j = 0; j < unit.size(); j++)
+		if (this->unit.size())
 		{
-			this->unit[j]->updateAll(mouseposview, i.second->returnIsCursorOnDistrict());
-		}
-
-		//Update jednostki która zosta³a wybrana
-		if (this->whichUnit >= this->unit.size())
-			this->whichUnit = 0;
-		this->unit[this->whichUnit]->updateChoosen(mouseposview, i.second->returnIsCursorOnDistrict(), this->unit);
-		if (this->unit[whichUnit])
-		{
-			if (this->unit[this->whichUnit]->ifNewUnit())
+			//Update wszystkich jednostek (bez mechaniki gry)
+			for (int j = 0; j < unit.size(); j++)
 			{
-				if (this->unit.size() >= howManyUnitsOnMap)
+				this->unit[j]->updateAll(mouseposview, i.second->returnIsCursorOnDistrict());
+			}
+
+			//Update jednostki która zosta³a wybrana
+
+
+			if (this->whichUnit >= this->unit.size())
+				this->whichUnit = 0;
+			this->unit[this->whichUnit]->updateChoosen(mouseposview, i.second->returnIsCursorOnDistrict(), this->unit, i.second->cities);
+			if (this->unit[whichUnit])
+			{
+				if (this->unit[this->whichUnit]->ifNewUnit())
 				{
-					cout << "Nie mozna miec na raz wiecej niz howManyUnitsOnMap(5) jednostek na mapie\n";
-				}
-				else
-				{
-					initUnit();
+					if (this->unit.size() >= howManyUnitsOnMap)
+					{
+						cout << "Nie mozna miec na raz wiecej niz howManyUnitsOnMap(5) jednostek na mapie\n";
+					}
+					else
+					{
+						initUnit();
+					}
 				}
 			}
+			if (this->unit[whichUnit]->to_delete)
+			{
+				this->unit.erase(this->unit.begin() + this->whichUnit);
+
+			}
 		}
-		if (this->unit[whichUnit]->to_delete)
-	{
-		this->unit.erase(this->unit.begin() + this->whichUnit);
-
 	}
-	}
-
 	//Wyœwieltanie menu miasta po podwójnym klikniêciu
 	for (auto& i : this->districts)
 	{
@@ -80,7 +85,14 @@ void GameState::update()
 		}
 	}
 
-	
+	if (/*jakiœ przycisk który now¹ turê zacznie*/ 0)
+	{
+		for (auto& i : this->enemies)
+			i->update();
+		for (auto& i : this->unit)
+			i->setDistance();
+
+	}
 	//Wyœwietlanie pozycji myszki (czasem przydatne)
 	//cout << this->mouseposwindow.x << " " << this->mouseposwindow.y << "\n";
 }
@@ -89,7 +101,7 @@ void GameState::render(RenderTarget* target)
 {
 	if (!target)
 		target = this->window;
-	target->draw(this->background);
+	//target->draw(this->background);
 
 	//Renderowanie dystryktów
 	for (auto& i : this->districts)
@@ -157,7 +169,7 @@ void GameState::end()
 //Inicjalizacja jednostek
 void GameState::initUnit()
 {
-	this->unit.push_back(new Unit());
+	this->unit.push_back(new Unit(this->player->playerColor()));
 	this->unit.back()->initUnit();
 }
 
@@ -166,7 +178,7 @@ void GameState::changeUnit()
 {
 	for (int i = 0; i < this->unit.size(); i++)
 	{
-		if (this->unit[i]->UnitShape.getGlobalBounds().contains(this->mouseposview) && Mouse::isButtonPressed(Mouse::Left) && this->whichUnit != i)
+		if (this->unit[i]->UnitShape.getGlobalBounds().contains(this->mouseposview) && Mouse::isButtonPressed(Mouse::Left) && this->whichUnit != i&& this->unit[i]->colorOfOwner==this->player->playerColor())
 		{
 			this->unit[this->whichUnit]->clicked = false;
 			this->unit[this->whichUnit]->hideButtons();
@@ -244,4 +256,13 @@ int GameState::amountOfdistricts()
 			sum++;
 
 	return sum;
+}
+//Inicjacja przeciwników
+void GameState::initEnemies()
+{
+	for (int i = 0; i < 2; i++)
+	{	
+		this->enemies.push_back(new Enemy(Color::Blue));
+
+	}
 }

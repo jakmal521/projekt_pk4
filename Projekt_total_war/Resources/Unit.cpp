@@ -6,12 +6,14 @@
 #include <iostream>
 #include "..\Headers\Unit.h"
 
-Unit::Unit()
+Unit::Unit(Color color)
 {
+	this->colorOfOwner = color;
 	this->knights = 1; 
 	this->horses = 1; 
 	this->archers = 1; 
 	this->to_delete = false;
+	this->distance = 700.f;
 }
 
 Unit::~Unit()
@@ -65,7 +67,7 @@ void Unit::initUnit()
 /// <summary>Wykorzystuje funkcje z district.h ¿eby sprawdziæ czy kursor znajduje siê nad dystryktem, po klikniêciu prawym przyciskiem myszy pojawia siê X, po czym klikaj¹c w niego pojawia siê tekstura gracza, klikaj¹c dwa razy lewym przyciskiem pojawia siê okno split umo¿liwiaj¹ce rozdzelenie jednostki na dwie.</summary>
 /// <param name="">Pozycja kursora | bool Czy kursor nad dystryktem</param>
 /// <returns>Void</returns>
-void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units)
+void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units,vector<City*> &cities)
 {
 	//Event po klikniêciu na dystrykt prawym przyciskiem
 	if (iCOD)
@@ -82,22 +84,82 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units)
 				{
 					int thisone=-1;
 					int tojoin = -1;
-					for (int i = 0; i < units.size(); i++)
+					
+					if (
+						(this->distance -
+							sqrt(
+								(this->UnitShape.getPosition().x - mpos.x) * (this->UnitShape.getPosition().x - mpos.x)
+								+ (this->UnitShape.getPosition().y - mpos.y) * (this->UnitShape.getPosition().y - mpos.y)
+							)) > 0
+						)
 					{
-						 if (units[i]->UnitShape.getGlobalBounds().contains(mpos))
-						{
-							units[i]->archers += this->archers;
-						units[i]->knights += this->knights;
-						units[i]->horses += this->horses;
-						this->to_delete = true;
-						return;
+
+						this->distance -=
+							sqrt(
+								(this->UnitShape.getPosition().x - mpos.x) * (this->UnitShape.getPosition().x - mpos.x)
+								+ (this->UnitShape.getPosition().y - mpos.y) * (this->UnitShape.getPosition().y - mpos.y)
+							);
+						
+						for (int i = 0; i < units.size(); i++)
+						{//dodawanie jednostek tylko gdy s¹ tego samego gracza w innym przypadku walka 
+							if (units[i]->UnitShape.getGlobalBounds().contains(mpos) && units[i]->UnitShape.getGlobalBounds().contains(mpos) != this->UnitShape.getGlobalBounds().contains(mpos)&& this->colorOfOwner==units[i]->colorOfOwner) 
+							{
+								units[i]->archers += this->archers;
+								units[i]->knights += this->knights;
+								units[i]->horses += this->horses;
+								this->to_delete = true;
+								return;
+							}
+							else if (units[i]->UnitShape.getGlobalBounds().contains(mpos) && units[i]->UnitShape.getGlobalBounds().contains(mpos) != this->UnitShape.getGlobalBounds().contains(mpos) && this->colorOfOwner != units[i]->colorOfOwner)
+							{
+								cout << "walka!!!";
+								this->fight(units[i]);
+							}
 						}
-					}
-				
-					this->UnitShape.setPosition(mpos);	//mpos czy pozycja moveShape???
-					this->moveShape.setFillColor(sf::Color::Transparent); //X znika
-					this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f)); //Wyrzucenie X-sa poza mapê aby nie da³o siê go klikn¹æ ponownie
-					this->clicked = false;
+						for (int i = 0; i < cities.size(); i++)
+						{
+							if (cities[i]->cityIcon.getGlobalBounds().contains(mpos)/* && this->colorOfOwner == cities[i]->colorOfOwner*/)
+							{
+								if (cities[i]->archers < cities[i]->archersMax)
+								{	
+									while (cities[i]->archers != cities[i]->archersMax && this->archers!=0)
+									{
+										cities[i]->archers++;
+										this->archers--;
+									}
+								}
+
+								if (cities[i]->knights < cities[i]->knightsMax)
+								{
+									while (cities[i]->knights != cities[i]->knightsMax && this->knights != 0)
+									{
+										cities[i]->knights++;
+										this->knights--;
+									}
+								}
+
+								if (cities[i]->horses < cities[i]->horsesMax)
+								{
+									while (cities[i]->horses != cities[i]->horsesMax && this->horses != 0)
+									{
+										cities[i]->horses++;
+										this->horses--;
+									}
+								}
+
+								if (this->archers == 0 && this->knights == 0 && this->horses == 0)//je¿eli oddzia³ jest pusty to go usuwamy
+								{
+									this->to_delete = true;
+								}
+							}
+
+						}
+					
+						this->UnitShape.setPosition(mpos);	//mpos czy pozycja moveShape???
+					}	this->moveShape.setFillColor(sf::Color::Transparent); //X znika
+						this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f)); //Wyrzucenie X-sa poza mapê aby nie da³o siê go klikn¹æ ponownie
+						this->clicked = false;
+					
 				}
 				else
 				{
@@ -169,6 +231,7 @@ void Unit::updateAll(sf::Vector2f mpos, bool iCOD)
 		this->UnitShape.setFillColor(this->UnitShapeColor);
 	if (this->UnitShape.getGlobalBounds().contains(mpos))
 	{
+		//this->UnitShape.setFillColor(this->colorOfOwner); podœwietlanie aby sprawdziæ czy ten oddzia³ nale¿y do gracza
 		this->UnitShape.setFillColor(Color::Red);
 	}
 }
@@ -225,4 +288,13 @@ void Unit::hideButtons()
 
 	this->buttonSplit.setFillColor(sf::Color::Transparent);
 	this->buttonSplit.setPosition(sf::Vector2f(-100.f, -100.f));
+}
+//Ustawianie mo¿liwoœci do przejœcia
+void Unit::setDistance()
+{
+	this->distance = 100.f;
+}
+//Walka dwóch oddzia³ów
+void Unit::fight(Unit* enemyUnit)
+{
 }

@@ -75,7 +75,7 @@ void CityState::initInfo()
 	stringstream ss;
 
 	ss << "Populacja:\n" << this->city->population << "/" << this->city->populationMax << "\n"
-		<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% ";
+		<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: " << this->city->knights << "\nKonni: " << this->city->horses << "\nLucznicy: " << this->city->archers;
 	this->info.setString(ss.str());
 }
 void CityState::initButtons()

@@ -19,7 +19,7 @@ HeadBar::~HeadBar()
 void HeadBar::update(int amountOfDistricts)
 {
 	stringstream ss;
-	ss << "Ilosc zlota: " << this->player->gold << " Ilosc zolnierzy: TODO" << " Ilosc posiadanych regionow: " << amountOfDistricts;
+	ss << "Ilosc zlota: " << this->player->gold << " Ilosc posiadanych regionow: " << amountOfDistricts;
 	this->text.setString(ss.str());
 	this->text.setPosition(this->barShape.getPosition().x + (this->barShape.getGlobalBounds().width / 2) - this->text.getGlobalBounds().width / 2, this->barShape.getPosition().y + (this->barShape.getGlobalBounds().height / 2) - this->text.getGlobalBounds().height / 2);
 }

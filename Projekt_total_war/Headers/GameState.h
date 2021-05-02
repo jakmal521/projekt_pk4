@@ -8,6 +8,7 @@
 #include "..\Headers\Position.h"	//Pozycja view i headBar
 #include "..\Headers\City.h"		//Wyœwietlanie miast
 #include "..\Headers\CityState.h"	//Wyœwietlanie menu miasta i jego zarz¹dzanie
+#include "..\Headers\Enemy.h"		//Przeciwniy
 class GameState :
 	public State
 {
@@ -57,4 +58,8 @@ private:
 	void initPlayer();
 	//Ile regionów ma gracz
 	int amountOfdistricts();
+
+	//Przeciwnicy
+	vector<Enemy*> enemies;
+	void initEnemies();
 };

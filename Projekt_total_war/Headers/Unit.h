@@ -5,20 +5,22 @@
 #include <SFML/Network.hpp>
 
 #include <vector>
+#include <cmath>
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include "../Headers/Button.h"
+#include "../Headers/City.h"
 
 class Unit
 {
 public:
 	//Konstruktor i destruktor
-	Unit();
+	Unit(Color color);
 	~Unit();
 
 	//Metody
-	void updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*> &units);
+	void updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*> &units, vector<City*>& cities);
 	void updateAll(sf::Vector2f mpos, bool iCOD);
 	void render(sf::RenderTarget* target);
 	void initUnit();
@@ -37,6 +39,8 @@ private:
 	int knights;
 	int horses; //lol
 	int archers;
+	//Do kogo nale¿y oddzia³
+	Color colorOfOwner;
 	//Przyciski
 	RectangleShape buttonBackground;
 	RectangleShape buttonSplit;
@@ -63,5 +67,12 @@ private:
 	//Parametry
 	float moveSpeed;
 	friend class GameState;
+	//Sprawdzenie czy trzeba usun¹æ jednostkê
 	bool to_delete;
+	//Ile mog¹ przejœæ w jednym  do przejœcia
+	float distance;
+	void setDistance();
+	friend class GameState;
+	//Walka dwóch oddzia³ów
+	void fight(Unit* enemyUnit);
 };

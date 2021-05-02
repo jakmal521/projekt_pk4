@@ -158,6 +158,7 @@
     <ClCompile Include="Resources\City.cpp" />
     <ClCompile Include="Resources\CityState.cpp" />
     <ClCompile Include="Resources\District.cpp" />
+    <ClCompile Include="Resources\Enemy.cpp" />
     <ClCompile Include="Resources\Game.cpp" />
     <ClCompile Include="Resources\GameState.cpp" />
     <ClCompile Include="Resources\MainMenu.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Headers\City.h" />
     <ClInclude Include="Headers\CityState.h" />
     <ClInclude Include="Headers\District.h" />
+    <ClInclude Include="Headers\Enemy.h" />
     <ClInclude Include="Headers\Game.h" />
     <ClInclude Include="Headers\GameState.h" />
     <ClInclude Include="Headers\HeadBar.h" />

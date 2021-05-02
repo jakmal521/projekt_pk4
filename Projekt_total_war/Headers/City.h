@@ -55,15 +55,29 @@ protected:
 	//Wygl¹d miasta
 	RectangleShape cityIcon;
 	Sprite sprite;
-
+	//Kolor do kogo nale¿y miasto;
+	Color colorOfOwner;
 	/*Wartoœci w grze*/
 	//Nazwa
-	std::string cityName;
+	string cityName;
 	//Iloœæ ludzi
 	int population;
 	//iloœæ ludzi jaka maksymalnie mo¿e mieszkaæ w mieœcie
 	int populationMax;
+	//Iloœæ rycerzy 
+	int knights;
+	//iloœærycerzy jaka maksymalnie mo¿e byæ w mieœcie
+	int knightsMax;
+	//Iloœæ konnych
+	int horses;
+	//iloœæ konnychjaka maksymalnie mo¿e byæ w mieœcie
+	int horsesMax;
+	//Iloœæ ³uczników
+	int archers;
+	//iloœæ ³uczników jaka maksymalnie mo¿e byæ w mieœcie
+	int archersMax;
 	//zmiany w populacji
 	void updatePopulation();
 	friend class CityState;
+	friend class Unit;
 };
