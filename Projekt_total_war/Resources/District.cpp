@@ -81,7 +81,7 @@ void District::initCity(string line)
 	string city_name;
 	int pop, pointA, pointB;
 	stream >> city_name >> pop >> pointA >> pointB;
-	this->cities.push_back(new City(city_name, pop, sf::Vector2f(pointA, pointB)));
+	this->cities.push_back(new City(city_name, pop, sf::Vector2f(pointA, pointB), this->shape.getFillColor()));
 	this->cities.back()->initCity(sf::Vector2f(pointA, pointB));
 }
 

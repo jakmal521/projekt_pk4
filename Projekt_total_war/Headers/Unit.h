@@ -75,4 +75,6 @@ private:
 	friend class GameState;
 	//Walka dwóch oddzia³ów
 	void fight(Unit* enemyUnit);
+	//Atakowanie miasta
+	void cityAttack( City *city);
 };

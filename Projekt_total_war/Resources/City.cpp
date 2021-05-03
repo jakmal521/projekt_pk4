@@ -6,7 +6,7 @@
 #include <iostream>
 #include "..\Headers\City.h"
 //Konstruktor i destruktor
-City::City(std::string name, int popMax, sf::Vector2f cityPoints)
+City::City(std::string name, int popMax, sf::Vector2f cityPoints, Color color)
 {
 	this->cityName = name;
 	this->populationMax = popMax;
@@ -17,7 +17,8 @@ City::City(std::string name, int popMax, sf::Vector2f cityPoints)
 	this->horses = 0;
 	this->knightsMax = 4;
 	this->archersMax = 4;
-	this->horsesMax = 4;
+	this->horsesMax = 0;
+	this->colorOfOwner = color;
 	
 	
 }

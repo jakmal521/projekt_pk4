@@ -16,7 +16,7 @@ class City
 public:
 	//Konstruktor i destruktor
 	City();
-	City(std::string name, int popMax, sf::Vector2f cityPoints);
+	City(string name, int popMax, Vector2f cityPoints, Color color);
 	~City();
 
 	//Wyœwietlenie na ekranie

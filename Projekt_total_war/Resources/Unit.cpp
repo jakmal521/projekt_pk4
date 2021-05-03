@@ -117,8 +117,9 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units,vec
 							}
 						}
 						for (int i = 0; i < cities.size(); i++)
-						{
-							if (cities[i]->cityIcon.getGlobalBounds().contains(mpos)/* && this->colorOfOwner == cities[i]->colorOfOwner*/)
+						{	//Dodawanie z jednostki do miasta bior¹c pod uwagê limity, w innym przypadku atak miasta
+							if (cities[i]->cityIcon.getGlobalBounds().contains(mpos) && this->colorOfOwner == cities[i]->colorOfOwner)
+							
 							{
 								if (cities[i]->archers < cities[i]->archersMax)
 								{	
@@ -151,6 +152,11 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units,vec
 								{
 									this->to_delete = true;
 								}
+							}
+							else if (cities[i]->cityIcon.getGlobalBounds().contains(mpos) && this->colorOfOwner != cities[i]->colorOfOwner)
+							{
+								this->cityAttack(cities[i]);
+
 							}
 
 						}
@@ -296,5 +302,9 @@ void Unit::setDistance()
 }
 //Walka dwóch oddzia³ów
 void Unit::fight(Unit* enemyUnit)
+{
+}
+//atakowanie miasta
+void Unit::cityAttack(City* city)
 {
 }
