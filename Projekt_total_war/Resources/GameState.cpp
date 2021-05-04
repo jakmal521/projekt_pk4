@@ -93,7 +93,7 @@ void GameState::update()
 			i->setDistance();
 	}
 	//Wyœwietlanie pozycji myszki (czasem przydatne)
-	//cout << this->mouseposwindow.x << " " << this->mouseposwindow.y << "\n";
+	cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
 }
 
 void GameState::render(RenderTarget* target)
@@ -130,8 +130,8 @@ void GameState::initDis()
 		{
 			float x, y;
 			plik >> x >> y;
-			x = this->window->getSize().x * (x / 800);
-			y = this->window->getSize().y * (y / 600);
+			/*x = this->window->getSize().x * (x / 800);
+			y = this->window->getSize().y * (y / 600);*/
 
 			this->districts[name]->shape.setPoint(i, Vector2f(x, y));
 		}
@@ -245,6 +245,7 @@ void GameState::initView()
 {
 	this->view2 = window->getDefaultView();
 	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(400.f, 300.f));
+	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(800.f, 600.f));
 	this->position = new Position(this->view1.getSize());
 }
 
