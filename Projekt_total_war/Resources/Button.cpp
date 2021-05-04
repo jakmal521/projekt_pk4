@@ -33,7 +33,6 @@ void Button::update(Vector2f mpos)
 	this->button.setOutlineColor(this->color);
 	this->pressed = false;
 	if (this->button.getGlobalBounds().contains(mpos))
-
 	{
 		this->button.setOutlineColor(Color::Black);
 		if (Mouse::isButtonPressed(Mouse::Left))

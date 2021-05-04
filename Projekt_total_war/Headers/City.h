@@ -30,6 +30,19 @@ public:
 	bool isInCity();
 	//
 	void setNotInCity();
+
+	//Zwracanie czy wyprowadziæ wojsko
+	bool isUnitsDeployed();
+
+	//Zwracanie pozycji miasta
+	sf::Vector2f getPosition();
+
+	//Zwracanie iloœci wojska w mieœcie
+	vector<int> howManyUnits();
+
+	//Usuwanie wojska z miasta (liczb)
+	void deleteTroops();
+
 	//Akcesory
 	/*string CityName();
 	int Population();
@@ -46,17 +59,22 @@ protected:
 	sf::Vector2f cityPos;
 	//Czy wejœæ do miasta
 	bool doubleClicked;
+	//Czy wypuœciæ jednostki z miasta
+	bool deployUnits;
 
 	/*Wygl¹d*/
 	//Tekstury
 	sf::Texture cityIconTexture;
 	sf::Color cityIconColor;
 	sf::Texture insideCityTexture;
+
 	//Wygl¹d miasta
 	RectangleShape cityIcon;
 	Sprite sprite;
+
 	//Kolor do kogo nale¿y miasto;
 	Color colorOfOwner;
+
 	/*Wartoœci w grze*/
 	//Nazwa
 	string cityName;
@@ -64,7 +82,7 @@ protected:
 	int population;
 	//iloœæ ludzi jaka maksymalnie mo¿e mieszkaæ w mieœcie
 	int populationMax;
-	//Iloœæ rycerzy 
+	//Iloœæ rycerzy
 	int knights;
 	//iloœærycerzy jaka maksymalnie mo¿e byæ w mieœcie
 	int knightsMax;

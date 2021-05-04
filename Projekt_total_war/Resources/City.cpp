@@ -19,8 +19,7 @@ City::City(std::string name, int popMax, sf::Vector2f cityPoints, Color color)
 	this->archersMax = 4;
 	this->horsesMax = 0;
 	this->colorOfOwner = color;
-	
-	
+	this->deployUnits = false;
 }
 
 City::~City()
@@ -40,14 +39,42 @@ void City::initCity(sf::Vector2f cityPos)
 	this->doubleClicked = false;
 }
 
+//Zwraca czy klikniêto dwa razy w miasto
 bool City::isInCity()
 {
 	return this->doubleClicked;
 }
 
+//Zmienia stan na nie w mieœcie
 void City::setNotInCity()
 {
 	this->doubleClicked = false;
+}
+
+bool City::isUnitsDeployed()
+{
+	if (this->deployUnits) {
+		this->deployUnits = false;
+		return true;
+	}
+	return false;
+}
+
+sf::Vector2f City::getPosition()
+{
+	return this->cityIcon.getPosition();
+}
+
+vector<int> City::howManyUnits()
+{
+	return vector<int> { this->knights, this->archers, this->horses };
+}
+
+void City::deleteTroops()
+{
+	this->knights = 0;
+	this->archers = 0;
+	this->horses = 0;
 }
 
 /// <summary>Wykorzystuje funkcje z district.h ¿eby sprawdziæ czy kursor znajduje siê nad miastem, po najechaniu zmienia siê kolor miasta na czerwony, a po podwójnym klikniêciu TODO: ma pojawiaæ siê menu miasta</summary>

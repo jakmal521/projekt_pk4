@@ -6,12 +6,25 @@
 #include <iostream>
 #include "..\Headers\Unit.h"
 
-Unit::Unit(Color color)
+Unit::Unit(Color color, vector<int> amountOfTroops)
 {
 	this->colorOfOwner = color;
-	this->knights = 1; 
-	this->horses = 1; 
-	this->archers = 1; 
+	if (amountOfTroops.size() == 0)
+	{
+		this->knights = 1;
+		this->archers = 1;
+		this->horses = 1;
+	}
+	else if (amountOfTroops.size() == 3)
+	{
+		this->knights = amountOfTroops[0];
+		this->archers = amountOfTroops[1];
+		this->horses = amountOfTroops[2];
+	}
+	else
+	{
+		std::cout << "Error with vector amountOfTroops";
+	}
 	this->to_delete = false;
 	this->distance = 700.f;
 }
@@ -21,7 +34,7 @@ Unit::~Unit()
 }
 
 //Inicjalizacja gracza
-void Unit::initUnit()
+void Unit::initUnit(sf::Vector2f position)
 {
 	this->newUnit = false;
 
@@ -34,7 +47,14 @@ void Unit::initUnit()
 	this->UnitShape.setTexture(&this->UnitTexture);
 	this->UnitShape.setSize(Vector2f(100.f, 100.f));
 	this->UnitShape.setOrigin(0.5 * this->UnitShape.getSize().x, 1 * this->UnitShape.getSize().y);
-	this->UnitShape.setPosition(sf::Vector2f(550.f, 350.f));
+	if (position.x == 0)
+	{
+		this->UnitShape.setPosition(sf::Vector2f(550.f, 350.f));
+	}
+	else
+	{
+		this->UnitShape.setPosition(position);
+	}
 	this->UnitShapeColor = this->UnitShape.getFillColor();
 
 	//Obrazek poruszania siê
@@ -60,6 +80,7 @@ void Unit::initUnit()
 	this->buttonBackgroundText.setFont(this->font);
 	this->buttonBackgroundText.setFillColor(Color::White);
 	this->buttonBackgroundText.setCharacterSize(8);
+
 	//Atrybuty gracza
 	this->moveSpeed = 600;
 }
@@ -67,24 +88,24 @@ void Unit::initUnit()
 /// <summary>Wykorzystuje funkcje z district.h ¿eby sprawdziæ czy kursor znajduje siê nad dystryktem, po klikniêciu prawym przyciskiem myszy pojawia siê X, po czym klikaj¹c w niego pojawia siê tekstura gracza, klikaj¹c dwa razy lewym przyciskiem pojawia siê okno split umo¿liwiaj¹ce rozdzelenie jednostki na dwie.</summary>
 /// <param name="">Pozycja kursora | bool Czy kursor nad dystryktem</param>
 /// <returns>Void</returns>
-void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units,vector<City*> &cities)
+void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, vector<City*>& cities)
 {
 	//Event po klikniêciu na dystrykt prawym przyciskiem
 	if (iCOD)
 	{
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
-			this->hideButtons();
 			this->clicked = false;
 
 			if (this->mouseRightHeld == false)
 			{
 				this->mouseRightHeld = true;
+				this->hideButtons();
 				if (this->moveShape.getGlobalBounds().contains(mpos))
 				{
-					int thisone=-1;
+					int thisone = -1;
 					int tojoin = -1;
-					
+
 					if (
 						(this->distance -
 							sqrt(
@@ -93,22 +114,22 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units,vec
 							)) > 0
 						)
 					{
-
 						this->distance -=
 							sqrt(
 								(this->UnitShape.getPosition().x - mpos.x) * (this->UnitShape.getPosition().x - mpos.x)
 								+ (this->UnitShape.getPosition().y - mpos.y) * (this->UnitShape.getPosition().y - mpos.y)
 							);
-						
+
 						for (int i = 0; i < units.size(); i++)
-						{//dodawanie jednostek tylko gdy s¹ tego samego gracza w innym przypadku walka 
-							if (units[i]->UnitShape.getGlobalBounds().contains(mpos) && units[i]->UnitShape.getGlobalBounds().contains(mpos) != this->UnitShape.getGlobalBounds().contains(mpos)&& this->colorOfOwner==units[i]->colorOfOwner) 
+						{
+							//dodawanie jednostek tylko gdy s¹ tego samego gracza w innym przypadku walka
+							if (units[i]->UnitShape.getGlobalBounds().contains(mpos) && units[i]->UnitShape.getGlobalBounds().contains(mpos) != this->UnitShape.getGlobalBounds().contains(mpos) && this->colorOfOwner == units[i]->colorOfOwner)
 							{
 								units[i]->archers += this->archers;
 								units[i]->knights += this->knights;
 								units[i]->horses += this->horses;
 								this->to_delete = true;
-								return;
+								this->nextUnit = i;
 							}
 							else if (units[i]->UnitShape.getGlobalBounds().contains(mpos) && units[i]->UnitShape.getGlobalBounds().contains(mpos) != this->UnitShape.getGlobalBounds().contains(mpos) && this->colorOfOwner != units[i]->colorOfOwner)
 							{
@@ -119,11 +140,11 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units,vec
 						for (int i = 0; i < cities.size(); i++)
 						{	//Dodawanie z jednostki do miasta bior¹c pod uwagê limity, w innym przypadku atak miasta
 							if (cities[i]->cityIcon.getGlobalBounds().contains(mpos) && this->colorOfOwner == cities[i]->colorOfOwner)
-							
+
 							{
 								if (cities[i]->archers < cities[i]->archersMax)
-								{	
-									while (cities[i]->archers != cities[i]->archersMax && this->archers!=0)
+								{
+									while (cities[i]->archers != cities[i]->archersMax && this->archers != 0)
 									{
 										cities[i]->archers++;
 										this->archers--;
@@ -156,16 +177,14 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units,vec
 							else if (cities[i]->cityIcon.getGlobalBounds().contains(mpos) && this->colorOfOwner != cities[i]->colorOfOwner)
 							{
 								this->cityAttack(cities[i]);
-
 							}
-
 						}
-					
+
 						this->UnitShape.setPosition(mpos);	//mpos czy pozycja moveShape???
-					}	this->moveShape.setFillColor(sf::Color::Transparent); //X znika
-						this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f)); //Wyrzucenie X-sa poza mapê aby nie da³o siê go klikn¹æ ponownie
-						this->clicked = false;
-					
+					}
+					this->moveShape.setFillColor(sf::Color::Transparent); //X znika
+					this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f)); //Wyrzucenie X-sa poza mapê aby nie da³o siê go klikn¹æ ponownie
+					this->clicked = false;
 				}
 				else
 				{
@@ -278,9 +297,9 @@ void Unit::showButtons()
 	this->buttonSplit.setFillColor(sf::Color::Black);
 	this->buttonSplit.setPosition(sf::Vector2f(this->buttonBackground.getPosition().x + 55, this->buttonBackground.getPosition().y - 25));
 	stringstream ss;
-	ss<<"Licznosc jednostki\n\n" << "Rycerze: " << this->knights << "\nKonni: " << this->horses << "\nLucznicy: " << this->archers;
+	ss << "Licznosc jednostki\n\n" << "Rycerze: " << this->knights << "\nKonni: " << this->horses << "\nLucznicy: " << this->archers;
 	this->buttonBackgroundText.setString(ss.str());
-	this->buttonBackgroundText.setPosition(this->buttonBackground.getPosition().x + (this->buttonBackground.getGlobalBounds().width / 2) - this->buttonBackgroundText.getGlobalBounds().width / 2, this->buttonBackground.getPosition().y -100 );
+	this->buttonBackgroundText.setPosition(this->buttonBackground.getPosition().x + (this->buttonBackground.getGlobalBounds().width / 2) - this->buttonBackgroundText.getGlobalBounds().width / 2, this->buttonBackground.getPosition().y - 100);
 }
 
 void Unit::hideButtons()
@@ -294,7 +313,13 @@ void Unit::hideButtons()
 
 	this->buttonSplit.setFillColor(sf::Color::Transparent);
 	this->buttonSplit.setPosition(sf::Vector2f(-100.f, -100.f));
+
+	if (!this->mouseRightHeld) {
+		this->moveShape.setFillColor(sf::Color::Transparent);
+		this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f));
+	}
 }
+
 //Ustawianie mo¿liwoœci do przejœcia
 void Unit::setDistance()
 {

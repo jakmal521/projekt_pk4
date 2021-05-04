@@ -1,5 +1,5 @@
 ﻿  GameState.cpp
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\GameState.cpp(135,74): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\GameState.cpp(156,74): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
           with
           [
               T=unsigned int
@@ -8,7 +8,7 @@ C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Ga
           [
               T=float
           ]
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\GameState.cpp(135,53): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\GameState.cpp(156,53): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
           with
           [
               T=unsigned int

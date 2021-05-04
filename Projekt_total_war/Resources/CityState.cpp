@@ -1,7 +1,7 @@
 #include "..\Headers\CityState.h"
 
-CityState::CityState(RenderWindow* window,Font _font, stack<State*>* _states, City &city) : State(window, _states)
-{	
+CityState::CityState(RenderWindow* window, Font _font, stack<State*>* _states, City& city) : State(window, _states)
+{
 	this->initBackground(window);
 	this->city = &city;
 	this->font = _font;
@@ -48,7 +48,7 @@ void CityState::initBackground(sf::RenderWindow* window)
 	this->background.setTexture(&this->texture);
 }
 
-void CityState::initText(Font  font, City & city)
+void CityState::initText(Font  font, City& city)
 {
 	stringstream ss;
 	ss << "Witaj w " << city.cityName;
@@ -57,10 +57,10 @@ void CityState::initText(Font  font, City & city)
 	cout << city.cityName << endl;
 	this->greeting.setFillColor(Color::White);
 	this->greeting.setCharacterSize(30);
-		  
-	this->greeting.setPosition(this->window->getPosition().x -  this->greeting.getGlobalBounds().width-20, 50);
 
+	this->greeting.setPosition(this->window->getPosition().x - this->greeting.getGlobalBounds().width - 20, 50);
 }
+
 //inicjalizacja informacji o mieœcie
 void CityState::initInfo()
 {
@@ -68,27 +68,43 @@ void CityState::initInfo()
 	this->infoShape.setPosition(this->buttons["Upgrade"]->getPosX() + this->buttons["Upgrade"]->getWidth() + 50, this->buttons["Upgrade"]->getPosY());
 	this->infoShape.setFillColor(Color(0, 0, 0, 150));
 	this->info.setFont(this->font);
-	
+
 	this->info.setFillColor(Color::White);
 	this->info.setCharacterSize(18);
-	this->info.setPosition(this->infoShape.getPosition().x +5, this->infoShape.getPosition().y + (this->infoShape.getGlobalBounds().height / 2) - this->info.getGlobalBounds().height / 2);
+	this->info.setPosition(this->infoShape.getPosition().x + 5, this->infoShape.getPosition().y + (this->infoShape.getGlobalBounds().height / 2) - this->info.getGlobalBounds().height / 2);
 	stringstream ss;
 
-	ss << "Populacja:\n" << this->city->population << "/" << this->city->populationMax << "\n"
-		<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: " << this->city->knights << "\nKonni: " << this->city->horses << "\nLucznicy: " << this->city->archers;
+	if (this->city->deployUnits)
+	{
+		//Dla sytuacji gdy wyprowadzamy wojsko z miasta
+		ss << "Populacja:\n" << this->city->population << "/" << this->city->populationMax << "\n"
+			<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: 0\nKonni: 0\nLucznicy: 0";
+	}
+	else
+	{
+		ss << "Populacja:\n" << this->city->population << "/" << this->city->populationMax << "\n"
+			<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: " << this->city->knights << "\nKonni: " << this->city->horses << "\nLucznicy: " << this->city->archers;
+	}
 	this->info.setString(ss.str());
 }
+
 void CityState::initButtons()
 {
 	this->buttons["Upgrade"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.25, 300, 100, &this->font, "Ulepszenie miasta", Color(0, 0, 0, 150));
 	this->buttons["Training"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.5, 300, 100, &this->font, "Trenowanie wojska", Color(0, 0, 0, 150));
 	this->buttons["Buildings"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.75, 300, 100, &this->font, "Budynki", Color(0, 0, 0, 150));
-	
+	this->buttons["Deploy"] = new Button(this->buttons["Upgrade"]->getPosX() + this->buttons["Upgrade"]->getWidth() + 50, this->buttons["Upgrade"]->getPosY() + 330, 150, 100, &this->font, "Wyprowadz wojsko", Color(0, 0, 0, 150));
 }
+
 void CityState::updateButtons()
 {
 	for (auto& i : this->buttons)
 		i.second->update(this->mouseposview);
+	if (this->buttons["Deploy"]->press())
+	{
+		this->city->deployUnits = true;
+		this->initInfo();	//zaktualizowanie liczby wojsk po jego wyjœciu
+	}
 }
 
 void CityState::renderButtons(RenderTarget* target)

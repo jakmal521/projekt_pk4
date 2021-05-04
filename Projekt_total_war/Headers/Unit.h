@@ -10,20 +10,20 @@
 #include <sstream>
 #include <fstream>
 #include "../Headers/Button.h"
-#include "../Headers/City.h"
+#include "../Headers/CityState.h"
 
 class Unit
 {
 public:
 	//Konstruktor i destruktor
-	Unit(Color color);
+	Unit(Color color, vector<int> amountOfTroops);
 	~Unit();
 
 	//Metody
-	void updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*> &units, vector<City*>& cities);
+	void updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, vector<City*>& cities);
 	void updateAll(sf::Vector2f mpos, bool iCOD);
 	void render(sf::RenderTarget* target);
-	void initUnit();
+	void initUnit(sf::Vector2f position);
 
 	bool ifNewUnit();
 
@@ -35,12 +35,15 @@ private:
 	sf::RectangleShape moveShape;	//Kwadrat kursora (czerwony X) poruszania siê po 1 klikniêciu
 	sf::Texture moveTexture;
 	sf::Color moveShapeColor;		//Kolor X-sa
+
 	//Ilosc wojska
 	int knights;
 	int horses; //lol
 	int archers;
+
 	//Do kogo nale¿y oddzia³
 	Color colorOfOwner;
+
 	//Przyciski
 	RectangleShape buttonBackground;
 	RectangleShape buttonSplit;
@@ -50,6 +53,7 @@ private:
 	void hideButtons();
 	Text buttonBackgroundText;
 	Font font;
+
 	//Sprawdzenie czy jednostka jest podwójnie klikniêta lewym przyciskiem myszy
 	bool clicked;
 
@@ -67,14 +71,21 @@ private:
 	//Parametry
 	float moveSpeed;
 	friend class GameState;
+
 	//Sprawdzenie czy trzeba usun¹æ jednostkê
 	bool to_delete;
+
+	//Wskazanie jednostki któr¹ bêdziemy kierowaæ po usuniêciu tej jednostki
+	int nextUnit;
+
 	//Ile mog¹ przejœæ w jednym  do przejœcia
 	float distance;
 	void setDistance();
 	friend class GameState;
+
 	//Walka dwóch oddzia³ów
 	void fight(Unit* enemyUnit);
+
 	//Atakowanie miasta
-	void cityAttack( City *city);
+	void cityAttack(City* city);
 };

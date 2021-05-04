@@ -4,8 +4,6 @@
 #include "..\Headers\City.h"
 #include "..\Headers\Button.h"
 
-
-
 #include <sstream>
 #include <fstream>
 #include <iostream>
@@ -14,13 +12,13 @@ class CityState :
 	public State
 {
 public:
-	CityState(RenderWindow* window, Font _font,stack<State*>* _states, City & city);
+	CityState(RenderWindow* window, Font _font, stack<State*>* _states, City& city);
 	virtual ~CityState();
 
 	void update();
 	void render(RenderTarget* target = nullptr);
 	void end();
-	
+
 private:
 	//t³o
 	RectangleShape background;
@@ -28,7 +26,7 @@ private:
 	//Czcionka
 	Font font;
 	//Przyciski
-    map<string, Button*>buttons;
+	map<string, Button*>buttons;
 	void initButtons();
 	void updateButtons();
 	void renderButtons(RenderTarget* target);
@@ -38,14 +36,13 @@ private:
 	void initBackground(sf::RenderWindow* window);
 	//Inicjalizacja tekstu i przycisków
 	void initText(Font font, City& city);
-	
+
 	//Nazwa miasta
 	Text greeting;
 	//Informacje o mieœcie
 	RectangleShape infoShape;
 	void initInfo();
 	Text info;
-	//Miasto 
+	//Miasto
 	City* city;
-	
 };

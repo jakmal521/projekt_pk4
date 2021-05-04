@@ -48,7 +48,8 @@ private:
 
 	//Klasa jednostki
 	vector<Unit*> unit;
-	void initUnit();
+	void initUnit(sf::Vector2f position, vector<int> amountOfTroops);
+
 	int howManyUnitsOnMap;
 	int whichUnit = 0;
 	void changeUnit();
