@@ -76,7 +76,7 @@ void CityState::initInfo()
 
 	if (this->city->deployUnits)
 	{
-		//Dla sytuacji gdy wyprowadzamy wojsko z miasta
+		//Dla sytuacji gdy wyprowadzamy wojsko z miasta (wpisanie 0)
 		ss << "Populacja:\n" << this->city->population << "/" << this->city->populationMax << "\n"
 			<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: 0\nKonni: 0\nLucznicy: 0";
 	}
