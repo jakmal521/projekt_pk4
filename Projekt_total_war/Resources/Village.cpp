@@ -26,3 +26,8 @@ Village::~Village()
 {
 
 }
+
+int Village::getGoldToUpgrade()
+{
+	return this->goldToUpgradde;
+}

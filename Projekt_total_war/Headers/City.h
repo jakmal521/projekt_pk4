@@ -17,7 +17,7 @@ public:
 	//Konstruktor i destruktor
 	City();
 	City(string name, int popMax, Vector2f cityPoints, Color color);
-	~City();
+	 virtual ~City();
 
 	//Wyœwietlenie na ekranie
 	void update(Vector2f mposC);
@@ -48,6 +48,7 @@ public:
 	int Population();
 	int PopulationMax();
 	*/
+	virtual int getGoldToUpgrade() = 0;
 protected:
 
 	/*Mechanika*/

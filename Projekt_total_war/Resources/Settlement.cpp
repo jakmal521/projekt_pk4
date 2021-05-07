@@ -12,3 +12,8 @@ Settlement::Settlement(string name, Vector2f cityPoints, Color color) :City(name
 Settlement::~Settlement()
 {
 }
+
+int Settlement::getGoldToUpgrade()
+{
+	return this->goldToUpdate;
+}

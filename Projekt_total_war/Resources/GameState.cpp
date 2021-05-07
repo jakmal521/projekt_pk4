@@ -220,7 +220,7 @@ void GameState::initView()
 //Inicjalizacja danych gracza(z³oto itp.)
 void GameState::initPlayer()
 {
-	this->player = new Player(Color::Black);
+	this->player = new Player(Color::Red);
 }
 //Ile regionów ma gracz
 int GameState::amountOfdistricts()

@@ -65,7 +65,7 @@ void CityState::initText(Font  font, City& city)
 void CityState::initInfo()
 {
 	this->infoShape.setSize(Vector2f(150, 300));
-	this->infoShape.setPosition(this->buttons["Upgrade"]->getPosX() + this->buttons["Upgrade"]->getWidth() + 50, this->buttons["Upgrade"]->getPosY());
+	this->infoShape.setPosition(this->buttons.rbegin()->second->getPosX() + this->buttons.rbegin()->second->getWidth() + 50, this->buttons.rbegin()->second->getPosY());
 	this->infoShape.setFillColor(Color(0, 0, 0, 150));
 	this->info.setFont(this->font);
 
@@ -90,10 +90,22 @@ void CityState::initInfo()
 
 void CityState::initButtons()
 {
-	this->buttons["Upgrade"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.25, 300, 100, &this->font, "Ulepszenie miasta", Color(0, 0, 0, 150));
-	this->buttons["Training"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.5, 300, 100, &this->font, "Trenowanie wojska", Color(0, 0, 0, 150));
-	this->buttons["Buildings"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.75, 300, 100, &this->font, "Budynki", Color(0, 0, 0, 150));
-	this->buttons["Deploy"] = new Button(this->buttons["Upgrade"]->getPosX() + this->buttons["Upgrade"]->getWidth() + 50, this->buttons["Upgrade"]->getPosY() + 330, 150, 100, &this->font, "Wyprowadz wojsko", Color(0, 0, 0, 150));
+	if (Town* ob = dynamic_cast<Town*>(this->city))
+	{
+		this->buttons["Training"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.25, 300, 100, &this->font, "Trenowanie wojska", Color(0, 0, 0, 150));
+		this->buttons["Deploy"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.5, 300, 100, &this->font, "Wyprowadz wojsko", Color(0, 0, 0, 150));
+
+		
+	}
+	else
+	{
+		stringstream ss;
+		ss << "Ulepszenie miasta\n " << this->city->getGoldToUpgrade() << " zlota";
+		this->buttons["Upgrade"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.25, 300, 100, &this->font, ss.str(), Color(0, 0, 0, 150));
+		this->buttons["Training"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.5, 300, 100, &this->font, "Trenowanie wojska", Color(0, 0, 0, 150));
+		this->buttons["Deploy"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.75, 300, 100, &this->font, "Wyprowadz wojsko", Color(0, 0, 0, 150));
+		
+	}
 }
 
 void CityState::updateButtons()

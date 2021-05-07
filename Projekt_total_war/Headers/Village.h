@@ -9,7 +9,7 @@ public:
 	Village(string name, Vector2f cityPoints, Color color);
 	Village(City * city);
 	~Village();
-
+	int getGoldToUpgrade();
 private: 
 	int goldToUpgradde;
 };

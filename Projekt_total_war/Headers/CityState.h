@@ -2,6 +2,7 @@
 
 #include "..\Headers\State.h"
 #include "..\Headers\City.h"
+#include "..\Headers\Town.h"
 #include "..\Headers\Button.h"
 
 #include <sstream>

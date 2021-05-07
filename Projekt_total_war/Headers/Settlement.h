@@ -11,6 +11,7 @@ public:
 	//Konstruktor i destruktor
 	Settlement(string name, Vector2f cityPoints, Color color);
 	~Settlement();
+	int getGoldToUpgrade();
 private:
 	int goldToUpdate;
 };

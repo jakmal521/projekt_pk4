@@ -1,3 +1,4 @@
+#pragma once
 #include "..\Headers\City.h"
 using namespace std;
 using namespace sf;
@@ -8,9 +9,9 @@ class Town :
 public:
 	Town(string name, Vector2f cityPoints, Color color);
 	Town(City* city);
-	~Town();
-	
-	
+	 ~Town();
+	 
+	 int getGoldToUpgrade() { return 0; }
 	
 };
 
