@@ -6,9 +6,10 @@ class Town :
 {
 	//Konstruktor i destruktor
 public:
-	Town(string name, int popMax, Vector2f cityPoints, Color color);
+	Town(string name, Vector2f cityPoints, Color color);
+	Town(City* city);
 	~Town();
-	//Wyœwietlanie i updatowanie miasta
+	
 	
 	
 };

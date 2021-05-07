@@ -1,13 +1,17 @@
-/*#include "..\Headers\City.h"
+#include "..\Headers\City.h"
+using namespace std;
+using namespace sf;
 class Village :
 	public City
 {
 public:
 	//konstruktor i destruktor
-	Village(std::string name, int popMax);
+	Village(string name, Vector2f cityPoints, Color color);
+	Village(City * city);
 	~Village();
-	//Wyœwietlanie i updatowanie miasta
-	void update();
-	void render(RenderTarget * target);
+
+private: 
+	int goldToUpgradde;
 };
-*/
+
+

@@ -15,9 +15,6 @@ City::City(std::string name, int popMax, sf::Vector2f cityPoints, Color color)
 	this->knights = 0;
 	this->archers = 0;
 	this->horses = 0;
-	this->knightsMax = 4;
-	this->archersMax = 4;
-	this->horsesMax = 0;
 	this->colorOfOwner = color;
 	this->deployUnits = false;
 }

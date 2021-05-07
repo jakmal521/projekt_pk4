@@ -123,9 +123,11 @@ void GameState::initDis()
 {
 	string name;
 	int points;
+	char color;
 	fstream plik("Resources/districts.txt");
 	while (plik >> name)
-	{
+	{	
+		plik >> color;
 		this->districts[name] = new District(name);
 		plik >> points;
 		this->districts[name]->shape.setPointCount(points);
@@ -133,15 +135,21 @@ void GameState::initDis()
 		{
 			float x, y;
 			plik >> x >> y;
-			/*x = this->window->getSize().x * (x / 800);
-			y = this->window->getSize().y * (y / 600);*/
+			
 
 			this->districts[name]->shape.setPoint(i, Vector2f(x, y));
 		}
-		//this->districts[name]->shape.scale(0.5, 0.5);
-		this->districts[name]->shape.setFillColor(Color::Black);
+		
+		switch (color)
+		{
+		case 'c':this->districts[name]->shape.setFillColor(Color::Red); break;
+		case 'b': this->districts[name]->shape.setFillColor(Color::White); break;
+		case 'z':this->districts[name]->shape.setFillColor(Color::Green); break;
+
+		}
+		
 		this->districts[name]->shape.setOutlineThickness(2);
-		this->districts[name]->shape.setOutlineColor(Color(222, 184, 135, 160));
+				this->districts[name]->shape.setOutlineColor(Color(0, 0, 0, 160));
 
 		//Zainicjowanie miasta w dystrykcie
 		string line;
@@ -197,50 +205,7 @@ void GameState::changeUnit()
 		}
 	}
 
-	/*
-	int a = this->whichUnit;
-	if (Keyboard::isKeyPressed(Keyboard::Num1))
-	{
-		this->whichUnit = 0;
-	}
-	else if (Keyboard::isKeyPressed(Keyboard::Num2))
-	{
-		this->whichUnit = 1;
-	}
-	else if (Keyboard::isKeyPressed(Keyboard::Num3))
-	{
-		this->whichUnit = 2;
-	}
-	else if (Keyboard::isKeyPressed(Keyboard::Num4))
-	{
-		this->whichUnit = 3;
-	}
-	else if (Keyboard::isKeyPressed(Keyboard::Num5))
-	{
-		this->whichUnit = 4;
-	}
-	else if (Keyboard::isKeyPressed(Keyboard::Num6))
-	{
-		this->whichUnit = 5;
-	}
-	else if (Keyboard::isKeyPressed(Keyboard::Num7))
-	{
-		this->whichUnit = 6;
-	}
-	else if (Keyboard::isKeyPressed(Keyboard::Num8))
-	{
-		this->whichUnit = 7;
-	}
-	else if (Keyboard::isKeyPressed(Keyboard::Num9))
-	{
-		this->whichUnit = 8;
-	}
-
-	if (this->whichUnit >= this->unit.size())
-	{
-		this->whichUnit = a;
-	}
-	*/
+	
 }
 
 //Incjalizacja widoku
@@ -248,7 +213,7 @@ void GameState::initView()
 {
 	this->view2 = window->getDefaultView();
 	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(400.f, 300.f));
-	//this->view1 = View(Vector2f(0.f, 0.f), Vector2f(800.f, 600.f));
+	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(800.f, 600.f));
 	this->position = new Position(this->view1.getSize());
 }
 

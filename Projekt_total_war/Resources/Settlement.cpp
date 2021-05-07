@@ -1,19 +1,14 @@
-/*#include "..\Headers\Settlement.h"
-#include "..\Headers\City.h"
+#include "..\Headers\Settlement.h"
+
 //Konstruktor i destruktor
-Settlement::Settlement(std::string name, int popMax) :City(name, popMax, cityPos)
+Settlement::Settlement(string name, Vector2f cityPoints, Color color) :City(name, 1000, cityPoints, color)
 {
+	this->knightsMax = 20;
+	this->archersMax = 10;
+	this->horsesMax = 25;
+	this->goldToUpdate = 25000;
 }
 
 Settlement::~Settlement()
 {
 }
-//Wyœwietlanie i updatowanie miasta
-void Settlement::update()
-{
-	this->updatePopulation();
-}
-
-void Settlement::render(RenderTarget* target)
-{
-}*/

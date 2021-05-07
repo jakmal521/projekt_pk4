@@ -8,6 +8,9 @@
 #include <iostream>
 #include <sstream>
 #include "..\Headers\City.h"
+#include "..\Headers\Settlement.h"
+#include "..\Headers\Village.h"
+#include "..\Headers\Town.h"
 
 using namespace sf;
 using namespace std;

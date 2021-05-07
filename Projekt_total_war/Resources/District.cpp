@@ -79,9 +79,22 @@ void District::initCity(string line)
 {
 	stringstream stream(line);
 	string city_name;
-	int pop, pointA, pointB;
-	stream >> city_name >> pop >> pointA >> pointB;
-	this->cities.push_back(new City(city_name, pop, sf::Vector2f(pointA, pointB), this->shape.getFillColor()));
+	int pointA, pointB;
+	stream >> city_name >> pointA >> pointB;
+	int sizeOfCity;
+	if (city_name == "Rzym")
+		sizeOfCity = 3;
+	else
+	{
+		sizeOfCity = rand() % 3 + 1;
+	}
+	switch (sizeOfCity)
+	{
+	case 1:	this->cities.push_back(new Settlement(city_name ,Vector2f(pointA, pointB), this->shape.getFillColor())); break;
+	case 2:	this->cities.push_back(new Village(city_name ,Vector2f(pointA, pointB), this->shape.getFillColor())); break;
+	case 3:	this->cities.push_back(new Town(city_name ,Vector2f(pointA, pointB), this->shape.getFillColor())); break;
+	}
+	
 	this->cities.back()->initCity(sf::Vector2f(pointA, pointB));
 }
 

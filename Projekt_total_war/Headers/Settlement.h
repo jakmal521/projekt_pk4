@@ -1,4 +1,4 @@
-/*#pragma once
+#pragma once
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -9,10 +9,8 @@ class Settlement : public City
 {
 public:
 	//Konstruktor i destruktor
-	Settlement(std::string name, int popMax);
+	Settlement(string name, Vector2f cityPoints, Color color);
 	~Settlement();
-	//Wyœwietlanie i updatowanie miasta
-	void update();
-	void render(RenderTarget* target);
+private:
+	int goldToUpdate;
 };
-*/

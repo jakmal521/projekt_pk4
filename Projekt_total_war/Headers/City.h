@@ -99,4 +99,7 @@ protected:
 	friend class CityState;
 	friend class GameState;
 	friend class Unit;
+	friend class Village;
+	friend class Town;
+	friend class Settlement;
 };
