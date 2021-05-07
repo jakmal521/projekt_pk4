@@ -84,16 +84,18 @@ void GameState::update()
 			i.second->cities.back()->deleteTroops();
 		}
 	}
-
+	
 	if (/*jakiœ przycisk który now¹ turê zacznie*/ 0)
 	{
 		for (auto& i : this->enemies)
 			i->update();
 		for (auto& i : this->unit)
 			i->setDistance();
+
+		this->updateGold();
 	}
 	//Wyœwietlanie pozycji myszki (czasem przydatne)
-	cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
+	//cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
 }
 
 void GameState::render(RenderTarget* target)
@@ -115,6 +117,7 @@ void GameState::render(RenderTarget* target)
 	this->window->setView(view1);
 	this->position->render(target);
 }
+
 //Inicjalizacja regionów i miast
 void GameState::initDis()
 {
@@ -245,7 +248,7 @@ void GameState::initView()
 {
 	this->view2 = window->getDefaultView();
 	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(400.f, 300.f));
-	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(800.f, 600.f));
+	//this->view1 = View(Vector2f(0.f, 0.f), Vector2f(800.f, 600.f));
 	this->position = new Position(this->view1.getSize());
 }
 
@@ -271,4 +274,16 @@ void GameState::initEnemies()
 	{
 		this->enemies.push_back(new Enemy(Color::Blue));
 	}
+}
+//Updatowanie ilosci zlota z podatków
+void GameState::updateGold()
+{
+	int sum = 0;
+	for (auto& i : this->districts)
+	{
+		if (i.second->cities[0]->colorOfOwner == this->player->playerColor())
+			sum += i.second->cities[0]->population * 2;
+
+	}
+	this->player->setGold(sum);
 }

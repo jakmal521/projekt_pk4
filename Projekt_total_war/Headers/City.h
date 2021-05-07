@@ -97,5 +97,6 @@ protected:
 	//zmiany w populacji
 	void updatePopulation();
 	friend class CityState;
+	friend class GameState;
 	friend class Unit;
 };

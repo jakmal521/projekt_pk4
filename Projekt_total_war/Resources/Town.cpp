@@ -1,20 +1,13 @@
-/*
+
 #include "..\Headers\Town.h"
 //konstruktor i destruktor
-Town::Town(std::string name, int popMax):City(name, popMax)
+Town::Town(string name, int popMax, Vector2f cityPoints, Color color):City(name, popMax, cityPoints, color)
 {
 }
 
 Town::~Town()
 {
 }
-//Wyœwietlanie i updatowanie miasta
-void Town::update()
-{
-	this->updatePopulation();
-}
 
-void Town::render(RenderTarget* target)
-{
-}
-*/
+
+

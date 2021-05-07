@@ -42,7 +42,8 @@ private:
 
 	//Wektor regionów
 	map<string, District*> districts;
-
+	//updatowanie iloœci z³ota z podatków 
+	void updateGold();
 	//Inicjalizacja regionów
 	void initDis();
 
@@ -59,7 +60,7 @@ private:
 	void initPlayer();
 	//Ile regionów ma gracz
 	int amountOfdistricts();
-
+	
 	//Przeciwnicy
 	vector<Enemy*> enemies;
 	void initEnemies();

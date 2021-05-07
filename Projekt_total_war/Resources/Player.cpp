@@ -15,3 +15,10 @@ Color Player::playerColor()
 
 	return this->color;
 }
+
+void Player::setGold(int _gold)
+{
+
+	this->gold = _gold;
+
+}

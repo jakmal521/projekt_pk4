@@ -19,12 +19,14 @@ public:
 	~Player();
 	//zwraca kolor gracza
 	Color playerColor();
+	//Ustawia ilosc zlota
+	void setGold(int _gold);
 private:
 	//Atrybuty
 	Color color;
 	//Iloœæ z³ota
 	int gold;
-
+	
 	friend class HeadBar;
 	
 };
