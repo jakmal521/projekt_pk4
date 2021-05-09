@@ -21,6 +21,8 @@ public:
 	Color playerColor();
 	//Ustawia ilosc zlota
 	void setGold(int _gold);
+	//Ile gracz ma z³ota
+	int getGold();
 private:
 	//Atrybuty
 	Color color;

@@ -33,7 +33,8 @@ public:
 
 	//Zwracanie czy wyprowadziæ wojsko
 	bool isUnitsDeployed();
-
+	//Zwracanie czy ulepszyæ miasto 
+	bool isToUpdate();
 	//Zwracanie pozycji miasta
 	sf::Vector2f getPosition();
 
@@ -62,7 +63,8 @@ protected:
 	bool doubleClicked;
 	//Czy wypuœciæ jednostki z miasta
 	bool deployUnits;
-
+	//Czy ulepszyæ miasto 
+	bool toUpdate;
 	/*Wygl¹d*/
 	//Tekstury
 	sf::Texture cityIconTexture;

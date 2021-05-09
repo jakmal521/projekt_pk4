@@ -59,16 +59,12 @@ void District::render(RenderTarget* target)
 {
 	target->draw(this->shape);
 	if (!this->cities.empty())
-		for (auto& i : this->cities)
+	{
+			for (auto& i : this->cities)
 			i->render(target);
-}
+	}
+	}
 
-/*
-	@return Vector2f
-
-	Zwraca po³o¿enie dystryktu - na razie nie dzia³a i zwraca po³o¿enie 1 punktu tego dystryktu
-
-*/
 sf::Vector2f District::returnPosition()
 {
 	return sf::Vector2f(this->shape.getPoint(1));
@@ -83,7 +79,7 @@ void District::initCity(string line)
 	stream >> city_name >> pointA >> pointB;
 	int sizeOfCity;
 	if (city_name == "Rzym")
-		sizeOfCity = 3;
+		sizeOfCity = 1;
 	else
 	{
 		sizeOfCity = rand() % 3 + 1;

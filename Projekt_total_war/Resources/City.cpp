@@ -17,6 +17,7 @@ City::City(std::string name, int popMax, sf::Vector2f cityPoints, Color color)
 	this->horses = 0;
 	this->colorOfOwner = color;
 	this->deployUnits = false;
+	this->toUpdate = 0;
 }
 
 City::~City()
@@ -52,6 +53,15 @@ bool City::isUnitsDeployed()
 {
 	if (this->deployUnits) {
 		this->deployUnits = false;
+		return true;
+	}
+	return false;
+}
+
+bool City::isToUpdate()
+{
+	if (this->toUpdate) {
+		this->toUpdate = false;
 		return true;
 	}
 	return false;

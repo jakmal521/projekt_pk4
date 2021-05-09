@@ -83,6 +83,30 @@ void GameState::update()
 			initUnit(i.second->cities.back()->getPosition(), i.second->cities.back()->howManyUnits());
 			i.second->cities.back()->deleteTroops();
 		}
+		if (i.second->cities.back()->isToUpdate())
+		{
+			if (this->player->getGold() > i.second->cities.back()->getGoldToUpgrade())
+			{
+				if (Settlement* ob = dynamic_cast<Settlement*>(i.second->cities.back()))
+				{
+					i.second->cities.push_back(new Village(i.second->cities.back()));
+					i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
+					i.second->cities.erase(i.second->cities.begin());
+					cout << i.second->cities.size() << endl;
+					break;
+				}
+				else if (Village* ob = dynamic_cast<Village*>(i.second->cities.back()))
+				{
+					i.second->cities.push_back(new Town(i.second->cities.back()));
+					i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
+					i.second->cities.erase(i.second->cities.begin());
+					cout << i.second->cities.size() << endl;
+					break;
+				}
+				this->player->setGold(this->player->getGold() > i.second->cities.back()->getGoldToUpgrade());
+			}
+			else cout << "no money";
+		}
 	}
 	
 	if (/*jakiœ przycisk który now¹ turê zacznie*/ 0)
@@ -153,7 +177,7 @@ void GameState::initDis()
 
 		//Zainicjowanie miasta w dystrykcie
 		string line;
-		getline(plik, line);
+		std::getline(plik, line);
 		this->districts[name]->initCity(line);
 	}
 	//cout << this->districts.size();

@@ -112,11 +112,23 @@ void CityState::updateButtons()
 {
 	for (auto& i : this->buttons)
 		i.second->update(this->mouseposview);
-	if (this->buttons["Deploy"]->press())
+	if (Town* ob = dynamic_cast<Town*>(this->city))
+	{}
+	else
 	{
-		this->city->deployUnits = true;
-		this->initInfo();	//zaktualizowanie liczby wojsk po jego wyjœciu
+		if (this->buttons["Upgrade"]->press())
+
+			this->city->toUpdate = true;
+	
+	
 	}
+if (this->buttons["Deploy"]->press())
+		{
+			this->city->deployUnits = true;
+			this->initInfo();	//zaktualizowanie liczby wojsk po jego wyjœciu
+			
+
+		}
 }
 
 void CityState::renderButtons(RenderTarget* target)
