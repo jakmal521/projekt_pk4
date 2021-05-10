@@ -85,7 +85,7 @@ void CityState::updateInfo()
 	if (this->city->deployUnits < 0)
 	{
 		ss << "Nie mozna \nwyprowadzic wojska\n z pustego miasta";
-		this->city->deployUnits++;
+		this->city->deployUnits++; //Trzeba by to zmieniæ xDDDDD
 	}
 	else if (this->city->deployUnits == 1)
 	{
