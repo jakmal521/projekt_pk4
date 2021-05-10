@@ -108,7 +108,7 @@ void GameState::update()
 			else cout << "no money";
 		}
 	}
-	
+
 	if (/*jakiœ przycisk który now¹ turê zacznie*/ 0)
 	{
 		for (auto& i : this->enemies)
@@ -118,8 +118,8 @@ void GameState::update()
 
 		this->updateGold();
 	}
-	//Wyœwietlanie pozycji myszki (czasem przydatne)
-	//cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
+	//Wyœwietlanie pozycji myszki(czasem przydatne)
+	cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
 }
 
 void GameState::render(RenderTarget* target)
@@ -150,7 +150,7 @@ void GameState::initDis()
 	char color;
 	fstream plik("Resources/districts.txt");
 	while (plik >> name)
-	{	
+	{
 		plik >> color;
 		this->districts[name] = new District(name);
 		plik >> points;
@@ -159,21 +159,19 @@ void GameState::initDis()
 		{
 			float x, y;
 			plik >> x >> y;
-			
 
 			this->districts[name]->shape.setPoint(i, Vector2f(x, y));
 		}
-		
+
 		switch (color)
 		{
 		case 'c':this->districts[name]->shape.setFillColor(Color::Red); break;
 		case 'b': this->districts[name]->shape.setFillColor(Color::White); break;
 		case 'z':this->districts[name]->shape.setFillColor(Color::Green); break;
-
 		}
-		
+
 		this->districts[name]->shape.setOutlineThickness(2);
-				this->districts[name]->shape.setOutlineColor(Color(0, 0, 0, 160));
+		this->districts[name]->shape.setOutlineColor(Color(0, 0, 0, 160));
 
 		//Zainicjowanie miasta w dystrykcie
 		string line;
@@ -228,8 +226,6 @@ void GameState::changeUnit()
 			break;
 		}
 	}
-
-	
 }
 
 //Incjalizacja widoku
@@ -272,7 +268,6 @@ void GameState::updateGold()
 	{
 		if (i.second->cities[0]->colorOfOwner == this->player->playerColor())
 			sum += i.second->cities[0]->population * 2;
-
 	}
 	this->player->setGold(sum);
 }

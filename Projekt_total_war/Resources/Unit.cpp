@@ -62,24 +62,29 @@ void Unit::initUnit(sf::Vector2f position)
 	this->moveShape.setTexture(&this->moveTexture);
 	this->moveShapeColor = this->moveShape.getFillColor();	//Pobranie koloru X-sa
 	this->moveShape.setFillColor(sf::Color::Transparent);	//Zabranie mu koloru
-	this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f));	//Pozycja pocz¹tkowa poza map¹
+	this->moveShape.setPosition(sf::Vector2f(-1000.f, -1000.f));	//Pozycja pocz¹tkowa poza map¹
 	this->moveShape.setSize(sf::Vector2f(50.f, 50.f));
 	this->moveShape.setOrigin(sf::Vector2f(25.f, 25.f));
 
 	//Przyciski
 	this->buttonsFont.loadFromFile("Fonts/RomanSD.ttf");
 	this->buttonBackground.setSize(sf::Vector2f(100.f, 100.f));
-	this->buttonBackground.setFillColor(sf::Color(127, 127, 127, 127));
+	this->buttonBackground.setFillColor(sf::Color::Transparent);
+	this->buttonBackground.setPosition(-1000.f, -1000.f);
 	this->buttonBackground.setOutlineColor(sf::Color::Black);
 	this->buttonBackground.setOrigin(0, this->buttonBackground.getSize().y);
 	this->buttonSplit.setSize(sf::Vector2f(40.f, 20.f));
-	this->buttonSplit.setFillColor(sf::Color::Black);
+	this->buttonSplit.setFillColor(sf::Color::Transparent);
+	this->buttonSplit.setPosition(-1000.f, -1000.f);
 	this->buttonCancel.setSize(sf::Vector2f(40.f, 20.f));
-	this->buttonCancel.setFillColor(sf::Color::Black);
+	this->buttonCancel.setFillColor(sf::Color::Transparent);
+	this->buttonCancel.setPosition(-1000.f, -1000.f);
 	this->font.loadFromFile("Fonts/RomanSD.ttf");
-	this->buttonBackgroundText.setFont(this->font);
-	this->buttonBackgroundText.setFillColor(Color::White);
-	this->buttonBackgroundText.setCharacterSize(8);
+	{//To trzeba jeszcze dodaæ
+		this->buttonBackgroundText.setFont(this->font);
+		this->buttonBackgroundText.setFillColor(Color::White);
+		this->buttonBackgroundText.setCharacterSize(8);
+	}
 
 	//Atrybuty gracza
 	this->moveSpeed = 600;
@@ -177,7 +182,6 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, ve
 							else if (cities[i]->cityIcon.getGlobalBounds().contains(mpos) && this->colorOfOwner != cities[i]->colorOfOwner)
 							{
 								this->cityAttack(cities[i]);
-								
 							}
 						}
 

@@ -19,6 +19,7 @@ void CityState::update()
 	this->mousepos();
 	this->end();
 	this->updateButtons();
+	this->updateInfo();
 }
 
 void CityState::render(RenderTarget* target)
@@ -37,6 +38,10 @@ void CityState::end()
 {
 	if (Keyboard::isKeyPressed(Keyboard::Escape))
 	{
+		if (this->city->deployUnits < 0)
+		{
+			this->city->deployUnits = 0;
+		}
 		this->ifend = true;
 	}
 }
@@ -72,13 +77,21 @@ void CityState::initInfo()
 	this->info.setFillColor(Color::White);
 	this->info.setCharacterSize(18);
 	this->info.setPosition(this->infoShape.getPosition().x + 5, this->infoShape.getPosition().y + (this->infoShape.getGlobalBounds().height / 2) - this->info.getGlobalBounds().height / 2);
-	stringstream ss;
+}
 
-	if (this->city->deployUnits)
+void CityState::updateInfo()
+{
+	stringstream ss;
+	if (this->city->deployUnits < 0)
+	{
+		ss << "Nie mozna \nwyprowadzic wojska\n z pustego miasta";
+		this->city->deployUnits++;
+	}
+	else if (this->city->deployUnits == 1)
 	{
 		//Dla sytuacji gdy wyprowadzamy wojsko z miasta (wpisanie 0)
 		ss << "Populacja:\n" << this->city->population << "/" << this->city->populationMax << "\n"
-			<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: 0\nKonni: 0\nLucznicy: 0";
+			<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: 0\nKonni: " << "0\n" << "Lucznicy: " << "0";
 	}
 	else
 	{
@@ -94,8 +107,6 @@ void CityState::initButtons()
 	{
 		this->buttons["Training"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.25, 300, 100, &this->font, "Trenowanie wojska", Color(0, 0, 0, 150));
 		this->buttons["Deploy"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.5, 300, 100, &this->font, "Wyprowadz wojsko", Color(0, 0, 0, 150));
-
-		
 	}
 	else
 	{
@@ -104,7 +115,6 @@ void CityState::initButtons()
 		this->buttons["Upgrade"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.25, 300, 100, &this->font, ss.str(), Color(0, 0, 0, 150));
 		this->buttons["Training"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.5, 300, 100, &this->font, "Trenowanie wojska", Color(0, 0, 0, 150));
 		this->buttons["Deploy"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.75, 300, 100, &this->font, "Wyprowadz wojsko", Color(0, 0, 0, 150));
-		
 	}
 }
 
@@ -113,22 +123,25 @@ void CityState::updateButtons()
 	for (auto& i : this->buttons)
 		i.second->update(this->mouseposview);
 	if (Town* ob = dynamic_cast<Town*>(this->city))
-	{}
+	{
+	}
 	else
 	{
 		if (this->buttons["Upgrade"]->press())
 
 			this->city->toUpdate = true;
-	
-	
 	}
-if (this->buttons["Deploy"]->press())
+	if (this->buttons["Deploy"]->press())
+	{
+		if (this->city->deployUnits != 1 && this->city->knights == 0 && this->city->archers == 0 && this->city->horses == 0)
 		{
-			this->city->deployUnits = true;
-			this->initInfo();	//zaktualizowanie liczby wojsk po jego wyjœciu
-			
-
+			this->city->deployUnits = -100;
 		}
+		else
+		{
+			this->city->deployUnits = 1;
+		}
+	}
 }
 
 void CityState::renderButtons(RenderTarget* target)

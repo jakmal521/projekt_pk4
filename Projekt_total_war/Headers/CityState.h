@@ -43,6 +43,7 @@ private:
 	//Informacje o mieœcie
 	RectangleShape infoShape;
 	void initInfo();
+	void updateInfo();
 	Text info;
 	//Miasto
 	City* city;

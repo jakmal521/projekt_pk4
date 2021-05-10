@@ -17,7 +17,7 @@ public:
 	//Konstruktor i destruktor
 	City();
 	City(string name, int popMax, Vector2f cityPoints, Color color);
-	 virtual ~City();
+	virtual ~City();
 
 	//Wyœwietlenie na ekranie
 	void update(Vector2f mposC);
@@ -33,7 +33,7 @@ public:
 
 	//Zwracanie czy wyprowadziæ wojsko
 	bool isUnitsDeployed();
-	//Zwracanie czy ulepszyæ miasto 
+	//Zwracanie czy ulepszyæ miasto
 	bool isToUpdate();
 	//Zwracanie pozycji miasta
 	sf::Vector2f getPosition();
@@ -62,8 +62,8 @@ protected:
 	//Czy wejœæ do miasta
 	bool doubleClicked;
 	//Czy wypuœciæ jednostki z miasta
-	bool deployUnits;
-	//Czy ulepszyæ miasto 
+	int deployUnits;
+	//Czy ulepszyæ miasto
 	bool toUpdate;
 	/*Wygl¹d*/
 	//Tekstury
