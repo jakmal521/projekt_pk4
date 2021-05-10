@@ -1,4 +1,19 @@
 #include "..\Headers\GameState.h"
+/*
+Co ostatnio zrobione?
+1. Nie mo¿na wyjœæ wojskiem z miasta jeœli miasto jest puste (wyœwietla siê komunikat)
+2. Przycisk na headBar rozpoczynaj¹cy now¹ turê
+
+TO DO LIST
+1. Sztuczna inteligencja - w trakcie ;)
+2. Komunikat po wciœniêciu upgrade miasta
+3. Odejmowanie kasy po zupradowaniu miasta
+4. Przydzielanie kasy co turê (nie wiem czy dobrze to dzia³a)
+
+Dodatkowe
+1. Czy chcemy mieæ inne ikonki dla ró¿nego rodzaju miast???
+
+*/
 
 //Konstruktory i destruktory
 GameState::GameState(RenderWindow* window, stack<State*>* _states, Font _font)
@@ -25,12 +40,12 @@ void GameState::update()
 	this->end();
 
 	//update pozycji view i headBar
-	position->update(this->amountOfdistricts());
+	position->update(this->amountOfdistricts(), this->mouseposview);
 
 	//podœwietlanie dystryktów po najechaniu myszk¹
 	for (auto& i : this->districts)
 	{
-		i.second->update(mouseposview);
+		i.second->update(this->mouseposview);
 	}
 
 	//Sprawdzenie czy gracz zmieni³ obs³ugiwan¹ jednostkê
@@ -109,7 +124,8 @@ void GameState::update()
 		}
 	}
 
-	if (/*jakiœ przycisk który now¹ turê zacznie*/ 0)
+	//Rozpoczynanie nowej tury
+	if (this->position->isNextTurn())
 	{
 		for (auto& i : this->enemies)
 			i->update();
@@ -119,7 +135,7 @@ void GameState::update()
 		this->updateGold();
 	}
 	//Wyœwietlanie pozycji myszki(czasem przydatne)
-	cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
+	//cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
 }
 
 void GameState::render(RenderTarget* target)

@@ -84,17 +84,19 @@ void CityState::updateInfo()
 	stringstream ss;
 	if (this->city->deployUnits < 0)
 	{
-		ss << "Nie mozna \nwyprowadzic wojska\n z pustego miasta";
+		this->info.setCharacterSize(15);
+		ss << "Nie ma wojska\n w miescie";
 		this->city->deployUnits++; //Trzeba by to zmieniæ xDDDDD
 	}
 	else if (this->city->deployUnits == 1)
 	{
 		//Dla sytuacji gdy wyprowadzamy wojsko z miasta (wpisanie 0)
 		ss << "Populacja:\n" << this->city->population << "/" << this->city->populationMax << "\n"
-			<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: 0\nKonni: " << "0\n" << "Lucznicy: " << "0";
+			<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: 0\nKonni: 0\nLucznicy: 0";
 	}
 	else
 	{
+		this->info.setCharacterSize(18);
 		ss << "Populacja:\n" << this->city->population << "/" << this->city->populationMax << "\n"
 			<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: " << this->city->knights << "\nKonni: " << this->city->horses << "\nLucznicy: " << this->city->archers;
 	}
@@ -135,7 +137,7 @@ void CityState::updateButtons()
 	{
 		if (this->city->deployUnits != 1 && this->city->knights == 0 && this->city->archers == 0 && this->city->horses == 0)
 		{
-			this->city->deployUnits = -100;
+			this->city->deployUnits = -300;
 		}
 		else
 		{

@@ -20,11 +20,13 @@ public:
 	~Position();
 
 	//Metody
-	void update(int amountOfDistricts);
+	void update(int amountOfDistricts, sf::Vector2f mpos);
 	void render(sf::RenderTarget* window);
 
 	//Inicjalizacja headBar
 	void initHeadBar(Font* font, Player* player);
+
+	bool isNextTurn();
 
 	/*
 		@param void

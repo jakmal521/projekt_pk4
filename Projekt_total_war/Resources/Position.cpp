@@ -26,14 +26,14 @@ Position::~Position()
 {
 }
 
-void Position::update(int amountOfDistricts)
+void Position::update(int amountOfDistricts, sf::Vector2f mpos)
 {
 	/*
 		@param void
 		Funkcja aktualizujaca pozycjê ekranu
 		-float speed - predkosc przewijania kamery
 	*/
-	float speed = 2.f;
+	float speed = 4.f;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		this->shape.move(-speed, 0);
@@ -43,9 +43,9 @@ void Position::update(int amountOfDistricts)
 		this->shape.move(0, -speed);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		this->shape.move(0, speed);
-	
+
 	this->headBar->setPos(this->shape.getPosition(), this->shape.getOrigin());
-	this->headBar->update(amountOfDistricts);
+	this->headBar->update(amountOfDistricts, mpos);
 }
 
 void Position::render(sf::RenderTarget* window)
@@ -55,7 +55,17 @@ void Position::render(sf::RenderTarget* window)
 	//window.draw(shape);
 }
 
-void Position::initHeadBar(Font * font, Player * player)
+void Position::initHeadBar(Font* font, Player* player)
 {
-	this->headBar = new HeadBar(this->shape.getSize().x, this->shape.getSize().y,font, player);
+	this->headBar = new HeadBar(this->shape.getSize().x, this->shape.getSize().y, font, player);
+}
+
+bool Position::isNextTurn()
+{
+	if (this->headBar->nextTurn)
+	{
+		this->headBar->nextTurn = 0;
+		return true;
+	}
+	return false;
 }

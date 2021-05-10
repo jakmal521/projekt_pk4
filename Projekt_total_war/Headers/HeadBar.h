@@ -6,7 +6,7 @@
 #include <SFML/Network.hpp>
 #include <sstream>
 #include <iostream>
- #include "..\Headers\Player.h"
+#include "..\Headers\Player.h"
 using namespace std;
 using namespace sf;
 class HeadBar
@@ -16,13 +16,17 @@ public:
 	HeadBar(float x, float y, Font* font, Player* player);
 	~HeadBar();
 	//updatowanie i wyœwietlanie na ekranie
-	void update(int amountOfDistricts);
+	void update(int amountOfDistricts, sf::Vector2f mpos);
 	void render(sf::RenderTarget* window);
 
 	void setPos(sf::Vector2f viewPos, sf::Vector2f viewOrigin);
+
+	int nextTurn;
 private:
 	//Kszta³t
 	RectangleShape barShape;
+	RectangleShape nextTurnShape;
+	Text nextTurnText;
 	//Wyœwietlanie info o graczu
 	Text text;
 	Player* player;

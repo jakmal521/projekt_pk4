@@ -27,6 +27,8 @@ Unit::Unit(Color color, vector<int> amountOfTroops)
 	}
 	this->to_delete = false;
 	this->distance = 700.f;
+	//Atrybuty gracza
+	this->moveSpeed = 600;
 }
 
 Unit::~Unit()
@@ -85,9 +87,6 @@ void Unit::initUnit(sf::Vector2f position)
 		this->buttonBackgroundText.setFillColor(Color::White);
 		this->buttonBackgroundText.setCharacterSize(8);
 	}
-
-	//Atrybuty gracza
-	this->moveSpeed = 600;
 }
 
 /// <summary>Wykorzystuje funkcje z district.h ¿eby sprawdziæ czy kursor znajduje siê nad dystryktem, po klikniêciu prawym przyciskiem myszy pojawia siê X, po czym klikaj¹c w niego pojawia siê tekstura gracza, klikaj¹c dwa razy lewym przyciskiem pojawia siê okno split umo¿liwiaj¹ce rozdzelenie jednostki na dwie.</summary>
@@ -328,7 +327,7 @@ void Unit::hideButtons()
 //Ustawianie mo¿liwoœci do przejœcia
 void Unit::setDistance()
 {
-	this->distance = 100.f;
+	this->distance = 600.f;
 }
 //Walka dwóch oddzia³ów
 void Unit::fight(Unit* enemyUnit)
