@@ -43,9 +43,9 @@ void Position::update(int amountOfDistricts, Vector2f mpos)
 		this->shape.move(0, -speed);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		this->shape.move(0, speed);
-	
+
 	this->headBar->setPos(this->shape.getPosition(), this->shape.getOrigin());
-	this->headBar->update(amountOfDistricts,mpos);
+	this->headBar->update(amountOfDistricts, mpos);
 }
 
 void Position::render(sf::RenderTarget* window)
@@ -62,8 +62,7 @@ void Position::initHeadBar(Font* font, Player* player)
 
 bool Position::isNextTurn()
 {
-	
-	if (this->headBar->nextTurn)
+	if (this->headBar->nextTurn == 1)
 	{
 		this->headBar->nextTurn = 0;
 		return true;

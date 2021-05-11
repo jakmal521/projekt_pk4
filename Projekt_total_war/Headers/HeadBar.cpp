@@ -35,10 +35,20 @@ void HeadBar::update(int amountOfDistricts, Vector2f mpos)
 	this->nextTurnText.setPosition(this->nextTurnShape.getPosition().x + this->nextTurnShape.getSize().x * 0.085, this->nextTurnShape.getPosition().y + this->nextTurnShape.getSize().y * 0.4);
 
 	this->nextTurnShape.setFillColor(Color(128, 128, 128, 230));
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->nextTurnShape.getGlobalBounds().contains(mpos)) {
-		this->nextTurn = 1;
-		this->nextTurnShape.setFillColor(Color::Green);
-		
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+		if (this->nextTurnShape.getGlobalBounds().contains(mpos))
+		{
+			if (this->mouseHeld == false)
+			{
+				this->mouseHeld = true;
+				this->nextTurn = 1;
+				this->nextTurnShape.setFillColor(Color::Green);
+			}
+		}
+	}
+	else
+	{
+		this->mouseHeld = false;
 	}
 }
 
