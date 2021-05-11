@@ -75,7 +75,7 @@ void CityState::initText(Font  font, City& city)
 	cout << city.cityName << endl;
 	this->greeting.setFillColor(Color::White);
 	this->greeting.setCharacterSize(30);
-	this->greeting.setPosition(this->window->getPosition().x - this->greeting.getGlobalBounds().width - 20, 50);
+	this->greeting.setPosition(this->window->getPosition().x , 50);
 
 	this->error.setFont(this->font);
 	this->error.setString("");
@@ -86,14 +86,14 @@ void CityState::initText(Font  font, City& city)
 //inicjalizacja informacji o mieœcie
 void CityState::initInfo()
 {
-	this->infoShape.setSize(Vector2f(150, 300));
-	this->infoShape.setPosition(this->buttons.rbegin()->second->getPosX() + this->buttons.rbegin()->second->getWidth() + 50, this->buttons.rbegin()->second->getPosY());
+	this->infoShape.setSize(Vector2f(300, 300));
+	this->infoShape.setPosition(this->buttons.rbegin()->second->getPosX() + this->buttons.rbegin()->second->getWidth() + 50, this->buttons.rbegin()->second->getPosY()+ this->buttons.rbegin()->second->getHeight()/2);
 	this->infoShape.setFillColor(Color(0, 0, 0, 150));
 	this->info.setFont(this->font);
 
 	this->info.setFillColor(Color::White);
 	this->info.setCharacterSize(18);
-	this->info.setPosition(this->infoShape.getPosition().x + 5, this->infoShape.getPosition().y + (this->infoShape.getGlobalBounds().height / 2) - this->info.getGlobalBounds().height / 2);
+	
 }
 
 void CityState::updateInfo()
@@ -105,15 +105,17 @@ void CityState::updateInfo()
 
 		ss << "Populacja:\n" << this->city->population << "/" << this->city->populationMax << "\n"
 			<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: " << 0 << "\nKonni: " << 0 << "\nLucznicy: " << 0;
+		
 	}
 	else
 	{
-		///this->error.setString("");
+	
 
 		ss << "Populacja:\n" << this->city->population << "/" << this->city->populationMax << "\n"
 			<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: " << this->city->knights << "\nKonni: " << this->city->horses << "\nLucznicy: " << this->city->archers;
+
 	}
-	this->info.setString(ss.str());
+	this->info.setString(ss.str());this->info.setPosition(this->infoShape.getPosition().x + (this->infoShape.getGlobalBounds().width / 2) - this->info.getGlobalBounds().width / 2, this->infoShape.getPosition().y + (this->infoShape.getGlobalBounds().height / 2) - this->info.getGlobalBounds().height / 2);
 }
 
 void CityState::initButtons()

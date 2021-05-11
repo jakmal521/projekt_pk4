@@ -49,7 +49,7 @@ public:
 	int Population();
 	int PopulationMax();
 	*/
-	virtual int getGoldToUpgrade() = 0;
+	virtual int getGoldToUpgrade() { return 0; };
 protected:
 
 	/*Mechanika*/

@@ -11,7 +11,7 @@ public:
 	Town(City* city);
 	 ~Town();
 	 
-	 int getGoldToUpgrade() { return 0; }
+	// int getGoldToUpgrade() { return 0; }
 	
 };
 

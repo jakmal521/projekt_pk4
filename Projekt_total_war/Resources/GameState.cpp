@@ -137,10 +137,11 @@ void GameState::update()
 				this->enemies[i].second[j]->updateAiUnits(); //Do zrobienia updateAiUnits
 			}
 		}
+		this->updateGold();
 	}
 
 	//Wyœwietlanie pozycji myszki(czasem przydatne)
-	cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
+	// << this->mouseposview.x << " " << this->mouseposview.y << "\n";
 }
 
 void GameState::render(RenderTarget* target)
