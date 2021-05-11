@@ -8,7 +8,7 @@
 #include "..\Headers\Position.h"	//Pozycja view i headBar
 #include "..\Headers\City.h"		//Wyœwietlanie miast
 #include "..\Headers\CityState.h"	//Wyœwietlanie menu miasta i jego zarz¹dzanie
-#include "..\Headers\Enemy.h"		//Przeciwniy
+#include "..\Headers\Enemy.h"		//Przeciwnicy
 class GameState :
 	public State
 {
@@ -42,7 +42,7 @@ private:
 
 	//Wektor regionów
 	map<string, District*> districts;
-	//updatowanie iloœci z³ota z podatków 
+	//updatowanie iloœci z³ota z podatków
 	void updateGold();
 	//Inicjalizacja regionów
 	void initDis();
@@ -60,8 +60,8 @@ private:
 	void initPlayer();
 	//Ile regionów ma gracz
 	int amountOfdistricts();
-	
+
 	//Przeciwnicy
-	vector<Enemy*> enemies;
+	vector<pair<Enemy*, vector<Unit*>>> enemies;
 	void initEnemies();
 };

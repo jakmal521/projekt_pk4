@@ -1,22 +1,20 @@
-﻿  HeadBar.cpp
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Headers\HeadBar.cpp(7,39): warning C4244: "argument": konwersja z "double" do "T", możliwa utrata danych
+﻿  GameState.cpp
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\GameState.cpp(219,74): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
           with
+          [
+              T=unsigned int
+          ]
+          and
           [
               T=float
           ]
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Headers\HeadBar.cpp(14,51): warning C4244: "argument": konwersja z "double" do "T", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\GameState.cpp(219,53): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
           with
+          [
+              T=unsigned int
+          ]
+          and
           [
               T=float
           ]
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Headers\HeadBar.cpp(14,41): warning C4244: "argument": konwersja z "double" do "T", możliwa utrata danych
-          with
-          [
-              T=float
-          ]
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Headers\HeadBar.cpp(35,148): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Headers\HeadBar.cpp(35,69): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Headers\HeadBar.cpp(67,44): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-  Position.cpp
-  Generowanie kodu...
   Projekt_total_war.vcxproj -> C:\Users\krzys\source\repos\projekt_pk4_total_war\x64\Debug\Projekt_total_war.exe

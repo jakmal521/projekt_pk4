@@ -3,9 +3,12 @@
 Co ostatnio zrobione?
 1. Komunikaty po wciœnieciu przycisków w miescie
 2. Dzia³aj¹ce dodawanie i odejmowanie z³ota
+
 TO DO LIST
 1. Sztuczna inteligencja - w trakcie ;)
 2. Dodawanie jednostek w mieœcie - w trakcie as well
+
+Bugs:
 
 Dodatkowe
 1. Czy chcemy mieæ inne ikonki dla ró¿nego rodzaju miast???- jak zd¹¿ymy XD
@@ -20,6 +23,7 @@ GameState::GameState(RenderWindow* window, stack<State*>* _states, Font _font)
 	this->initBackground();
 	this->initView();
 	this->initPlayer();
+	this->initEnemies();
 	this->initUnit(sf::Vector2f(0.f, 0.f), vector<int> {});
 	this->font = _font;
 	this->position->initHeadBar(&this->font, this->player);
@@ -106,7 +110,6 @@ void GameState::update()
 					i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
 					i.second->cities.erase(i.second->cities.begin());
 					this->position->update(amountOfdistricts(), this->mouseposview);
-					
 				}
 				else if (Village* ob = dynamic_cast<Village*>(i.second->cities.back()))
 				{
@@ -115,29 +118,27 @@ void GameState::update()
 					i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
 					i.second->cities.erase(i.second->cities.begin());
 					this->position->update(amountOfdistricts(), this->mouseposview);
-					
 				}
-
 			}
-
 		}
 	}
 
-	//Rozpoczynanie nowej tury
+	//Rozpoczynanie nowej tury - poruszanie Ai
 	if (this->position->isNextTurn())
 	{
-		for (auto& i : this->enemies)
-
+		cout << "Leci nastepna tura\n";
+		for (int i = 0; i < this->enemies.size(); i++)
 		{
-			i->update();
+			//Zauktalizowanie z³ota wroga
+			this->enemies[i].first->updateEnemy(); //Do zrobienia update enemy
+		//Zauktalizowanie jednostek wroga
+			for (int j = 0; j < this->enemies[i].second.size(); j++)
+			{
+				this->enemies[i].second[j]->updateAiUnits(); //Do zrobienia updateAiUnits
+			}
 		}
-		for (auto& i : this->unit)
-		{
-			i->setDistance();
-		}
-		this->updateGold();
-		
 	}
+
 	//Wyœwietlanie pozycji myszki(czasem przydatne)
 	//cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
 }
@@ -155,6 +156,15 @@ void GameState::render(RenderTarget* target)
 	//Renderowanie jednostek
 	for (auto& j : this->unit)
 		j->render(this->window);
+
+	//Renderowanie przeciwników
+	for (int k = 0; k < this->enemies.size(); k++)
+	{
+		for (int l = 0; l < this->enemies[k].second.size(); l++)
+		{
+			this->enemies[k].second[l]->render(window);
+		}
+	}
 
 	//Ustawianie view
 	this->view1.setCenter(position->GetPosition());
@@ -272,14 +282,15 @@ int GameState::amountOfdistricts()
 
 	return sum;
 }
+
 //Inicjacja przeciwników
 void GameState::initEnemies()
 {
-	for (int i = 0; i < 2; i++)
-	{
-		this->enemies.push_back(new Enemy(Color::Blue));
+	for (int i = 0; i < 2; i++) {
+		this->enemies.push_back(pair<Enemy*, vector<Unit*>>(new Enemy(Color::Blue), { new Unit(Color::Blue, vector<int> {}) }));
 	}
 }
+
 //Updatowanie ilosci zlota z podatków
 void GameState::updateGold()
 {
@@ -287,7 +298,7 @@ void GameState::updateGold()
 	for (auto& i : this->districts)
 	{
 		if (i.second->cities[0]->colorOfOwner == this->player->playerColor())
-			sum += i.second->cities[0]->population /10;
+			sum += i.second->cities[0]->population / 10;
 	}
-	this->player->setGold(this->player->getGold()+sum);
+	this->player->setGold(this->player->getGold() + sum);
 }

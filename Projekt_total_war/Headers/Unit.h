@@ -88,4 +88,7 @@ private:
 
 	//Atakowanie miasta
 	void cityAttack(City* city);
+
+	//Poruszanie jednostkami Ai
+	void updateAiUnits();
 };

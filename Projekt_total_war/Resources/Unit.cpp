@@ -327,7 +327,6 @@ void Unit::hideButtons()
 //Ustawianie mo¿liwoœci do przejœcia
 void Unit::setDistance()
 {
-
 	this->distance = 600.f;
 }
 //Walka dwóch oddzia³ów
@@ -336,5 +335,10 @@ void Unit::fight(Unit* enemyUnit)
 }
 //atakowanie miasta
 void Unit::cityAttack(City* city)
+{
+}
+
+//Poruszanie jednostkami Ai
+void Unit::updateAiUnits()
 {
 }
