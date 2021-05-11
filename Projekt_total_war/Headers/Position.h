@@ -20,7 +20,7 @@ public:
 	~Position();
 
 	//Metody
-	void update(int amountOfDistricts, sf::Vector2f mpos);
+	void update(int amountOfDistricts, Vector2f mpos);
 	void render(sf::RenderTarget* window);
 
 	//Inicjalizacja headBar

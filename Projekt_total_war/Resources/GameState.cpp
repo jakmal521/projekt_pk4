@@ -6,12 +6,12 @@ Co ostatnio zrobione?
 
 TO DO LIST
 1. Sztuczna inteligencja - w trakcie ;)
-2. Komunikat po wciœniêciu upgrade miasta
-3. Odejmowanie kasy po zupradowaniu miasta
-4. Przydzielanie kasy co turê (nie wiem czy dobrze to dzia³a)
+2. Komunikat po wciœniêciu upgrade miasta - done
+3. Odejmowanie kasy po zupradowaniu miasta - done
+4. Przydzielanie kasy co turê (nie wiem czy dobrze to dzia³a) - kuwa 11 siê wykonuje XD
 
 Dodatkowe
-1. Czy chcemy mieæ inne ikonki dla ró¿nego rodzaju miast???
+1. Czy chcemy mieæ inne ikonki dla ró¿nego rodzaju miast???- jak zd¹¿ymy XD
 
 */
 
@@ -90,7 +90,7 @@ void GameState::update()
 		{
 			this->window->setView(this->view2);
 
-			this->states->push(new CityState(this->window, this->font, this->states, i.second->cities.back()[0]));
+			this->states->push(new CityState(this->window, this->font, this->states, i.second->cities.back()[0], this->player->getGold()));
 			i.second->cities.back()->setNotInCity();
 		}
 		if (i.second->cities.back()->isUnitsDeployed())
@@ -104,23 +104,25 @@ void GameState::update()
 			{
 				if (Settlement* ob = dynamic_cast<Settlement*>(i.second->cities.back()))
 				{
+					this->player->setGold(this->player->getGold() - i.second->cities.back()->getGoldToUpgrade());
 					i.second->cities.push_back(new Village(i.second->cities.back()));
 					i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
 					i.second->cities.erase(i.second->cities.begin());
-					cout << i.second->cities.size() << endl;
-					break;
+					this->position->update(amountOfdistricts(), this->mouseposview);
+					
 				}
 				else if (Village* ob = dynamic_cast<Village*>(i.second->cities.back()))
 				{
+					this->player->setGold(this->player->getGold() - i.second->cities.back()->getGoldToUpgrade());
 					i.second->cities.push_back(new Town(i.second->cities.back()));
 					i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
 					i.second->cities.erase(i.second->cities.begin());
-					cout << i.second->cities.size() << endl;
-					break;
+					this->position->update(amountOfdistricts(), this->mouseposview);
+					
 				}
-				this->player->setGold(this->player->getGold() > i.second->cities.back()->getGoldToUpgrade());
+
 			}
-			else cout << "no money";
+
 		}
 	}
 
@@ -128,11 +130,16 @@ void GameState::update()
 	if (this->position->isNextTurn())
 	{
 		for (auto& i : this->enemies)
-			i->update();
-		for (auto& i : this->unit)
-			i->setDistance();
 
+		{
+			i->update();
+		}
+		for (auto& i : this->unit)
+		{
+			i->setDistance();
+		}
 		this->updateGold();
+		cout << "DUPA" << endl;
 	}
 	//Wyœwietlanie pozycji myszki(czasem przydatne)
 	//cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
@@ -283,7 +290,7 @@ void GameState::updateGold()
 	for (auto& i : this->districts)
 	{
 		if (i.second->cities[0]->colorOfOwner == this->player->playerColor())
-			sum += i.second->cities[0]->population * 2;
+			sum += i.second->cities[0]->population /10;
 	}
-	this->player->setGold(sum);
+	this->player->setGold(this->player->getGold()+sum);
 }

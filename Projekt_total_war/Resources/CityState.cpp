@@ -1,6 +1,6 @@
 #include "..\Headers\CityState.h"
 
-CityState::CityState(RenderWindow* window, Font _font, stack<State*>* _states, City& city) : State(window, _states)
+CityState::CityState(RenderWindow* window, Font _font, stack<State*>* _states, City& city, int gold) : State(window, _states)
 {
 	this->initBackground(window);
 	this->city = &city;
@@ -8,6 +8,8 @@ CityState::CityState(RenderWindow* window, Font _font, stack<State*>* _states, C
 	this->initText(font, city);
 	this->initButtons();
 	this->initInfo();
+	this->ownerGold = gold;
+	this->timeToSeeAlert = -1;
 }
 
 CityState::~CityState()
@@ -18,7 +20,7 @@ void CityState::update()
 {
 	this->mousepos();
 	this->end();
-	this->updateButtons();
+	this->updateButtons(this->ownerGold);
 	this->updateInfo();
 }
 
@@ -32,6 +34,21 @@ void CityState::render(RenderTarget* target)
 	this->renderButtons(this->window);
 	target->draw(this->infoShape);
 	target->draw(this->info);
+	if (!this->timeToSeeAlert)
+	{
+		this->timeToSeeAlert = -1;
+		this->error.setString("");
+
+	}
+	else if (this->timeToSeeAlert > 0)
+	{
+		this->error.setPosition(0, 0);
+		this->timeToSeeAlert--;
+		target->draw(this->error);
+
+
+	}
+
 }
 
 void CityState::end()
@@ -62,8 +79,14 @@ void CityState::initText(Font  font, City& city)
 	cout << city.cityName << endl;
 	this->greeting.setFillColor(Color::White);
 	this->greeting.setCharacterSize(30);
-
 	this->greeting.setPosition(this->window->getPosition().x - this->greeting.getGlobalBounds().width - 20, 50);
+
+	this->error.setFont(this->font);
+	this->error.setString("");
+	this->error.setFillColor(Color::Red);
+	this->error.setCharacterSize(20);
+
+
 }
 
 //inicjalizacja informacji o mieœcie
@@ -82,25 +105,23 @@ void CityState::initInfo()
 void CityState::updateInfo()
 {
 	stringstream ss;
-	if (this->city->deployUnits < 0)
+	if (this->city->deployUnits == 1)
 	{
-		this->info.setCharacterSize(15);
-		ss << "Nie ma wojska\n w miescie";
-		this->city->deployUnits++; //Trzeba by to zmieniæ xDDDDD
-	}
-	else if (this->city->deployUnits == 1)
-	{
-		//Dla sytuacji gdy wyprowadzamy wojsko z miasta (wpisanie 0)
+		this->error.setString("Wojsko wyszlo z miasta!");
+
 		ss << "Populacja:\n" << this->city->population << "/" << this->city->populationMax << "\n"
-			<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: 0\nKonni: 0\nLucznicy: 0";
+			<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: " << 0 << "\nKonni: " << 0 << "\nLucznicy: " << 0;
 	}
 	else
 	{
-		this->info.setCharacterSize(18);
+		///this->error.setString("");
+
 		ss << "Populacja:\n" << this->city->population << "/" << this->city->populationMax << "\n"
 			<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: " << this->city->knights << "\nKonni: " << this->city->horses << "\nLucznicy: " << this->city->archers;
+
 	}
 	this->info.setString(ss.str());
+
 }
 
 void CityState::initButtons()
@@ -120,7 +141,7 @@ void CityState::initButtons()
 	}
 }
 
-void CityState::updateButtons()
+void CityState::updateButtons(int playerGold)
 {
 	for (auto& i : this->buttons)
 		i.second->update(this->mouseposview);
@@ -129,15 +150,37 @@ void CityState::updateButtons()
 	}
 	else
 	{
-		if (this->buttons["Upgrade"]->press())
-
+		if (this->city->toUpdate && this->buttons["Upgrade"]->press())
+		{
+			this->timeToSeeAlert = 100;
+			this->error.setString("Wyjdz z miasta a zobaczysz efekty przy najblizszej wizycie!");
+		}
+		else if (this->buttons["Upgrade"]->press() && playerGold >= this->city->getGoldToUpgrade())
+		{
 			this->city->toUpdate = true;
+		}
+		else if (this->buttons["Upgrade"]->press() && playerGold < this->city->getGoldToUpgrade())
+		{
+			this->timeToSeeAlert = 100;
+			this->error.setString("Brak odpowiedniej ilosci zlota!");
+
+		}
+
+
+
 	}
 	if (this->buttons["Deploy"]->press())
 	{
 		if (this->city->deployUnits != 1 && this->city->knights == 0 && this->city->archers == 0 && this->city->horses == 0)
 		{
-			this->city->deployUnits = -300;
+			this->timeToSeeAlert = 100;
+			this->error.setString("Nie mozna wyprowadzic nie istniejacych jednostek");
+		}
+		else if (this->city->deployUnits == 1)
+		{
+			this->timeToSeeAlert = 100;
+			this->error.setString("Jednostki wyprowadzone");
+
 		}
 		else
 		{

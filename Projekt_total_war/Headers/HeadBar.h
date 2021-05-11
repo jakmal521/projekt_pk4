@@ -16,7 +16,7 @@ public:
 	HeadBar(float x, float y, Font* font, Player* player);
 	~HeadBar();
 	//updatowanie i wyœwietlanie na ekranie
-	void update(int amountOfDistricts, sf::Vector2f mpos);
+	void update(int amountOfDistricts, Vector2f mpos);
 	void render(sf::RenderTarget* window);
 
 	void setPos(sf::Vector2f viewPos, sf::Vector2f viewOrigin);
@@ -30,4 +30,6 @@ private:
 	//Wyœwietlanie info o graczu
 	Text text;
 	Player* player;
+	//przytrzymanie przycisku
+	bool mouseHeld;
 };

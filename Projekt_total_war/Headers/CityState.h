@@ -13,7 +13,7 @@ class CityState :
 	public State
 {
 public:
-	CityState(RenderWindow* window, Font _font, stack<State*>* _states, City& city);
+	CityState(RenderWindow* window, Font _font, stack<State*>* _states, City& city, int gold);
 	virtual ~CityState();
 
 	void update();
@@ -29,7 +29,7 @@ private:
 	//Przyciski
 	map<string, Button*>buttons;
 	void initButtons();
-	void updateButtons();
+	void updateButtons(int playerGold);
 	void renderButtons(RenderTarget* target);
 	//Wyœwietlanie i update ekranu*/
 
@@ -47,4 +47,9 @@ private:
 	Text info;
 	//Miasto
 	City* city;
+	//Tekst do pokazywania b³êdów
+	Text error;
+	int timeToSeeAlert;
+	//Ile zlota ma wlasciciel
+	int ownerGold;
 };
