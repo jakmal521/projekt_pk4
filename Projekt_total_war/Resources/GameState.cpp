@@ -237,8 +237,7 @@ void GameState::initUnit(sf::Vector2f position, vector<int> amountOfTroops)
 	}
 	else
 	{
-		this->unit.push_back(new Unit(this->player->playerColor(), amountOfTroops));
-		this->unit.back()->initUnit(position);
+		this->unit.push_back(new Unit(this->player->playerColor(), amountOfTroops, position));
 	}
 }
 
@@ -287,7 +286,7 @@ int GameState::amountOfdistricts()
 void GameState::initEnemies()
 {
 	for (int i = 0; i < 2; i++) {
-		this->enemies.push_back(pair<Enemy*, vector<Unit*>>(new Enemy(Color::Blue), { new Unit(Color::Blue, vector<int> {}) }));
+		this->enemies.push_back(pair<Enemy*, vector<Unit*>>(new Enemy(Color::Blue), { new Unit(Color::Blue, vector<int> {}, sf::Vector2f(0,0)) }));
 	}
 }
 

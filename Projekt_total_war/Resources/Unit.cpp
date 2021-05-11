@@ -6,7 +6,12 @@
 #include <iostream>
 #include "..\Headers\Unit.h"
 
-Unit::Unit(Color color, vector<int> amountOfTroops)
+Unit::Unit()
+{
+}
+
+//Inicjalizacja jednostki
+Unit::Unit(Color color, vector<int> amountOfTroops, sf::Vector2f position)
 {
 	this->colorOfOwner = color;
 	if (amountOfTroops.size() == 0)
@@ -29,15 +34,7 @@ Unit::Unit(Color color, vector<int> amountOfTroops)
 	this->distance = 700.f;
 	//Atrybuty gracza
 	this->moveSpeed = 600;
-}
 
-Unit::~Unit()
-{
-}
-
-//Inicjalizacja gracza
-void Unit::initUnit(sf::Vector2f position)
-{
 	this->newUnit = false;
 
 	this->mouseRightHeld = false;
@@ -82,6 +79,7 @@ void Unit::initUnit(sf::Vector2f position)
 	this->buttonCancel.setFillColor(sf::Color::Transparent);
 	this->buttonCancel.setPosition(-1000.f, -1000.f);
 	this->font.loadFromFile("Fonts/RomanSD.ttf");
+
 	{//To trzeba jeszcze dodaæ
 		this->buttonBackgroundText.setFont(this->font);
 		this->buttonBackgroundText.setFillColor(Color::White);
@@ -89,6 +87,9 @@ void Unit::initUnit(sf::Vector2f position)
 	}
 }
 
+Unit::~Unit()
+{
+}
 /// <summary>Wykorzystuje funkcje z district.h ¿eby sprawdziæ czy kursor znajduje siê nad dystryktem, po klikniêciu prawym przyciskiem myszy pojawia siê X, po czym klikaj¹c w niego pojawia siê tekstura gracza, klikaj¹c dwa razy lewym przyciskiem pojawia siê okno split umo¿liwiaj¹ce rozdzelenie jednostki na dwie.</summary>
 /// <param name="">Pozycja kursora | bool Czy kursor nad dystryktem</param>
 /// <returns>Void</returns>

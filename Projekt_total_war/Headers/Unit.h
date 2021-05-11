@@ -16,7 +16,8 @@ class Unit
 {
 public:
 	//Konstruktor i destruktor
-	Unit(Color color, vector<int> amountOfTroops);
+	Unit();
+	Unit(Color color, vector<int> amountOfTroops, sf::Vector2f position);
 	~Unit();
 
 	//Metody
