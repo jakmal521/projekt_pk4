@@ -38,17 +38,13 @@ void CityState::render(RenderTarget* target)
 	{
 		this->timeToSeeAlert = -1;
 		this->error.setString("");
-
 	}
 	else if (this->timeToSeeAlert > 0)
 	{
 		this->error.setPosition(0, 0);
 		this->timeToSeeAlert--;
 		target->draw(this->error);
-
-
 	}
-
 }
 
 void CityState::end()
@@ -66,7 +62,7 @@ void CityState::end()
 void CityState::initBackground(sf::RenderWindow* window)
 {
 	this->texture.loadFromFile("JPG/inside_city.jpg");
-	this->background.setSize(Vector2f(800.f, 600.f)); //Trzeba zmieniæ ¿eby pobiera³o wielkoœæ view czy coœ takiego albo ¿eby w ogóle usuwa³o view
+	this->background.setSize(sf::Vector2f(this->window->getSize().x, this->window->getSize().y));
 	this->background.setTexture(&this->texture);
 }
 
@@ -85,8 +81,6 @@ void CityState::initText(Font  font, City& city)
 	this->error.setString("");
 	this->error.setFillColor(Color::Red);
 	this->error.setCharacterSize(20);
-
-
 }
 
 //inicjalizacja informacji o mieœcie
@@ -118,10 +112,8 @@ void CityState::updateInfo()
 
 		ss << "Populacja:\n" << this->city->population << "/" << this->city->populationMax << "\n"
 			<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: " << this->city->knights << "\nKonni: " << this->city->horses << "\nLucznicy: " << this->city->archers;
-
 	}
 	this->info.setString(ss.str());
-
 }
 
 void CityState::initButtons()
@@ -139,14 +131,13 @@ void CityState::initButtons()
 		this->buttons["Training"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.5, 300, 100, &this->font, "Trenowanie wojska", Color(0, 0, 0, 150));
 		this->buttons["Deploy"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.75, 300, 100, &this->font, "Wyprowadz wojsko", Color(0, 0, 0, 150));
 	}
-	
+
 	this->buttons["+knights"] = new Button(-100, this->window->getSize().y * 0.25, 50, 50, &this->font, "+", Color(0, 0, 0, 150));
 	this->buttons["+horses"] = new Button(-100, this->window->getSize().y * 0.5, 50, 50, &this->font, "+", Color(0, 0, 0, 150));
 	this->buttons["+archers"] = new Button(-100, this->window->getSize().y * 0.75, 50, 50, &this->font, "+", Color(0, 0, 0, 150));
 	this->buttons["-knights"] = new Button(-100, this->window->getSize().y * 0.25, 50, 50, &this->font, "-", Color(0, 0, 0, 150));
-	this->buttons["-horses"] = new Button(-100 ,this->window->getSize().y * 0.5, 50, 50, &this->font, "-", Color(0, 0, 0, 150));
+	this->buttons["-horses"] = new Button(-100, this->window->getSize().y * 0.5, 50, 50, &this->font, "-", Color(0, 0, 0, 150));
 	this->buttons["-archers"] = new Button(-100, this->window->getSize().y * 0.75, 50, 50, &this->font, "-", Color(0, 0, 0, 150));
-	
 }
 
 void CityState::updateButtons(int playerGold)
@@ -171,11 +162,7 @@ void CityState::updateButtons(int playerGold)
 		{
 			this->timeToSeeAlert = 100;
 			this->error.setString("Brak odpowiedniej ilosci zlota!");
-
 		}
-
-
-
 	}
 	if (this->buttons["Deploy"]->press())
 	{
@@ -188,7 +175,6 @@ void CityState::updateButtons(int playerGold)
 		{
 			this->timeToSeeAlert = 100;
 			this->error.setString("Jednostki wyprowadzone");
-
 		}
 		else
 		{
@@ -200,10 +186,9 @@ void CityState::updateButtons(int playerGold)
 		for (auto& i : this->buttons)
 			i.second->button.setPosition(-400, i.second->button.getPosition().y);
 
-
 		this->buttons["+knights"]->button.setPosition(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.25);
-			this->buttons["+horses"]->button.setPosition(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.50);
-			this->buttons["+archers"]->button.setPosition(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.75);
+		this->buttons["+horses"]->button.setPosition(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.50);
+		this->buttons["+archers"]->button.setPosition(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.75);
 	}
 }
 

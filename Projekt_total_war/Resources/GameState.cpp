@@ -140,7 +140,7 @@ void GameState::update()
 	}
 
 	//Wyœwietlanie pozycji myszki(czasem przydatne)
-	//cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
+	cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
 }
 
 void GameState::render(RenderTarget* target)
@@ -261,8 +261,8 @@ void GameState::changeUnit()
 void GameState::initView()
 {
 	this->view2 = window->getDefaultView();
-	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(400.f, 300.f));
-	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(800.f, 600.f));
+	//this->view1 = View(Vector2f(0.f, 0.f), Vector2f(400.f, 300.f));
+	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(1080.f, 720.f));
 	this->position = new Position(this->view1.getSize());
 }
 

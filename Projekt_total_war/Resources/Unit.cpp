@@ -342,4 +342,5 @@ void Unit::cityAttack(City* city)
 //Poruszanie jednostkami Ai
 void Unit::updateAiUnits()
 {
+	this->UnitShape.move(100.f, 100.f);
 }
