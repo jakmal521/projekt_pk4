@@ -139,6 +139,14 @@ void CityState::initButtons()
 		this->buttons["Training"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.5, 300, 100, &this->font, "Trenowanie wojska", Color(0, 0, 0, 150));
 		this->buttons["Deploy"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.75, 300, 100, &this->font, "Wyprowadz wojsko", Color(0, 0, 0, 150));
 	}
+	
+	this->buttons["+knights"] = new Button(-100, this->window->getSize().y * 0.25, 50, 50, &this->font, "+", Color(0, 0, 0, 150));
+	this->buttons["+horses"] = new Button(-100, this->window->getSize().y * 0.5, 50, 50, &this->font, "+", Color(0, 0, 0, 150));
+	this->buttons["+archers"] = new Button(-100, this->window->getSize().y * 0.75, 50, 50, &this->font, "+", Color(0, 0, 0, 150));
+	this->buttons["-knights"] = new Button(-100, this->window->getSize().y * 0.25, 50, 50, &this->font, "-", Color(0, 0, 0, 150));
+	this->buttons["-horses"] = new Button(-100 ,this->window->getSize().y * 0.5, 50, 50, &this->font, "-", Color(0, 0, 0, 150));
+	this->buttons["-archers"] = new Button(-100, this->window->getSize().y * 0.75, 50, 50, &this->font, "-", Color(0, 0, 0, 150));
+	
 }
 
 void CityState::updateButtons(int playerGold)
@@ -186,6 +194,16 @@ void CityState::updateButtons(int playerGold)
 		{
 			this->city->deployUnits = 1;
 		}
+	}
+	if (this->buttons["Training"]->press())
+	{
+		for (auto& i : this->buttons)
+			i.second->button.setPosition(-400, i.second->button.getPosition().y);
+
+
+		this->buttons["+knights"]->button.setPosition(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.25);
+			this->buttons["+horses"]->button.setPosition(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.50);
+			this->buttons["+archers"]->button.setPosition(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.75);
 	}
 }
 

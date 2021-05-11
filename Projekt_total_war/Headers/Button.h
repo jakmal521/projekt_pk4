@@ -37,4 +37,5 @@ private:
 	//Czy ktoœ nacisn¹³
 	bool pressed;
 	friend class Unit;
+	friend class CityState;
 };

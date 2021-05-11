@@ -52,4 +52,5 @@ private:
 	int timeToSeeAlert;
 	//Ile zlota ma wlasciciel
 	int ownerGold;
+	//przyciski do zwiekszania liczby  
 };

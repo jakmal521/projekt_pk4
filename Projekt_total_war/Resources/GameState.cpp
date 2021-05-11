@@ -1,14 +1,11 @@
 #include "..\Headers\GameState.h"
 /*
 Co ostatnio zrobione?
-1. Nie mo¿na wyjœæ wojskiem z miasta jeœli miasto jest puste (wyœwietla siê komunikat)
-2. Przycisk na headBar rozpoczynaj¹cy now¹ turê
-
+1. Komunikaty po wciœnieciu przycisków w miescie
+2. Dzia³aj¹ce dodawanie i odejmowanie z³ota
 TO DO LIST
 1. Sztuczna inteligencja - w trakcie ;)
-2. Komunikat po wciœniêciu upgrade miasta - done
-3. Odejmowanie kasy po zupradowaniu miasta - done
-4. Przydzielanie kasy co turê (nie wiem czy dobrze to dzia³a) - kuwa 11 siê wykonuje XD
+2. Dodawanie jednostek w mieœcie - w trakcie as well
 
 Dodatkowe
 1. Czy chcemy mieæ inne ikonki dla ró¿nego rodzaju miast???- jak zd¹¿ymy XD
@@ -139,7 +136,7 @@ void GameState::update()
 			i->setDistance();
 		}
 		this->updateGold();
-		cout << "DUPA" << endl;
+		
 	}
 	//Wyœwietlanie pozycji myszki(czasem przydatne)
 	//cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";

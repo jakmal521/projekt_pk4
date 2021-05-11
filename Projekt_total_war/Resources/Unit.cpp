@@ -327,7 +327,7 @@ void Unit::hideButtons()
 //Ustawianie mo¿liwoœci do przejœcia
 void Unit::setDistance()
 {
-	cout << "dlaczego " << endl;
+
 	this->distance = 600.f;
 }
 //Walka dwóch oddzia³ów
