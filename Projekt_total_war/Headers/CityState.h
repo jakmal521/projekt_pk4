@@ -28,6 +28,7 @@ private:
 	Font font;
 	//Przyciski
 	map<string, Button*>buttons;
+
 	void initButtons();
 	void updateButtons(int playerGold);
 	void renderButtons(RenderTarget* target);
@@ -52,5 +53,18 @@ private:
 	int timeToSeeAlert;
 	//Ile zlota ma wlasciciel
 	int ownerGold;
-	//przyciski do zwiekszania liczby  
+	//Ukrywanie przycisków i pokazywanie g³ownych przycisków
+	void hidingMainButtons();
+	void showingMainButtons();
+	// Sprawdzenie czy g³owne klawisze s¹ ukryte
+	bool hiddenMainbuttons;
+	//iloœæ jednostek do wytrenowania - wyœwietlanie
+	Text newKnightsText;
+	Text newHorsesText;
+	Text newArchersText;
+	//iloœæ jednostek do wytrenowania
+	unsigned int newKnight;
+	unsigned int newHorse;
+	unsigned int newArcher;
+
 };

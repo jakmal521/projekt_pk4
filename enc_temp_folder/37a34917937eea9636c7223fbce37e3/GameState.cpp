@@ -1,12 +1,12 @@
 #include "..\Headers\GameState.h"
 /*
 Co ostatnio zrobione?
-Dodawanie jednostek w mieœcie
-
+1. Komunikaty po wciœnieciu przycisków w miescie
+2. Dzia³aj¹ce dodawanie i odejmowanie z³ota
 
 TO DO LIST
 1. Sztuczna inteligencja - w trakcie ;)
-
+2. Dodawanie jednostek w mieœcie - w trakcie as well
 
 Bugs:
 

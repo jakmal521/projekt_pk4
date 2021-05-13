@@ -68,3 +68,8 @@ float Button::getWidth()
 {
 	return this->button.getGlobalBounds().width;
 }
+
+void Button::setText()
+{
+	this->text.setPosition(this->button.getPosition().x + (this->button.getGlobalBounds().width / 2) - this->text.getGlobalBounds().width / 2, this->button.getPosition().y + (this->button.getGlobalBounds().height / 2) - this->text.getGlobalBounds().height / 2);
+}
