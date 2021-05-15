@@ -3,14 +3,15 @@
 Co ostatnio zrobione?
 1. Atakowanie przeciwnika i atakowanie miasta
 2. Naprawiono b³¹d wchodzenia do nie swojego miasta
+3. Funkcja atakowania przeciwnika (znikanie jednostki odejmowanie rycerzy)
+4. Funkcja atakowania miasta (zmiana koloru dystryktu i przypisanego koloru miasta)
 
 TO DO LIST
 1. Sztuczna inteligencja - w trakcie ;)
-2. Funkcja atakowania przeciwnika (znikanie jednostki odejmowanie rycerzy)
-3. Funkcja atakowania miasta (zmiana koloru dystryktu i przypisanego koloru miasta)
 
 Bugs:
 1. Przytrzymanie (ale zwyk³e klikniêcie tak samo) myszy ci¹gle dodaje jednostki, a te¿ przy wchodzeniu do miasta od razu klika w przycisk (przez co np. mo¿e od razu ulepszyæ miasto albo wejœæ do rekrutowania jednostek)
+2.	Nie da siê zaatakowaæ ka¿dego miasta na mapie
 
 Dodatkowe
 1. Czy chcemy mieæ inne ikonki dla ró¿nego rodzaju miast???- jak zd¹¿ymy XD
@@ -34,7 +35,7 @@ GameState::GameState(RenderWindow* window, stack<State*>* _states, Font _font)
 }
 
 GameState::~GameState()
-{ 
+{
 	for (auto& i : this->districts)
 	{
 		delete i.second;
@@ -49,7 +50,6 @@ GameState::~GameState()
 			delete j;
 
 		delete i.first;
-
 	}
 	delete this->player;
 	this->window->setView(this->view2);
@@ -134,7 +134,7 @@ void GameState::update()
 					}
 					i.second->cities.push_back(new Village(i.second->cities.back()));
 					i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
-					
+
 					i.second->cities.erase(i.second->cities.begin());
 					this->position->update(amountOfdistricts(), this->mouseposview);
 				}
@@ -146,14 +146,14 @@ void GameState::update()
 					}
 					i.second->cities.push_back(new Town(i.second->cities.back()));
 					i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
-					
+
 					i.second->cities.erase(i.second->cities.begin());
 					this->position->update(amountOfdistricts(), this->mouseposview);
 				}
 			}
 		}
 	}
-	for (auto& i: this->enemies)
+	for (auto& i : this->enemies)
 	{
 		for (int j = 0; j < i.second.size(); j++)
 		{
@@ -162,9 +162,7 @@ void GameState::update()
 				i.second.erase(i.second.begin() + j);
 				j--;
 			}
-
 		}
-
 	}
 	//Rozpoczynanie nowej tury - poruszanie Ai
 	if (this->position->isNextTurn())
