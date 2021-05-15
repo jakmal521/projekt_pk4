@@ -93,7 +93,7 @@ Unit::~Unit()
 /// <summary>Wykorzystuje funkcje z district.h ¿eby sprawdziæ czy kursor znajduje siê nad dystryktem, po klikniêciu prawym przyciskiem myszy pojawia siê X, po czym klikaj¹c w niego pojawia siê tekstura gracza, klikaj¹c dwa razy lewym przyciskiem pojawia siê okno split umo¿liwiaj¹ce rozdzelenie jednostki na dwie.</summary>
 /// <param name="">Pozycja kursora | bool Czy kursor nad dystryktem</param>
 /// <returns>Void</returns>
-void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, vector<City*>& cities)
+void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, vector<City*>& cities, vector<pair<Enemy*, vector<Unit*>>> enemies)
 {
 	//Event po klikniêciu na dystrykt prawym przyciskiem
 	if (iCOD)
@@ -136,10 +136,17 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, ve
 								this->to_delete = true;
 								this->nextUnit = i;
 							}
-							else if (units[i]->UnitShape.getGlobalBounds().contains(mpos) && units[i]->UnitShape.getGlobalBounds().contains(mpos) != this->UnitShape.getGlobalBounds().contains(mpos) && this->colorOfOwner != units[i]->colorOfOwner)
+							/*else if (units[i]->UnitShape.getGlobalBounds().contains(mpos) && units[i]->UnitShape.getGlobalBounds().contains(mpos) != this->UnitShape.getGlobalBounds().contains(mpos) && this->colorOfOwner != units[i]->colorOfOwner)*/
+						}
+						for (int j = 0; j < enemies.size(); j++)
+						{
+							for (int k = 0; k < enemies[j].second.size(); k++)
 							{
-								cout << "walka!!!";
-								this->fight(units[i]);
+								if (enemies[j].second[k]->UnitShape.getGlobalBounds().contains(mpos) && enemies[j].first->playerColor() != this->colorOfOwner)
+								{
+									cout << "walka!!!";
+									this->fight(enemies[j].second[k]);
+								}
 							}
 						}
 						for (int i = 0; i < cities.size(); i++)
@@ -181,6 +188,7 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, ve
 							}
 							else if (cities[i]->cityIcon.getGlobalBounds().contains(mpos) && this->colorOfOwner != cities[i]->colorOfOwner)
 							{
+								cout << "Atak na miasto\n";
 								this->cityAttack(cities[i]);
 							}
 						}
@@ -340,7 +348,14 @@ void Unit::cityAttack(City* city)
 }
 
 //Poruszanie jednostkami Ai
-void Unit::updateAiUnits()
+void Unit::updateAiUnits(int turn, vector <Unit*>& units, map<string, District*> districts, vector<pair<Enemy*, vector<Unit*>>> enemies)
 {
+	for (auto& i : districts)
+	{
+		if (turn < 10)
+		{
+			cout << "Wielkoœæ miasta " << i.second->name << " to " << i.second->sizeOfCity << "\n";
+		}
+	}
 	this->UnitShape.move(100.f, 100.f);
 }

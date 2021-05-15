@@ -41,7 +41,8 @@ public:
 	//Miasta
 	//Miasta w obrêbie regionu
 	vector<City*> cities;
-	
+
+	int sizeOfCity;
 
 private:
 

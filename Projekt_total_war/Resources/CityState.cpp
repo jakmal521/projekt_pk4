@@ -2,6 +2,7 @@
 
 CityState::CityState(RenderWindow* window, Font _font, stack<State*>* _states, City& city, int gold) : State(window, _states)
 {
+	this->mouseHeld = false;
 	this->initBackground(window);
 	this->city = &city;
 	this->font = _font;
@@ -82,7 +83,7 @@ void CityState::initText(Font  font, City& city)
 	cout << city.cityName << endl;
 	this->greeting.setFillColor(Color::White);
 	this->greeting.setCharacterSize(30);
-	this->greeting.setPosition(this->window->getPosition().x , 50);
+	this->greeting.setPosition(this->window->getPosition().x, 50);
 
 	this->error.setFont(this->font);
 	this->error.setString("");
@@ -123,7 +124,6 @@ void CityState::initInfo()
 
 	this->info.setFillColor(Color::White);
 	this->info.setCharacterSize(18);
-	
 }
 
 void CityState::updateInfo()
@@ -135,20 +135,14 @@ void CityState::updateInfo()
 
 		ss << "Populacja:\n" << this->city->population << "/" << this->city->populationMax << "\n"
 			<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: " << 0 << "\nKonni: " << 0 << "\nLucznicy: " << 0;
-		
 	}
 	else
 	{
-	
-
 		ss << "Populacja:\n" << this->city->population << "/" << this->city->populationMax << "\n"
 			<< "Zapelnienie:\n" << fixed << setprecision(2) << float(this->city->population) / float(this->city->populationMax) * 100 << "% \n" << "Rycerze: " << this->city->knights << "\nKonni: " << this->city->horses << "\nLucznicy: " << this->city->archers;
-
 	}
-	this->info.setString(ss.str());this->info.setPosition(this->infoShape.getPosition().x + (this->infoShape.getGlobalBounds().width / 2) - this->info.getGlobalBounds().width / 2, this->infoShape.getPosition().y + (this->infoShape.getGlobalBounds().height / 2) - this->info.getGlobalBounds().height / 2);
+	this->info.setString(ss.str()); this->info.setPosition(this->infoShape.getPosition().x + (this->infoShape.getGlobalBounds().width / 2) - this->info.getGlobalBounds().width / 2, this->infoShape.getPosition().y + (this->infoShape.getGlobalBounds().height / 2) - this->info.getGlobalBounds().height / 2);
 }
-
-
 
 void CityState::initButtons()
 {
@@ -156,7 +150,6 @@ void CityState::initButtons()
 	{
 		this->buttons["Training"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.25, 300, 100, &this->font, "Trenowanie wojska", Color(0, 0, 0, 150));
 		this->buttons["Deploy"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.5, 300, 100, &this->font, "Wyprowadz wojsko", Color(0, 0, 0, 150));
-		
 	}
 	else
 	{
@@ -165,7 +158,6 @@ void CityState::initButtons()
 		this->buttons["Upgrade"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.25, 300, 100, &this->font, ss.str(), Color(0, 0, 0, 150));
 		this->buttons["Training"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.5, 300, 100, &this->font, "Trenowanie wojska", Color(0, 0, 0, 150));
 		this->buttons["Deploy"] = new Button(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.75, 300, 100, &this->font, "Wyprowadz wojsko", Color(0, 0, 0, 150));
-		
 	}
 	this->buttons["submit"] = new Button(-300, this->window->getSize().y * 0.75, 300, 100, &this->font, "Trenuj", Color(0, 0, 0, 150));
 	this->buttons["+knights"] = new Button(-100, this->window->getSize().y * 0.25, 50, 50, &this->font, "+", Color(0, 0, 0, 150));
@@ -174,7 +166,6 @@ void CityState::initButtons()
 	this->buttons["-knights"] = new Button(-100, this->window->getSize().y * 0.25, 50, 50, &this->font, "-", Color(0, 0, 0, 150));
 	this->buttons["-horses"] = new Button(-100, this->window->getSize().y * 0.5, 50, 50, &this->font, "-", Color(0, 0, 0, 150));
 	this->buttons["-archers"] = new Button(-100, this->window->getSize().y * 0.75, 50, 50, &this->font, "-", Color(0, 0, 0, 150));
-	
 }
 
 void CityState::updateButtons(int playerGold)
@@ -224,47 +215,38 @@ void CityState::updateButtons(int playerGold)
 		this->hidingMainButtons();
 		this->hiddenMainbuttons = true;
 	}
-	
 
 	if (this->hiddenMainbuttons)
 	{
 		int sum = 0;
-		if(this->buttons["+archers"]->press())
+		if (this->buttons["+archers"]->press())
 		{
 			if (this->city->archers + this->newArcher != this->city->archersMax)
 			{
 				this->newArcher++;
-
 			}
-			else 
+			else
 			{
 				this->timeToSeeAlert = 100;
 				this->error.setString("Nie mozna wytrenowac wiecej lucznikow!");
-
 			}
-
 		}
-		else if(this->buttons["-archers"]->press())
-		{ 
+		else if (this->buttons["-archers"]->press())
+		{
 			if (this->newArcher)
 				this->newArcher--;
-			
-		
 		}
 
 		if (this->buttons["+horses"]->press())
 		{
-
 			if (this->city->horses + this->newHorse != this->city->horsesMax)
 			{
 				this->newHorse++;
-
 			}
 			else
 			{
 				this->timeToSeeAlert = 100;
 				this->error.setString("Nie mozna wytrenowac wiecej konnych!");
-
 			}
 		}
 		else if (this->buttons["-horses"]->press())
@@ -277,15 +259,12 @@ void CityState::updateButtons(int playerGold)
 			if (this->city->knights + this->newKnight != this->city->knightsMax)
 			{
 				this->newKnight++;
-
 			}
 			else
 			{
 				this->timeToSeeAlert = 100;
 				this->error.setString("Nie mozna wytrenowac wiecej rycerzy!");
-
 			}
-
 		}
 		else if (this->buttons["-knights"]->press())
 		{
@@ -300,11 +279,9 @@ void CityState::updateButtons(int playerGold)
 		sum = (newKnight * 400 + newHorse * 500 + newArcher * 300);
 		ss << "Trenuj\n" << (newKnight * 400 + newHorse * 500 + newArcher * 300) << " zlota";
 		this->buttons["submit"]->text.setString(ss.str());
-		
-		
-		if (this->buttons["submit"]->press()&& playerGold >= sum)
-		{
 
+		if (this->buttons["submit"]->press() && playerGold >= sum)
+		{
 			this->hiddenMainbuttons = false;
 			playerGold -= sum;
 			cout << newArcher << endl;
@@ -323,7 +300,6 @@ void CityState::updateButtons(int playerGold)
 			this->newArcher = 0;
 			this->newHorse = 0;
 			this->newKnight = 0;
-
 		}
 	}
 }
@@ -336,11 +312,9 @@ void CityState::renderButtons(RenderTarget* target)
 
 void CityState::hidingMainButtons()
 {
-
-	this->newKnightsText.setPosition(this->buttons["Deploy"]->button.getPosition().x + (this->buttons["Deploy"]->button.getGlobalBounds().width / 2) - this->newKnightsText.getGlobalBounds().width / 2, this->window->getSize().y * 0.25+10);
-	this->newHorsesText.setPosition(this->buttons["Deploy"]->button.getPosition().x + (this->buttons["Deploy"]->button.getGlobalBounds().width / 2) - this->newKnightsText.getGlobalBounds().width / 2, this->window->getSize().y * 0.50+10);
-	this->newArchersText.setPosition(this->buttons["Deploy"]->button.getPosition().x + (this->buttons["Deploy"]->button.getGlobalBounds().width / 2) - this->newKnightsText.getGlobalBounds().width / 2, this->window->getSize().y*0.75+10);
-
+	this->newKnightsText.setPosition(this->buttons["Deploy"]->button.getPosition().x + (this->buttons["Deploy"]->button.getGlobalBounds().width / 2) - this->newKnightsText.getGlobalBounds().width / 2, this->window->getSize().y * 0.25 + 10);
+	this->newHorsesText.setPosition(this->buttons["Deploy"]->button.getPosition().x + (this->buttons["Deploy"]->button.getGlobalBounds().width / 2) - this->newKnightsText.getGlobalBounds().width / 2, this->window->getSize().y * 0.50 + 10);
+	this->newArchersText.setPosition(this->buttons["Deploy"]->button.getPosition().x + (this->buttons["Deploy"]->button.getGlobalBounds().width / 2) - this->newKnightsText.getGlobalBounds().width / 2, this->window->getSize().y * 0.75 + 10);
 
 	if (Town* ob = dynamic_cast<Town*>(this->city))
 	{
@@ -348,7 +322,7 @@ void CityState::hidingMainButtons()
 		this->buttons["Deploy"]->button.setPosition(-300, 0);
 		this->buttons["Training"]->setText();
 		this->buttons["Deploy"]->setText();
-	} 
+	}
 	else
 	{
 		stringstream ss;
@@ -361,15 +335,13 @@ void CityState::hidingMainButtons()
 		this->buttons["Deploy"]->setText();
 	}
 
-	
-
 	this->buttons["+knights"]->button.setPosition(this->window->getSize().x * 0.3125 + this->buttons["Training"]->getWidth() - 50, this->window->getSize().y * 0.25);
 	this->buttons["+horses"]->button.setPosition(this->window->getSize().x * 0.3125 + this->buttons["Training"]->getWidth() - 50, this->window->getSize().y * 0.50);
 	this->buttons["+archers"]->button.setPosition(this->window->getSize().x * 0.3125 + this->buttons["Training"]->getWidth() - 50, this->window->getSize().y * 0.75);
 	this->buttons["-knights"]->button.setPosition(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.25);
-	this->buttons["-horses"]->button.setPosition(this->window->getSize().x * 0.3125 , this->window->getSize().y * 0.50);
-	this->buttons["-archers"]->button.setPosition(this->window->getSize().x * 0.3125 , this->window->getSize().y * 0.75);
-	this->buttons["submit"]->button.setPosition(this->window->getSize().x * 0.3125 , this->window->getSize().y * 0.75+this->buttons["-archers"]->getHeight()+10);
+	this->buttons["-horses"]->button.setPosition(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.50);
+	this->buttons["-archers"]->button.setPosition(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.75);
+	this->buttons["submit"]->button.setPosition(this->window->getSize().x * 0.3125, this->window->getSize().y * 0.75 + this->buttons["-archers"]->getHeight() + 10);
 
 	this->buttons["+knights"]->setText();
 	this->buttons["+horses"]->setText();
@@ -378,8 +350,6 @@ void CityState::hidingMainButtons()
 	this->buttons["-horses"]->setText();
 	this->buttons["-archers"]->setText();
 	this->buttons["submit"]->setText();
-
-	
 }
 
 void CityState::showingMainButtons()
@@ -419,7 +389,7 @@ void CityState::showingMainButtons()
 	this->buttons["submit"]->setText();
 
 	this->newKnightsText.setPosition(-100, this->window->getSize().y * 0.25 + 10);
-	this->newHorsesText.setPosition(-100,this->window->getSize().y * 0.50 + 10);
+	this->newHorsesText.setPosition(-100, this->window->getSize().y * 0.50 + 10);
 	this->newArchersText.setPosition(-100, this->window->getSize().y * 0.75 + 10);
 	this->newArcher = 0;
 	this->newHorse = 0;

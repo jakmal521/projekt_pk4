@@ -28,11 +28,9 @@ void District::update(Vector2f mpos)
 	if (!this->cities.empty())
 		for (auto& i : this->cities)
 			i->update(mpos);
-	
+
 	if (this->shape.getGlobalBounds().contains(mpos)) // Trzeba potem to zmieniæ - convex nie wspiera GlobalBounds i trzeba u¿yæ coœ innego albo jakoœ sprawdzaæ inaczej
 	{
-		
-
 		this->isCursor = true;	//Jeœli nad dystryktem to true
 
 		//SprawdŸ czy zosta³ klikniêty
@@ -60,10 +58,10 @@ void District::render(RenderTarget* target)
 	target->draw(this->shape);
 	if (!this->cities.empty())
 	{
-			for (auto& i : this->cities)
+		for (auto& i : this->cities)
 			i->render(target);
 	}
-	}
+}
 
 sf::Vector2f District::returnPosition()
 {
@@ -77,20 +75,19 @@ void District::initCity(string line)
 	string city_name;
 	int pointA, pointB;
 	stream >> city_name >> pointA >> pointB;
-	int sizeOfCity;
 	if (city_name == "Rzym")
-		sizeOfCity = 1;
+		this->sizeOfCity = 1;
 	else
 	{
-		sizeOfCity = rand() % 3 + 1;
+		this->sizeOfCity = rand() % 3 + 1;
 	}
-	switch (sizeOfCity)
+	switch (this->sizeOfCity)
 	{
-	case 1:	this->cities.push_back(new Settlement(city_name ,Vector2f(pointA, pointB), this->shape.getFillColor())); break;
-	case 2:	this->cities.push_back(new Village(city_name ,Vector2f(pointA, pointB), this->shape.getFillColor())); break;
-	case 3:	this->cities.push_back(new Town(city_name ,Vector2f(pointA, pointB), this->shape.getFillColor())); break;
+	case 1:	this->cities.push_back(new Settlement(city_name, Vector2f(pointA, pointB), this->shape.getFillColor())); break;
+	case 2:	this->cities.push_back(new Village(city_name, Vector2f(pointA, pointB), this->shape.getFillColor())); break;
+	case 3:	this->cities.push_back(new Town(city_name, Vector2f(pointA, pointB), this->shape.getFillColor())); break;
 	}
-	
+
 	this->cities.back()->initCity(sf::Vector2f(pointA, pointB));
 }
 

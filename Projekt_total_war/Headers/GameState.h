@@ -60,6 +60,10 @@ private:
 	void initPlayer();
 	//Ile regionów ma gracz
 	int amountOfdistricts();
+	int amountOfEnemydistricts(Enemy* enemy);
+
+	//Runda
+	int turn = 1;
 
 	//Przeciwnicy
 	vector<pair<Enemy*, vector<Unit*>>> enemies;

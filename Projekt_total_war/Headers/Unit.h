@@ -11,6 +11,8 @@
 #include <fstream>
 #include "../Headers/Button.h"
 #include "../Headers/CityState.h"
+#include "../Headers/Enemy.h"
+#include "../Headers/District.h"
 
 class Unit
 {
@@ -21,10 +23,9 @@ public:
 	~Unit();
 
 	//Metody
-	void updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, vector<City*>& cities);
+	void updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, vector<City*>& cities, vector<pair<Enemy*, vector<Unit*>>> enemies);
 	void updateAll(sf::Vector2f mpos, bool iCOD);
 	void render(sf::RenderTarget* target);
-	void initUnit(sf::Vector2f position);
 
 	bool ifNewUnit();
 
@@ -91,5 +92,5 @@ private:
 	void cityAttack(City* city);
 
 	//Poruszanie jednostkami Ai
-	void updateAiUnits();
+	void updateAiUnits(int turn, vector <Unit*>& units, map<string, District*> districts, vector<pair<Enemy*, vector<Unit*>>> enemies);
 };

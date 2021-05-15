@@ -33,8 +33,10 @@ public:
 
 	//Zwracanie czy wyprowadziæ wojsko
 	bool isUnitsDeployed();
+
 	//Zwracanie czy ulepszyæ miasto
 	bool isToUpdate();
+
 	//Zwracanie pozycji miasta
 	sf::Vector2f getPosition();
 
@@ -44,12 +46,10 @@ public:
 	//Usuwanie wojska z miasta (liczb)
 	void deleteTroops();
 
-	//Akcesory
-	/*string CityName();
-	int Population();
-	int PopulationMax();
-	*/
-	virtual int getGoldToUpgrade() { return 0; };
+	virtual int getGoldToUpgrade() {
+		return 0;
+	};
+
 protected:
 
 	/*Mechanika*/
@@ -65,11 +65,16 @@ protected:
 	int deployUnits;
 	//Czy ulepszyæ miasto
 	bool toUpdate;
+
 	/*Wygl¹d*/
 	//Tekstury
 	sf::Texture cityIconTexture;
 	sf::Color cityIconColor;
 	sf::Texture insideCityTexture;
+
+	sf::RectangleShape nameShape;
+	sf::Font nameFont;
+	sf::Text nameText;
 
 	//Wygl¹d miasta
 	RectangleShape cityIcon;
@@ -99,6 +104,7 @@ protected:
 	int archersMax;
 	//zmiany w populacji
 	void updatePopulation();
+
 	friend class CityState;
 	friend class GameState;
 	friend class Unit;

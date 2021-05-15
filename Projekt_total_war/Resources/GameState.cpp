@@ -1,17 +1,20 @@
 #include "..\Headers\GameState.h"
 /*
 Co ostatnio zrobione?
-Dodawanie jednostek w mieœcie
-
+1. Atakowanie przeciwnika i atakowanie miasta
+2. Naprawiono b³¹d wchodzenia do nie swojego miasta
 
 TO DO LIST
 1. Sztuczna inteligencja - w trakcie ;)
-
+2. Funkcja atakowania przeciwnika (znikanie jednostki odejmowanie rycerzy)
+3. Funkcja atakowania miasta (zmiana koloru dystryktu i przypisanego koloru miasta)
 
 Bugs:
+1. Przytrzymanie (ale zwyk³e klikniêcie tak samo) myszy ci¹gle dodaje jednostki, a te¿ przy wchodzeniu do miasta od razu klika w przycisk (przez co np. mo¿e od razu ulepszyæ miasto albo wejœæ do rekrutowania jednostek)
 
 Dodatkowe
 1. Czy chcemy mieæ inne ikonki dla ró¿nego rodzaju miast???- jak zd¹¿ymy XD
+2. Ma³e flagi przy jednostkach aby wiadomo do którego koloru nale¿¹???
 
 */
 
@@ -66,7 +69,7 @@ void GameState::update()
 			//Update jednostki która zosta³a wybrana (tworzenie nowych armi, poruszanie itd.)
 			if (this->whichUnit >= this->unit.size())
 				this->whichUnit = 0;
-			this->unit[this->whichUnit]->updateChoosen(mouseposview, i.second->returnIsCursorOnDistrict(), this->unit, i.second->cities);
+			this->unit[this->whichUnit]->updateChoosen(mouseposview, i.second->returnIsCursorOnDistrict(), this->unit, i.second->cities, this->enemies);
 			if (this->unit[whichUnit])
 			{
 				if (this->unit[this->whichUnit]->ifNewUnit())
@@ -103,6 +106,7 @@ void GameState::update()
 		{
 			if (this->player->getGold() > i.second->cities.back()->getGoldToUpgrade())
 			{
+				i.second->sizeOfCity++;
 				if (Settlement* ob = dynamic_cast<Settlement*>(i.second->cities.back()))
 				{
 					this->player->setGold(this->player->getGold() - i.second->cities.back()->getGoldToUpgrade());
@@ -126,7 +130,6 @@ void GameState::update()
 	//Rozpoczynanie nowej tury - poruszanie Ai
 	if (this->position->isNextTurn())
 	{
-		cout << "Leci nastepna tura\n";
 		for (int i = 0; i < this->enemies.size(); i++)
 		{
 			//Zauktalizowanie z³ota wroga
@@ -134,10 +137,14 @@ void GameState::update()
 		//Zauktalizowanie jednostek wroga
 			for (int j = 0; j < this->enemies[i].second.size(); j++)
 			{
-				this->enemies[i].second[j]->updateAiUnits(); //Do zrobienia updateAiUnits
+				//for (auto& k : this->districts)
+
+				cout << "Przesun \n";
+				this->enemies[i].second[j]->updateAiUnits(this->turn, this->unit, this->districts, this->enemies); //Do zrobienia updateAiUnits
 			}
 		}
 		this->updateGold();
+		cout << "Teraz jest runda " << this->turn++ << "\n";
 	}
 
 	//Wyœwietlanie pozycji myszki(czasem przydatne)
@@ -213,6 +220,7 @@ void GameState::initDis()
 
 	plik.close();
 }
+
 //Inicjacja t³a
 void GameState::initBackground()
 {
@@ -283,6 +291,16 @@ int GameState::amountOfdistricts()
 	return sum;
 }
 
+int GameState::amountOfEnemydistricts(Enemy* enemy)
+{
+	int sum = 0;
+	for (auto& i : this->districts)
+		if (i.second->shape.getFillColor() == enemy->playerColor())
+			sum++;
+
+	return sum;
+}
+
 //Inicjacja przeciwników
 void GameState::initEnemies()
 {
@@ -298,9 +316,7 @@ void GameState::initEnemies()
 		plik >> three;
 		plik >> posX;
 		plik >> posY;
-		for (int i = 0; i < 2; i++) {
-			this->enemies.push_back(pair<Enemy*, vector<Unit*>>(new Enemy(Color(one, two, three, 255)), { new Unit(Color(one, two, three, 255), vector<int> {}, sf::Vector2f(posX, posY)) }));
-		}
+		this->enemies.push_back(pair<Enemy*, vector<Unit*>>(new Enemy(Color(one, two, three, 255)), { new Unit(Color(one, two, three, 255), vector<int> {}, sf::Vector2f(posX, posY)) }));
 	}
 }
 

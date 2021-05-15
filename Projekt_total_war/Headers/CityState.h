@@ -21,6 +21,8 @@ public:
 	void end();
 
 private:
+	bool mouseHeld;
+
 	//t³o
 	RectangleShape background;
 	Texture texture;
@@ -66,5 +68,4 @@ private:
 	unsigned int newKnight;
 	unsigned int newHorse;
 	unsigned int newArcher;
-
 };

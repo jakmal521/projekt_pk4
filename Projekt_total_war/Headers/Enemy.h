@@ -8,5 +8,7 @@ public:
 	~Enemy();
 	//updatowanie przeciwników
 	void updateEnemy();
+
+	friend class Unit;
 private:
 };
