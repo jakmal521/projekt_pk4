@@ -15,6 +15,7 @@ Bugs:
 Dodatkowe
 1. Czy chcemy mieæ inne ikonki dla ró¿nego rodzaju miast???- jak zd¹¿ymy XD
 2. Ma³e flagi przy jednostkach aby wiadomo do którego koloru nale¿¹???
+3. Komunikat po najechaniu miasta z jego nazw¹ i wielkoœci¹???
 
 */
 
