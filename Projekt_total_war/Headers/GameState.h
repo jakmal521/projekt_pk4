@@ -60,7 +60,7 @@ private:
 	void initPlayer();
 	//Ile regionów ma gracz
 	int amountOfdistricts();
-	int amountOfEnemydistricts(Enemy* enemy);
+	int amountOfEnemydistricts(Enemy *enemy);
 
 	//Runda
 	int turn = 1;

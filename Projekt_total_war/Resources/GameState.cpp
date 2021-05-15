@@ -33,7 +33,24 @@ GameState::GameState(RenderWindow* window, stack<State*>* _states, Font _font)
 }
 
 GameState::~GameState()
-{
+{ 
+	for (auto& i : this->districts)
+	{
+		delete i.second;
+	}
+	for (auto& i : this->unit)
+	{
+		delete i;
+	}
+	for (auto& i : this->enemies)
+	{
+		for (auto& j : i.second)
+			delete j;
+
+		delete i.first;
+
+	}
+	delete this->player;
 	this->window->setView(this->view2);
 	delete this->position;
 }
@@ -112,6 +129,7 @@ void GameState::update()
 					this->player->setGold(this->player->getGold() - i.second->cities.back()->getGoldToUpgrade());
 					i.second->cities.push_back(new Village(i.second->cities.back()));
 					i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
+					
 					i.second->cities.erase(i.second->cities.begin());
 					this->position->update(amountOfdistricts(), this->mouseposview);
 				}
@@ -120,13 +138,26 @@ void GameState::update()
 					this->player->setGold(this->player->getGold() - i.second->cities.back()->getGoldToUpgrade());
 					i.second->cities.push_back(new Town(i.second->cities.back()));
 					i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
+					
 					i.second->cities.erase(i.second->cities.begin());
 					this->position->update(amountOfdistricts(), this->mouseposview);
 				}
 			}
 		}
 	}
+	for (auto& i: this->enemies)
+	{
+		for (int j = 0; j < i.second.size(); j++)
+		{
+			if (i.second[j]->to_delete)
+			{
+				i.second.erase(i.second.begin() + j);
+				j--;
+			}
 
+		}
+
+	}
 	//Rozpoczynanie nowej tury - poruszanie Ai
 	if (this->position->isNextTurn())
 	{
@@ -144,6 +175,10 @@ void GameState::update()
 			}
 		}
 		this->updateGold();
+
+		for (int i = 0; i < unit.size(); i++)
+			unit[i]->setDistance();
+
 		cout << "Teraz jest runda " << this->turn++ << "\n";
 	}
 

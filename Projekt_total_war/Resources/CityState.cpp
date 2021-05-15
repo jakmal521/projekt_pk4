@@ -19,6 +19,10 @@ CityState::CityState(RenderWindow* window, Font _font, stack<State*>* _states, C
 
 CityState::~CityState()
 {
+	for (auto& i : this->buttons)
+	{
+		delete i.second;
+	}
 }
 
 void CityState::update()

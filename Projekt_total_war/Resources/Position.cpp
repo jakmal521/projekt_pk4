@@ -24,6 +24,7 @@ Position::Position(sf::Vector2f viewSize)
 
 Position::~Position()
 {
+	delete this->headBar;
 }
 
 void Position::update(int amountOfDistricts, Vector2f mpos)

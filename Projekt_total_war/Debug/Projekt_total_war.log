@@ -1,5 +1,13 @@
-﻿  CityState.cpp
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(72,90): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+﻿  GameState.cpp
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(81,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(87,24): warning C4018: ">=": niezgodność typu ze znakiem/bez znaku
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(150,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(164,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(169,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(179,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(204,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(206,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(263,74): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
           with
           [
               T=unsigned int
@@ -8,7 +16,7 @@ C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(7
           [
               T=float
           ]
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(72,63): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(263,53): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
           with
           [
               T=unsigned int
@@ -17,66 +25,6 @@ C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(7
           [
               T=float
           ]
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(85,56): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
-          with
-          [
-              T=int
-          ]
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(96,67): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(101,66): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(106,67): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(157,104): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(157,68): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(158,102): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(158,66): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(165,103): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(165,67): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(166,104): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(166,68): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(167,102): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(167,66): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(170,71): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(171,73): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(172,72): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(173,73): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(174,73): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(175,72): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(176,73): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(340,231): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(341,230): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(342,229): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(366,155): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(366,123): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(367,154): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(367,122): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(368,155): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(368,123): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(369,110): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(369,74): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(370,110): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(370,73): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(371,111): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(371,74): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(372,154): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(372,72): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(389,111): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(389,75): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(390,109): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(390,73): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(398,110): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(398,74): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(399,111): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(399,75): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(400,109): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(400,73): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(406,80): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(407,79): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(408,80): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(409,80): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(410,79): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(411,80): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(412,78): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(421,74): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(422,72): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\CityState.cpp(423,74): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(278,24): warning C4018: ">=": niezgodność typu ze znakiem/bez znaku
+C:\Users\Kuba\source\repos\total_war\Projekt_total_war\Resources\GameState.cpp(291,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
   Projekt_total_war.vcxproj -> C:\Users\Kuba\source\repos\total_war\Debug\Projekt_total_war.exe
