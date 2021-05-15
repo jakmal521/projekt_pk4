@@ -81,6 +81,13 @@ vector<int> City::howManyUnits()
 	return vector<int> { this->knights, this->archers, this->horses };
 }
 
+void City::setTroops(int k, int h, int a)
+{
+	this->knights += k;
+	this->horses += h;
+	this->archers += a;
+}
+
 void City::deleteTroops()
 {
 	this->knights = 0;
@@ -95,7 +102,7 @@ void City::update(Vector2f mpos)
 {
 	this->cityIcon.setFillColor(cityIconColor);
 
-	if (this->cityIcon.getGlobalBounds().contains(mpos) && this->colorOfOwner == sf::Color::Red)
+	if (this->cityIcon.getGlobalBounds().contains(mpos) /*&& this->colorOfOwner == sf::Color::Red*/)
 	{
 		/*this->nameShape.setPosition(this->cityIcon.getPosition().x, this->cityIcon.getPosition().y - 30);
 		this->nameShape.setFillColor(Color(127, 127, 127, 127));

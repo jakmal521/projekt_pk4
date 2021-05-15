@@ -105,12 +105,16 @@ void GameState::update()
 		}
 		if (i.second->cities.back()->isToUpdate())
 		{
+			cout << "Ulepszylem miasto\n";
 			if (this->player->getGold() > i.second->cities.back()->getGoldToUpgrade())
 			{
 				i.second->sizeOfCity++;
 				if (Settlement* ob = dynamic_cast<Settlement*>(i.second->cities.back()))
 				{
-					this->player->setGold(this->player->getGold() - i.second->cities.back()->getGoldToUpgrade());
+					if (i.second->cities.back()->colorOfOwner == Color::Red)
+					{
+						this->player->setGold(this->player->getGold() - i.second->cities.back()->getGoldToUpgrade());
+					}
 					i.second->cities.push_back(new Village(i.second->cities.back()));
 					i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
 					i.second->cities.erase(i.second->cities.begin());
@@ -118,7 +122,10 @@ void GameState::update()
 				}
 				else if (Village* ob = dynamic_cast<Village*>(i.second->cities.back()))
 				{
-					this->player->setGold(this->player->getGold() - i.second->cities.back()->getGoldToUpgrade());
+					if (i.second->cities.back()->colorOfOwner == Color::Red)
+					{
+						this->player->setGold(this->player->getGold() - i.second->cities.back()->getGoldToUpgrade());
+					}
 					i.second->cities.push_back(new Town(i.second->cities.back()));
 					i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
 					i.second->cities.erase(i.second->cities.begin());
@@ -134,14 +141,14 @@ void GameState::update()
 		for (int i = 0; i < this->enemies.size(); i++)
 		{
 			//Zauktalizowanie z³ota wroga
-			this->enemies[i].first->updateEnemy(); //Do zrobienia update enemy
+			this->enemies[i].first->updateEnemy(this->districts); //Do zrobienia update enemy
 		//Zauktalizowanie jednostek wroga
 			for (int j = 0; j < this->enemies[i].second.size(); j++)
 			{
 				//for (auto& k : this->districts)
 
 				cout << "Przesun \n";
-				this->enemies[i].second[j]->updateAiUnits(this->turn, this->unit, this->districts, this->enemies); //Do zrobienia updateAiUnits
+				this->enemies[i].second[j]->updateAiUnits(this->turn, &this->unit, &this->districts, &this->enemies, i); //Do zrobienia updateAiUnits
 			}
 		}
 		this->updateGold();

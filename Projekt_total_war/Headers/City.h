@@ -24,7 +24,7 @@ public:
 	void render(RenderTarget* target);
 
 	//Inicjowanie miasta
-	void initCity(sf::Vector2f cityPos);
+	void initCity(Vector2f cityPos);
 
 	//Zwracanie czy wejœæ do miasta
 	bool isInCity();
@@ -38,10 +38,13 @@ public:
 	bool isToUpdate();
 
 	//Zwracanie pozycji miasta
-	sf::Vector2f getPosition();
+	Vector2f getPosition();
 
 	//Zwracanie iloœci wojska w mieœcie
 	vector<int> howManyUnits();
+
+	//Ustawianie iloœæi wojska w mieœcie
+	void setTroops(int k, int h, int a);
 
 	//Usuwanie wojska z miasta (liczb)
 	void deleteTroops();
@@ -50,44 +53,48 @@ public:
 		return 0;
 	};
 
+	friend class Unit;
+
+	//Czy ulepszyæ miasto
+	bool toUpdate;
+
+	//Kolor do kogo nale¿y miasto;
+	Color colorOfOwner;
+
+	//Iloœæ ludzi
+	int population;
 protected:
 
 	/*Mechanika*/
 	//Zegar potrzebny do sprawdzenia czy by³ double click
-	sf::Clock clickClock;
+	Clock clickClock;
 	//Czy mysz jest przytrzymywana
 	bool mouseHeld;
 	//Po³o¿enie
-	sf::Vector2f cityPos;
+	Vector2f cityPos;
 	//Czy wejœæ do miasta
 	bool doubleClicked;
 	//Czy wypuœciæ jednostki z miasta
 	int deployUnits;
-	//Czy ulepszyæ miasto
-	bool toUpdate;
 
 	/*Wygl¹d*/
 	//Tekstury
-	sf::Texture cityIconTexture;
-	sf::Color cityIconColor;
-	sf::Texture insideCityTexture;
+	Texture cityIconTexture;
+	Color cityIconColor;
+	Texture insideCityTexture;
 
-	sf::RectangleShape nameShape;
-	sf::Font nameFont;
-	sf::Text nameText;
+	RectangleShape nameShape;
+	Font nameFont;
+	Text nameText;
 
 	//Wygl¹d miasta
 	RectangleShape cityIcon;
 	Sprite sprite;
 
-	//Kolor do kogo nale¿y miasto;
-	Color colorOfOwner;
-
 	/*Wartoœci w grze*/
 	//Nazwa
 	string cityName;
-	//Iloœæ ludzi
-	int population;
+
 	//iloœæ ludzi jaka maksymalnie mo¿e mieszkaæ w mieœcie
 	int populationMax;
 	//Iloœæ rycerzy
@@ -106,6 +113,7 @@ protected:
 	void updatePopulation();
 
 	friend class CityState;
+	friend class District;
 	friend class GameState;
 	friend class Unit;
 	friend class Village;

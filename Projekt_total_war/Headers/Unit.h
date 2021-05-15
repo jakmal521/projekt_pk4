@@ -86,11 +86,11 @@ private:
 	friend class GameState;
 
 	//Walka dwóch oddzia³ów
-	void fight(Unit* enemyUnit);
+	void fight(Unit& enemyUnit);
 
 	//Atakowanie miasta
-	void cityAttack(City* city);
+	void cityAttack(City& city);
 
 	//Poruszanie jednostkami Ai
-	void updateAiUnits(int turn, vector <Unit*>& units, map<string, District*> districts, vector<pair<Enemy*, vector<Unit*>>> enemies);
+	void updateAiUnits(int turn, vector <Unit*>* units, map<string, District*>* districts, vector<pair<Enemy*, vector<Unit*>>>* enemies, int whichEnemyIsChoosen);
 };

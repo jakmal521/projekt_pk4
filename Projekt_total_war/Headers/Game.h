@@ -22,7 +22,6 @@ private:
 	//Funckje inicjalizacyjne
 	void initWindow();
 	void initStates();
-	//void initVariables();
 
 	//Funcje do zmiany zawartoœci ekranu
 	void update();

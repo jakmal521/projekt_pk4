@@ -13,9 +13,9 @@ using namespace sf;
 using namespace std;
 class Player
 {
-public: 
+public:
 	//Konstruktor i destruktor
-	Player(Color color=Color::Black);
+	Player(Color color = Color::Black);
 	~Player();
 	//zwraca kolor gracza
 	Color playerColor();
@@ -28,8 +28,8 @@ private:
 	Color color;
 	//Iloœæ z³ota
 	int gold;
-	
-	friend class HeadBar;
-	
-};
 
+	friend class HeadBar;
+	friend class Unit;
+	friend class Enemy;
+};

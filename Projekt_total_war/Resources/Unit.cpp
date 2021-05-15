@@ -348,13 +348,140 @@ void Unit::cityAttack(City* city)
 }
 
 //Poruszanie jednostkami Ai
-void Unit::updateAiUnits(int turn, vector <Unit*>& units, map<string, District*> districts, vector<pair<Enemy*, vector<Unit*>>> enemies)
+void Unit::updateAiUnits(int turn, vector <Unit*>* units, map<string, District*>* districts, vector<pair<Enemy*, vector<Unit*>>>* enemies, int whichEnemyIsChoosen)
 {
-	for (auto& i : districts)
+	for (auto& i : *districts)
 	{
-		if (turn < 10)
+		Color color1 = enemies->at(whichEnemyIsChoosen).first->playerColor();
+		Color color2 = i.second->cities.back()->colorOfOwner;
+		if (i.second->cities.back()->colorOfOwner == enemies->at(whichEnemyIsChoosen).first->playerColor())
 		{
-			cout << "Wielkoœæ miasta " << i.second->name << " to " << i.second->sizeOfCity << "\n";
+			if (turn < 10)
+			{
+				int ran = rand() % 100 + 1;
+				if (ran > 85 && i.second->sizeOfCity == 1 && enemies->at(whichEnemyIsChoosen).first->getGold() > 25000)
+				{
+					cout << "Ulepszylem miasto " << i.second->cities.back()->cityName << " rozmiar: " << i.second->sizeOfCity << "\n";
+					enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - 25000);
+					i.second->cities.back()->toUpdate = 1;
+				}
+				else if (ran > 99 && i.second->sizeOfCity == 2 && enemies->at(whichEnemyIsChoosen).first->getGold() > 100000)
+				{
+					cout << "Ulepszylem miasto " << i.second->cities.back()->cityName << " rozmiar: " << i.second->sizeOfCity << "\n";
+					enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - 100000);
+					i.second->cities.back()->toUpdate = 1;
+				}
+				else if (ran)
+				{
+					int a = i.second->cities.back()->knightsMax - i.second->cities.back()->knights;
+					if (a)
+					{
+						int ran = rand() % 5 + 1;
+						if (enemies->at(whichEnemyIsChoosen).first->getGold() > 20000 && ran <= a)
+						{
+							cout << "Dodalem " << ran << " rycerzy do miasta " << i.second->cities.back()->cityName << "\n";
+							i.second->cities.back()->cityIcon.setFillColor(Color::Blue);
+							switch (ran)
+							{
+							case 1:
+								enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - ran * 400);
+								i.second->cities.back()->setTroops(1, 0, 0);
+								break;
+							case 2:
+								enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - ran * 400);
+								i.second->cities.back()->setTroops(2, 0, 0);
+								break;
+							case 3:
+								enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - ran * 400);
+								i.second->cities.back()->setTroops(3, 0, 0);
+								break;
+							case 4:
+								enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - ran * 400);
+								i.second->cities.back()->setTroops(4, 0, 0);
+								break;
+							case 5:
+								enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - ran * 400);
+								i.second->cities.back()->setTroops(5, 0, 0);
+								break;
+
+							default:
+								break;
+							}
+						}
+					}
+					a = i.second->cities.back()->horsesMax - i.second->cities.back()->horses;
+					if (a)
+					{
+						int ran = rand() % 5 + 1;
+						if (enemies->at(whichEnemyIsChoosen).first->getGold() > 20000 && ran <= a)
+						{
+							switch (ran)
+							{
+							case 1:
+								enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - ran * 500);
+								i.second->cities.back()->setTroops(0, 1, 0);
+								break;
+							case 2:
+								enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - ran * 500);
+								i.second->cities.back()->setTroops(0, 2, 0);
+								break;
+							case 3:
+								enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - ran * 500);
+								i.second->cities.back()->setTroops(0, 3, 0);
+								break;
+							case 4:
+								enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - ran * 500);
+								i.second->cities.back()->setTroops(0, 4, 0);
+								break;
+							case 5:
+								enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - ran * 500);
+								i.second->cities.back()->setTroops(0, 5, 0);
+								break;
+
+							default:
+								break;
+							}
+						}
+					}
+					a = i.second->cities.back()->archersMax - i.second->cities.back()->archers;
+					if (a)
+					{
+						int ran = rand() % 5 + 1;
+						if (enemies->at(whichEnemyIsChoosen).first->getGold() > 20000 && ran <= a)
+						{
+							switch (ran)
+							{
+							case 1:
+								enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - ran * 300);
+								i.second->cities.back()->setTroops(0, 0, 1);
+								break;
+							case 2:
+								enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - ran * 300);
+								i.second->cities.back()->setTroops(0, 0, 2);
+								break;
+							case 3:
+								enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - ran * 300);
+								i.second->cities.back()->setTroops(0, 0, 3);
+								break;
+							case 4:
+								enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - ran * 300);
+								i.second->cities.back()->setTroops(0, 0, 4);
+								break;
+							case 5:
+								enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - ran * 300);
+								i.second->cities.back()->setTroops(0, 0, 5);
+								break;
+
+							default:
+								break;
+							}
+						}
+					}
+				}
+			}
+			else if (turn < 15)
+			{
+			}
 		}
 	}
 	this->UnitShape.move(100.f, 100.f);
