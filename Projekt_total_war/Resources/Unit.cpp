@@ -149,7 +149,6 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, ve
 								this->to_delete = true;
 								this->nextUnit = i;
 							}
-							
 						}
 						for (int j = 0; j < enemies.size(); j++)
 						{
@@ -361,28 +360,23 @@ void Unit::setDistance()
 void Unit::fight(Unit& enemyUnit)
 {
 	float attackChance = 3 * this->archers + 5 * this->knights + 10 * this->horses;
-	float defenceChance= 3 * enemyUnit.archers + 5 * enemyUnit.knights + 10 * enemyUnit.horses;
+	float defenceChance = 3 * enemyUnit.archers + 5 * enemyUnit.knights + 10 * enemyUnit.horses;
 	float chanceToDefend = (defenceChance / attackChance) * 100;
 
 	if (chanceToDefend > 500)
 	{
-
 		this->to_delete = true;
-
 	}
 	else
 	{
 		if (rand() % 500 + 1 > chanceToDefend)
 		{
 			enemyUnit.to_delete = true;
-
 		}
 		else
 		{
 			this->to_delete = true;
-
 		}
-
 	}
 }
 //atakowanie miasta
@@ -391,7 +385,6 @@ void Unit::cityAttack(City& city)
 	if (!city.archers && !city.knights && !city.horses)
 
 	{
-
 		city.colorOfOwner = this->colorOfOwner;
 		return;
 	}
@@ -402,9 +395,7 @@ void Unit::cityAttack(City& city)
 
 	if (chanceToSaveCity > 500)
 	{
-
 		this->to_delete = true;
-
 	}
 	else
 	{
@@ -414,18 +405,12 @@ void Unit::cityAttack(City& city)
 			city.archers = 0;
 			city.knights = 0;
 			city.horses = 0;
-
 		}
-		else 
+		else
 		{
 			this->to_delete = true;
-
 		}
-
 	}
-	
-	
-
 }
 
 //Poruszanie jednostkami Ai
@@ -433,10 +418,9 @@ void Unit::updateAiUnits(int turn, vector <Unit*>* units, map<string, District*>
 {
 	for (auto& i : *districts)
 	{
-	
 		if (i.second->cities.back()->colorOfOwner == enemies->at(whichEnemyIsChoosen).first->playerColor())
 		{
-			if (turn < 10)
+			if (turn)
 			{
 				int ran = rand() % 100 + 1;
 				if (ran > 85 && i.second->sizeOfCity == 1 && enemies->at(whichEnemyIsChoosen).first->getGold() > 25000)
@@ -558,11 +542,113 @@ void Unit::updateAiUnits(int turn, vector <Unit*>* units, map<string, District*>
 						}
 					}
 				}
-			}
-			else if (turn < 15)
-			{
+
+				if (turn > 10)
+				{
+					if (i.second->cities.back()->knights > 20)
+					{
+						i.second->cities.back()->deployUnits = true;
+					}
+					for (int i = enemies->at(whichEnemyIsChoosen).second.size(); i > 1; i--)
+					{
+						float x = -(enemies->at(whichEnemyIsChoosen).second[i]->moveShape.getPosition().x - enemies->at(whichEnemyIsChoosen).second[i - 1]->moveShape.getPosition().x);
+						float y = -(enemies->at(whichEnemyIsChoosen).second[i]->moveShape.getPosition().y - enemies->at(whichEnemyIsChoosen).second[i - 1]->moveShape.getPosition().y);
+
+						this->distance = sqrt((x * x) + (y * y));
+
+						if (distance > 600.f)
+						{
+							if (x > 17.5 && y > 17.5)
+							{
+								enemies->at(whichEnemyIsChoosen).second[i]->moveShape.move(17.5, 17.5);
+							}
+							else if (x > 17.5 && y < 17.5)
+							{
+								enemies->at(whichEnemyIsChoosen).second[i]->moveShape.move(17.5, -y);
+							}
+							else
+							{
+								enemies->at(whichEnemyIsChoosen).second[i]->moveShape.move(-x, 17.5);
+							}
+						}
+						else
+						{
+							enemies->at(whichEnemyIsChoosen).second[i]->archers += enemies->at(whichEnemyIsChoosen).second[i - 1]->archers;
+							enemies->at(whichEnemyIsChoosen).second[i]->knights += enemies->at(whichEnemyIsChoosen).second[i - 1]->knights;
+							enemies->at(whichEnemyIsChoosen).second[i]->horses += enemies->at(whichEnemyIsChoosen).second[i - 1]->horses;
+							enemies->at(whichEnemyIsChoosen).second[i]->to_delete = true;
+						}
+					}
+					if (turn > 15)
+					{
+						float x = enemies->at(whichEnemyIsChoosen).second[0]->moveShape.getPosition().x - closestEnemyCity(*districts, enemies->at(whichEnemyIsChoosen).second[0]).x;
+						float y = enemies->at(whichEnemyIsChoosen).second[0]->moveShape.getPosition().y - closestEnemyCity(*districts, enemies->at(whichEnemyIsChoosen).second[0]).y;
+
+						this->distance = sqrt((x * x) + (y * y));
+
+						if (distance > 600.f)
+						{
+							if (x > 17.5 && y > 17.5)
+							{
+								enemies->at(whichEnemyIsChoosen).second[0]->moveShape.move(17.5, 17.5);
+							}
+							else if (x > 17.5 && y < 17.5)
+							{
+								enemies->at(whichEnemyIsChoosen).second[0]->moveShape.move(17.5, -y);
+							}
+							else
+							{
+								enemies->at(whichEnemyIsChoosen).second[0]->moveShape.move(-x, 17.5);
+							}
+						}
+						else
+						{
+							//this->cityAttack(*cities[i]);
+						}
+					}
+				}
 			}
 		}
 	}
-	this->UnitShape.move(100.f, 100.f);
 }
+
+Vector2f Unit::closestEnemyCity(map<string, District*> districts, Unit* unit)
+{
+	Vector2f closest;
+	float distance = numeric_limits<float>::max();
+	float distanceTemp;
+	for (auto& i : districts)
+	{
+		if (unit->colorOfOwner != i.second->cities.back()->colorOfOwner)
+		{
+			distanceTemp = sqrt(
+				pow(i.second->cities.back()->getPosition().x - unit->moveShape.getPosition().x, 2) +
+				pow(i.second->cities.back()->getPosition().y - unit->moveShape.getPosition().y, 2)
+			);
+			if (distanceTemp < distance)
+			{
+				distance = distanceTemp;
+				closest = i.second->cities.back()->getPosition();
+			}
+		}
+	}
+	return closest;
+}
+
+/*this->distance -=
+sqrt(
+	(this->UnitShape.getPosition().x - mpos.x) * (this->UnitShape.getPosition().x - mpos.x)
+	+ (this->UnitShape.getPosition().y - mpos.y) * (this->UnitShape.getPosition().y - mpos.y)
+);
+
+for (int i = 0; i < units.size(); i++)
+{
+	//dodawanie jednostek tylko gdy s¹ tego samego gracza w innym przypadku walka
+	if (units[i]->UnitShape.getGlobalBounds().contains(mpos) && units[i]->UnitShape.getGlobalBounds().contains(mpos) != this->UnitShape.getGlobalBounds().contains(mpos) && this->colorOfOwner == units[i]->colorOfOwner)
+	{
+		units[i]->archers += this->archers;
+		units[i]->knights += this->knights;
+		units[i]->horses += this->horses;
+		this->to_delete = true;
+		this->nextUnit = i;
+	}*/
