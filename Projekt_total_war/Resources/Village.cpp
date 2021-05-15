@@ -6,6 +6,9 @@ Village::Village(string name, Vector2f cityPoints, Color color) :City(name, 2000
 	this->knightsMax = 50;
 	this->archersMax = 25;
 	this->horsesMax = 70;
+	this->knights = (rand() % this->knightsMax) / 4;
+	this->archers = (rand() % this->horsesMax) / 4;
+	this->horses = (rand() % this->archersMax) / 4;
 	this->goldToUpgradde = 100000;
 }
 

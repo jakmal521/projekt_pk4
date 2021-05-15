@@ -69,4 +69,8 @@ private:
 	unsigned int newKnight;
 	unsigned int newHorse;
 	unsigned int newArcher;
+	//Tekst jakie jednostki siê dodaje
+	Text knightsText;
+	Text horsesText;
+	Text archersText;
 };
