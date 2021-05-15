@@ -1,17 +1,18 @@
 #include "..\Headers\GameState.h"
 /*
 Co ostatnio zrobione?
-1. Atakowanie przeciwnika i atakowanie miasta
-2. Naprawiono b³¹d wchodzenia do nie swojego miasta
-3. Funkcja atakowania przeciwnika (znikanie jednostki odejmowanie rycerzy)
-4. Funkcja atakowania miasta (zmiana koloru dystryktu i przypisanego koloru miasta)
+
 
 TO DO LIST
 1. Sztuczna inteligencja - w trakcie ;)
-
+2. Sprawdzenie koñca
+3. pare jednostek dla gracza
+4. jakaœ iloœæ w ka¿dym mieœcie
+5. dzielenie + nazwy przycisków
+6. tekst jakie jednostki siê dodaje
 Bugs:
 1. Przytrzymanie (ale zwyk³e klikniêcie tak samo) myszy ci¹gle dodaje jednostki, a te¿ przy wchodzeniu do miasta od razu klika w przycisk (przez co np. mo¿e od razu ulepszyæ miasto albo wejœæ do rekrutowania jednostek)
-2.	Nie da siê zaatakowaæ ka¿dego miasta na mapie
+
 
 Dodatkowe
 1. Czy chcemy mieæ inne ikonki dla ró¿nego rodzaju miast???- jak zd¹¿ymy XD

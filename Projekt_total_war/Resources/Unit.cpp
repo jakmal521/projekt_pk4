@@ -414,8 +414,7 @@ void Unit::updateAiUnits(int turn, vector <Unit*>* units, map<string, District*>
 {
 	for (auto& i : *districts)
 	{
-		Color color1 = enemies->at(whichEnemyIsChoosen).first->playerColor();
-		Color color2 = i.second->cities.back()->colorOfOwner;
+	
 		if (i.second->cities.back()->colorOfOwner == enemies->at(whichEnemyIsChoosen).first->playerColor())
 		{
 			if (turn < 10)
