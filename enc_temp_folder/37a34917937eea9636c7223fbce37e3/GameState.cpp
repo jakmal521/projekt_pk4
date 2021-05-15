@@ -1,12 +1,12 @@
 #include "..\Headers\GameState.h"
 /*
 Co ostatnio zrobione?
-Dodawanie jednostek w mieœcie
-
+1. Komunikaty po wciœnieciu przycisków w miescie
+2. Dzia³aj¹ce dodawanie i odejmowanie z³ota
 
 TO DO LIST
 1. Sztuczna inteligencja - w trakcie ;)
-
+2. Dodawanie jednostek w mieœcie - w trakcie as well
 
 Bugs:
 
@@ -286,21 +286,8 @@ int GameState::amountOfdistricts()
 //Inicjacja przeciwników
 void GameState::initEnemies()
 {
-	int one;
-	int two;
-	int three;
-	float posX;
-	float posY;
-	fstream plik("Resources/enemies.txt");
-	while (plik >> one)
-	{
-		plik >> two;
-		plik >> three;
-		plik >> posX;
-		plik >> posY;
-		for (int i = 0; i < 2; i++) {
-			this->enemies.push_back(pair<Enemy*, vector<Unit*>>(new Enemy(Color(one, two, three, 255)), { new Unit(Color(one, two, three, 255), vector<int> {}, sf::Vector2f(posX, posY)) }));
-		}
+	for (int i = 0; i < 2; i++) {
+		this->enemies.push_back(pair<Enemy*, vector<Unit*>>(new Enemy(Color::Blue), { new Unit(Color::Blue, vector<int> {}, sf::Vector2f(0,0)) }));
 	}
 }
 

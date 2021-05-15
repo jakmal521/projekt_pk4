@@ -36,6 +36,8 @@ private:
 	Color hover;
 	//Czy ktoœ nacisn¹³
 	bool pressed;
+	//Dawanie tesktu na poprawn¹ pozycjê
+	void setText();
 	friend class Unit;
 	friend class CityState;
 };
