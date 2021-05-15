@@ -14,7 +14,11 @@ class CityState :
 {
 public:
 	CityState(RenderWindow* window, Font _font, stack<State*>* _states, City& city, int gold);
+<<<<<<< HEAD
 	~CityState();
+=======
+	 ~CityState();
+>>>>>>> 1cf8ecfa341a597c60367b220b285f900b4d62bc
 
 	void update();
 	void render(RenderTarget* target = nullptr);

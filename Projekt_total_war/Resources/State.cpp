@@ -7,7 +7,7 @@ State::State(RenderWindow* window, stack<State*>*& _states)
 	this->ifend = false;
 }
 
-State::~State()
+ State::~State()
 {
 	
 }

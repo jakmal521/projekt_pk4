@@ -136,7 +136,7 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, ve
 								this->to_delete = true;
 								this->nextUnit = i;
 							}
-							/*else if (units[i]->UnitShape.getGlobalBounds().contains(mpos) && units[i]->UnitShape.getGlobalBounds().contains(mpos) != this->UnitShape.getGlobalBounds().contains(mpos) && this->colorOfOwner != units[i]->colorOfOwner)*/
+							
 						}
 						for (int j = 0; j < enemies.size(); j++)
 						{
@@ -145,7 +145,7 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, ve
 								if (enemies[j].second[k]->UnitShape.getGlobalBounds().contains(mpos) && enemies[j].first->playerColor() != this->colorOfOwner)
 								{
 									cout << "walka!!!";
-									this->fight(enemies[j].second[k]);
+									this->fight(*enemies[j].second[k]);
 								}
 							}
 						}
@@ -189,7 +189,7 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, ve
 							else if (cities[i]->cityIcon.getGlobalBounds().contains(mpos) && this->colorOfOwner != cities[i]->colorOfOwner)
 							{
 								cout << "Atak na miasto\n";
-								this->cityAttack(cities[i]);
+								this->cityAttack(*cities[i]);
 							}
 						}
 
@@ -339,12 +339,74 @@ void Unit::setDistance()
 	this->distance = 600.f;
 }
 //Walka dwóch oddzia³ów
-void Unit::fight(Unit* enemyUnit)
+void Unit::fight(Unit& enemyUnit)
 {
+	float attackChance = 3 * this->archers + 5 * this->knights + 10 * this->horses;
+	float defenceChance= 3 * enemyUnit.archers + 5 * enemyUnit.knights + 10 * enemyUnit.horses;
+	float chanceToDefend = (defenceChance / attackChance) * 100;
+
+	if (chanceToDefend > 500)
+	{
+
+		this->to_delete = true;
+
+	}
+	else
+	{
+		if (rand() % 500 + 1 > chanceToDefend)
+		{
+			enemyUnit.to_delete = true;
+
+		}
+		else
+		{
+			this->to_delete = true;
+
+		}
+
+	}
 }
 //atakowanie miasta
-void Unit::cityAttack(City* city)
+void Unit::cityAttack(City& city)
 {
+	if (!city.archers && !city.knights && !city.horses)
+
+	{
+
+		city.colorOfOwner = this->colorOfOwner;
+		return;
+	}
+	float cityChance = 10 * city.archers + 5 * city.knights + 5 * city.horses;
+	float unitChance = 8 * this->archers + 4 * this->knights + 2 * this->horses;
+
+	float chanceToSaveCity = (cityChance / unitChance) * 100;
+
+	if (chanceToSaveCity > 500)
+	{
+
+		this->to_delete = true;
+
+	}
+	else
+	{
+		if (rand() % 500 + 1 > chanceToSaveCity)
+		{
+			city.colorOfOwner = this->colorOfOwner;
+			city.archers = 0;
+			city.knights = 0;
+			city.horses = 0;
+
+		}
+		else 
+		{
+			this->to_delete = true;
+
+		}
+
+	}
+	
+	
+
 }
 
 //Poruszanie jednostkami Ai

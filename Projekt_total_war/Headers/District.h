@@ -23,6 +23,7 @@ public:
 	~District();
 
 	//Settery
+
 	ConvexShape shape; //Kszta³t dystryktu
 
 	//Zwraca 0 albo 1 w zale¿noœci czy jest gracz czy go nie ma

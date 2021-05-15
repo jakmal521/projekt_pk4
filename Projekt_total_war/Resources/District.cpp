@@ -10,11 +10,7 @@ District::~District()
 {
 }
 
-//settery
-void District::setColor()
-{
-	//this->shape.setFillColor(Color());
-}
+
 
 /// <summary>Zwraca isCursor.</summary>
 /// <returns>Bool</returns>
@@ -55,12 +51,18 @@ void District::update(Vector2f mpos)
 //Rysowanie dystryktów
 void District::render(RenderTarget* target)
 {
+	if (this->cities.back()->colorOfOwner != this->shape.getFillColor())
+				this->shape.setFillColor(this->cities.back()->colorOfOwner);
 	target->draw(this->shape);
 	if (!this->cities.empty())
 	{
 		for (auto& i : this->cities)
+		{
 			i->render(target);
+			
+		}
 	}
+	
 }
 
 sf::Vector2f District::returnPosition()
