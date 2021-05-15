@@ -2,7 +2,6 @@
 /*
 Co ostatnio zrobione?
 
-
 TO DO LIST
 1. Sztuczna inteligencja - w trakcie ;)
 2. Sprawdzenie koñca
@@ -12,7 +11,6 @@ TO DO LIST
 6. tekst jakie jednostki siê dodaje
 Bugs:
 1. Przytrzymanie (ale zwyk³e klikniêcie tak samo) myszy ci¹gle dodaje jednostki, a te¿ przy wchodzeniu do miasta od razu klika w przycisk (przez co np. mo¿e od razu ulepszyæ miasto albo wejœæ do rekrutowania jednostek)
-
 
 Dodatkowe
 1. Czy chcemy mieæ inne ikonki dla ró¿nego rodzaju miast???- jak zd¹¿ymy XD
@@ -118,8 +116,16 @@ void GameState::update()
 		}
 		if (i.second->cities.back()->isUnitsDeployed())
 		{
-			initUnit(i.second->cities.back()->getPosition(), i.second->cities.back()->howManyUnits());
-			i.second->cities.back()->deleteTroops();
+			if (i.second->cities.back()->colorOfOwner == Color::Red)
+			{
+				initUnit(i.second->cities.back()->getPosition(), i.second->cities.back()->howManyUnits());
+				i.second->cities.back()->deleteTroops();
+			}
+			else
+			{
+				initUnit(i.second->cities.back()->getPosition(), i.second->cities.back()->howManyUnits());
+				i.second->cities.back()->deleteTroops();
+			}
 		}
 		if (i.second->cities.back()->isToUpdate())
 		{

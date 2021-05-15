@@ -1,91 +1,6 @@
 ﻿  Projekt_total_war.cpp
 C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Projekt_total_war.cpp(6,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
   Button.cpp
-  City.cpp
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\City.cpp(37,65): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\City.cpp(37,31): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\City.cpp(123,63): warning C4244: "argument": konwersja z "float" do "sf::Int32", możliwa utrata danych
-  CityState.cpp
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(77,90): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(77,63): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(90,56): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
-          with
-          [
-              T=int
-          ]
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(101,67): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(106,66): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(111,67): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(155,104): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(155,68): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(156,102): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(156,66): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(162,103): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(162,67): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(163,104): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(163,68): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(164,102): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(164,66): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(166,71): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(167,73): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(168,72): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(169,73): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(170,73): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(171,72): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(172,73): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(319,232): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(320,231): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(321,232): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(342,155): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(342,123): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(343,154): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(343,122): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(344,155): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(344,123): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(345,110): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(345,74): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(346,109): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(346,73): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(347,110): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(347,74): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(348,156): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(348,72): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(363,111): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(363,75): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(364,109): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(364,73): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(372,110): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(372,74): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(373,111): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(373,75): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(374,109): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(374,73): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(380,80): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(381,79): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(382,80): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(383,80): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(384,79): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(385,80): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(386,78): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(395,74): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(396,73): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\CityState.cpp(397,74): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
   District.cpp
 C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\District.cpp(88,76): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
           with
@@ -127,10 +42,9 @@ C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Di
           [
               T=float
           ]
-  Enemy.cpp
   Game.cpp
   GameState.cpp
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\GameState.cpp(271,74): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\GameState.cpp(276,74): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
           with
           [
               T=unsigned int
@@ -139,7 +53,7 @@ C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Ga
           [
               T=float
           ]
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\GameState.cpp(271,53): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\GameState.cpp(276,53): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
           with
           [
               T=unsigned int
@@ -174,12 +88,12 @@ C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Ma
   Player.cpp
   Unit.cpp
 C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(48,32): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(223,63): warning C4244: "argument": konwersja z "float" do "sf::Int32", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(344,21): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(345,21): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(379,19): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(380,19): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
-  Position.cpp
-  Village.cpp
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(222,63): warning C4244: "argument": konwersja z "float" do "sf::Int32", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(343,21): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(344,22): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(372,19): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(373,19): warning C4244: "inicjowanie": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(533,6): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\krzys\source\repos\projekt_pk4_total_war\Projekt_total_war\Resources\Unit.cpp(605,23): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
   Generowanie kodu...
   Projekt_total_war.vcxproj -> C:\Users\krzys\source\repos\projekt_pk4_total_war\x64\Debug\Projekt_total_war.exe
