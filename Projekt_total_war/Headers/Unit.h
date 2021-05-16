@@ -73,8 +73,6 @@ private:
 	//Clock
 	sf::Clock clickClock;
 
-	//Parametry
-	float moveSpeed;
 	friend class GameState;
 
 	//Sprawdzenie czy trzeba usun¹æ jednostkê
