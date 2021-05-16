@@ -250,7 +250,16 @@ void GameState::initDis()
 	string name;
 	int points;
 	char color;
-	fstream plik("Resources/districts.txt");
+	string fileName = ("Resources/districts.txt");
+	smatch result;
+	regex pattern("^.+\.txt$");
+	if (!regex_match(fileName, result, pattern))
+
+	{
+		cout << "Nieprawidlowy plik TXT z mapa. Moga pojawic sie bledy!";
+	}
+	fstream plik;
+	plik.open(fileName);
 	while (plik >> name)
 	{
 		plik >> color;
@@ -392,7 +401,16 @@ void GameState::initEnemies()
 	int three;
 	float posX;
 	float posY;
-	fstream plik("Resources/enemies.txt");
+	string fileName = ("Resources/enemies.txt");
+	smatch result;
+	regex pattern("^.+\.txt$");
+	if (!regex_match(fileName, result, pattern))
+
+	{
+		cout<< "Nieprawidlowy plik TXT z przeciwnikami. Moga pojawic sie bledy!";
+	}
+	fstream plik;
+	plik.open(fileName);
 	while (plik >> one)
 	{
 		plik >> two;
