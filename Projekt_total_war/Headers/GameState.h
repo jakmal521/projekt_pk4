@@ -25,7 +25,9 @@ private:
 
 	//Wychodzenie z rozgrywki
 	void end();
-
+	// Koniec rozgrywki
+	bool won;
+	bool ifPlayerWon();
 	//Przechowuje pozycje i view
 	View view1;
 	View view2;

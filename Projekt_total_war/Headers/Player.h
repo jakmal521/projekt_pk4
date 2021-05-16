@@ -30,6 +30,7 @@ private:
 	int gold;
 
 	friend class HeadBar;
+	friend class GameState;
 	friend class Unit;
 	friend class Enemy;
 };

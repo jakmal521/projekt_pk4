@@ -371,12 +371,18 @@ void Unit::fight(Unit& enemyUnit)
 	{
 		if (rand() % 500 + 1 > chanceToDefend)
 		{
+			this->knights -= rand() % this->knights;
+			this->archers -= rand() % this->archers;
+			this->horses -= rand() % this->horses;
 			enemyUnit.to_delete = true;
 		}
 		else
 		{
 			this->to_delete = true;
-		}
+			enemyUnit.knights -= rand() %enemyUnit.knights;
+			enemyUnit.archers -= rand() % enemyUnit.archers;
+			enemyUnit.horses -= rand() % enemyUnit.horses;
+		}	
 	}
 }
 //atakowanie miasta
@@ -396,6 +402,9 @@ void Unit::cityAttack(City& city)
 	if (chanceToSaveCity > 500)
 	{
 		this->to_delete = true;
+		city.knights -= rand() % city.knights;
+		city.archers -= rand() % city.archers;
+		city.horses -= rand() % city.horses;
 	}
 	else
 	{
@@ -405,9 +414,15 @@ void Unit::cityAttack(City& city)
 			city.archers = 0;
 			city.knights = 0;
 			city.horses = 0;
+			this->knights -= rand() % this->knights;
+			this->archers -= rand() % this->archers;
+			this->horses -= rand() % this->horses;
 		}
 		else
 		{
+			city.knights -= rand() % city.knights;
+			city.archers -= rand() % city.archers;
+			city.horses -= rand() % city.horses;
 			this->to_delete = true;
 		}
 	}

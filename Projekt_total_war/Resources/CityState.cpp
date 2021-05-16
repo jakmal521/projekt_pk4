@@ -1,6 +1,6 @@
 #include "..\Headers\CityState.h"
 
-CityState::CityState(RenderWindow* window, Font _font, stack<State*>* _states, City& city, int gold) : State(window, _states)
+CityState::CityState(RenderWindow* window, Font _font, stack<State*>* _states, City& city, int gold, Player* player) : State(window, _states)
 {
 	this->mouseHeld = false;
 	this->initBackground(window);
@@ -9,12 +9,14 @@ CityState::CityState(RenderWindow* window, Font _font, stack<State*>* _states, C
 	this->initText(font, city);
 	this->initButtons();
 	this->initInfo();
-	this->ownerGold = gold;
+	this->ownerGold = player->getGold();
 	this->timeToSeeAlert = -1;
 	this->hiddenMainbuttons = false;
 	this->newArcher = 0;
 	this->newHorse = 0;
 	this->newKnight = 0;
+	this->player = player;
+
 }
 
 CityState::~CityState()
@@ -23,13 +25,15 @@ CityState::~CityState()
 	{
 		delete i.second;
 	}
+	cout << this->ownerGold << endl;
+	this->player->setGold(this->ownerGold);
 }
 
 void CityState::update()
 {
 	this->mousepos();
 	this->end();
-	this->updateButtons(this->ownerGold);
+	this->updateButtons();
 	this->updateInfo();
 }
 
@@ -196,7 +200,7 @@ void CityState::initButtons()
 	this->buttons["-archers"] = new Button(-100, this->window->getSize().y * 0.75, 50, 50, &this->font, "-", Color(0, 0, 0, 150));
 }
 
-void CityState::updateButtons(int playerGold)
+void CityState::updateButtons()
 {
 	for (auto& i : this->buttons)
 		i.second->update(this->mouseposview);
@@ -209,13 +213,15 @@ void CityState::updateButtons(int playerGold)
 		{
 			this->timeToSeeAlert = 100;
 			this->error.setString("Wyjdz z miasta a zobaczysz efekty przy najblizszej wizycie!");
-			playerGold -= this->city->getGoldToUpgrade();
+			
+			
 		}
-		else if (this->buttons["Upgrade"]->press() && playerGold >= this->city->getGoldToUpgrade())
+		else if (this->buttons["Upgrade"]->press() && this->ownerGold >= this->city->getGoldToUpgrade() && !this->city->toUpdate)
 		{
 			this->city->toUpdate = true;
+			this->ownerGold -= this->city->getGoldToUpgrade();
 		}
-		else if (this->buttons["Upgrade"]->press() && playerGold < this->city->getGoldToUpgrade())
+		else if (this->buttons["Upgrade"]->press() && this->ownerGold < this->city->getGoldToUpgrade())
 		{
 			this->timeToSeeAlert = 100;
 			this->error.setString("Brak odpowiedniej ilosci zlota!");
@@ -308,10 +314,10 @@ void CityState::updateButtons(int playerGold)
 		ss << "Trenuj\n" << (newKnight * 400 + newHorse * 500 + newArcher * 300) << " zlota";
 		this->buttons["submit"]->text.setString(ss.str());
 
-		if (this->buttons["submit"]->press() && playerGold >= sum)
+		if (this->buttons["submit"]->press() && this->ownerGold >= sum)
 		{
 			this->hiddenMainbuttons = false;
-			playerGold -= sum;
+			this->ownerGold -= sum;
 			cout << newArcher << endl;
 			this->city->archers += this->newArcher;
 			this->city->knights += this->newKnight;
@@ -321,7 +327,7 @@ void CityState::updateButtons(int playerGold)
 			this->updateInfo();
 			this->showingMainButtons();
 		}
-		else if (this->buttons["submit"]->press() && playerGold < sum)
+		else if (this->buttons["submit"]->press() && this->ownerGold < sum)
 		{
 			this->timeToSeeAlert = 100;
 			this->error.setString("Brak odpowiedniej ilosci zlota!");
