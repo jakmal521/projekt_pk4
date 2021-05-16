@@ -13,7 +13,9 @@ Unit::Unit()
 //Inicjalizacja jednostki
 Unit::Unit(Color color, vector<int> amountOfTroops, sf::Vector2f position)
 {
+	//Atrybuty jednostki
 	this->colorOfOwner = color;
+	this->distance = 700.f;
 	if (amountOfTroops.size() == 0)
 	{
 		this->knights = 1;
@@ -30,18 +32,15 @@ Unit::Unit(Color color, vector<int> amountOfTroops, sf::Vector2f position)
 	{
 		std::cout << "Error with vector amountOfTroops";
 	}
+
+	//Mechanika gry dla jednostki
 	this->to_delete = false;
-	this->distance = 700.f;
-	//Atrybuty gracza
-	this->moveSpeed = 600;
-
 	this->newUnit = false;
-
+	this->clicked = false;
 	this->mouseRightHeld = false;
 	this->mouseLeftHeld = false;
-	this->clicked = false;
 
-	//Obrazek gracza
+	//Obrazek jednostki
 	this->UnitTexture.loadFromFile("JPG/knight.png");
 	this->UnitShape.setTexture(&this->UnitTexture);
 	this->UnitShape.setSize(Vector2f(100.f, 100.f));
@@ -65,7 +64,7 @@ Unit::Unit(Color color, vector<int> amountOfTroops, sf::Vector2f position)
 	this->moveShape.setSize(sf::Vector2f(50.f, 50.f));
 	this->moveShape.setOrigin(sf::Vector2f(25.f, 25.f));
 
-	//Przyciski
+	//Przyciski dla info o jednostce
 	this->buttonsFont.loadFromFile("Fonts/RomanSD.ttf");
 	this->buttonBackground.setSize(sf::Vector2f(100.f, 100.f));
 	this->buttonBackground.setFillColor(sf::Color::Transparent);
@@ -80,24 +79,20 @@ Unit::Unit(Color color, vector<int> amountOfTroops, sf::Vector2f position)
 	this->buttonCancel.setPosition(-1000.f, -1000.f);
 	this->font.loadFromFile("Fonts/RomanSD.ttf");
 
-	{//To trzeba jeszcze dodaæ
-		this->buttonBackgroundText.setFont(this->font);
-		this->buttonBackgroundText.setFillColor(Color::White);
-		this->buttonBackgroundText.setCharacterSize(8);
-		
-		this->cancel.setFont(this->font);
-		this->cancel.setFillColor(Color::White);
-		this->cancel.setCharacterSize(8);
-		this->cancel.setString("Zamknij");
-		
-		this->split.setFont(this->font);
-		this->split.setFillColor(Color::White);
-		this->split.setCharacterSize(8);
-		this->split.setString("Dziel");
+	//Tekst dla info o jednostce, w tym zamknij i podziel
+	this->buttonBackgroundText.setFont(this->font);
+	this->buttonBackgroundText.setFillColor(Color::White);
+	this->buttonBackgroundText.setCharacterSize(8);
 
+	this->cancel.setFont(this->font);
+	this->cancel.setFillColor(Color::Transparent);
+	this->cancel.setCharacterSize(8);
+	this->cancel.setString("Zamknij");
 
-		
-	}
+	this->split.setFont(this->font);
+	this->split.setFillColor(Color::Transparent);
+	this->split.setCharacterSize(8);
+	this->split.setString("Dziel");
 }
 
 Unit::~Unit()
@@ -198,6 +193,7 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, ve
 									this->to_delete = true;
 								}
 							}
+							//cities[i]->cityIcon.getPosition();
 							else if (cities[i]->cityIcon.getGlobalBounds().contains(mpos) && this->colorOfOwner != cities[i]->colorOfOwner)
 							{
 								cout << "Atak na miasto\n";
@@ -234,8 +230,6 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, ve
 			{
 				if (this->clickClock.getElapsedTime() <= sf::milliseconds(600.f))
 				{
-					
-
 					this->clicked = true;
 					this->UnitShape.setFillColor(sf::Color::Red);
 					this->showButtons();
@@ -281,7 +275,6 @@ void Unit::updateAll(sf::Vector2f mpos, bool iCOD)
 		this->UnitShape.setFillColor(this->UnitShapeColor);
 	if (this->UnitShape.getGlobalBounds().contains(mpos))
 	{
-		
 		this->UnitShape.setFillColor(Color::Red);
 	}
 }
@@ -298,7 +291,6 @@ void Unit::render(sf::RenderTarget* target)
 		target->draw(this->buttonCancel);
 		target->draw(this->cancel);
 		target->draw(this->split);
-
 	}
 }
 
@@ -329,7 +321,10 @@ void Unit::showButtons()
 	this->buttonBackgroundText.setString(ss.str());
 	this->buttonBackgroundText.setPosition(this->buttonBackground.getPosition().x + (this->buttonBackground.getGlobalBounds().width / 2) - this->buttonBackgroundText.getGlobalBounds().width / 2, this->buttonBackground.getPosition().y - 100);
 
+	this->cancel.setFillColor(sf::Color::White);
 	this->cancel.setPosition(this->buttonCancel.getPosition().x + (this->buttonCancel.getGlobalBounds().width / 2) - this->cancel.getGlobalBounds().width / 2, this->buttonCancel.getPosition().y + (this->buttonCancel.getGlobalBounds().height / 2) - this->cancel.getGlobalBounds().height / 2);
+
+	this->split.setFillColor(sf::Color::White);
 	this->split.setPosition(this->buttonSplit.getPosition().x + (this->buttonSplit.getGlobalBounds().width / 2) - this->split.getGlobalBounds().width / 2, this->buttonSplit.getPosition().y + (this->buttonSplit.getGlobalBounds().height / 2) - this->split.getGlobalBounds().height / 2);
 }
 
@@ -337,17 +332,23 @@ void Unit::hideButtons()
 {
 	this->drawButton = false;
 	this->buttonBackground.setFillColor(sf::Color::Transparent);
-	this->buttonBackground.setPosition(sf::Vector2f(-100.f, -100.f));
+	this->buttonBackground.setPosition(sf::Vector2f(-1000.f, -1000.f));
 
 	this->buttonCancel.setFillColor(sf::Color::Transparent);
-	this->buttonCancel.setPosition(sf::Vector2f(-100.f, -100.f));
+	this->buttonCancel.setPosition(sf::Vector2f(-1000.f, -1000.f));
 
 	this->buttonSplit.setFillColor(sf::Color::Transparent);
-	this->buttonSplit.setPosition(sf::Vector2f(-100.f, -100.f));
+	this->buttonSplit.setPosition(sf::Vector2f(-1000.f, -1000.f));
+
+	this->split.setFillColor(sf::Color::Transparent);
+	this->split.setPosition(sf::Vector2f(-1000.f, -1000.f));
+
+	this->cancel.setFillColor(sf::Color::Transparent);
+	this->split.setPosition(sf::Vector2f(-1000.f, -1000.f));
 
 	if (!this->mouseRightHeld) {
 		this->moveShape.setFillColor(sf::Color::Transparent);
-		this->moveShape.setPosition(sf::Vector2f(-100.f, -100.f));
+		this->moveShape.setPosition(sf::Vector2f(-1000.f, -1000.f));
 	}
 }
 
@@ -542,71 +543,84 @@ void Unit::updateAiUnits(int turn, vector <Unit*>* units, map<string, District*>
 						}
 					}
 				}
-
-				if (turn > 10)
+			}
+			if (turn > 5)
+			{
+				if (i.second->cities.back()->knights > 20)
 				{
-					if (i.second->cities.back()->knights > 20)
-					{
-						i.second->cities.back()->deployUnits = true;
-					}
-					for (int i = enemies->at(whichEnemyIsChoosen).second.size(); i > 1; i--)
-					{
-						float x = -(enemies->at(whichEnemyIsChoosen).second[i]->moveShape.getPosition().x - enemies->at(whichEnemyIsChoosen).second[i - 1]->moveShape.getPosition().x);
-						float y = -(enemies->at(whichEnemyIsChoosen).second[i]->moveShape.getPosition().y - enemies->at(whichEnemyIsChoosen).second[i - 1]->moveShape.getPosition().y);
-
-						this->distance = sqrt((x * x) + (y * y));
-
-						if (distance > 600.f)
-						{
-							if (x > 17.5 && y > 17.5)
-							{
-								enemies->at(whichEnemyIsChoosen).second[i]->moveShape.move(17.5, 17.5);
-							}
-							else if (x > 17.5 && y < 17.5)
-							{
-								enemies->at(whichEnemyIsChoosen).second[i]->moveShape.move(17.5, -y);
-							}
-							else
-							{
-								enemies->at(whichEnemyIsChoosen).second[i]->moveShape.move(-x, 17.5);
-							}
-						}
-						else
-						{
-							enemies->at(whichEnemyIsChoosen).second[i]->archers += enemies->at(whichEnemyIsChoosen).second[i - 1]->archers;
-							enemies->at(whichEnemyIsChoosen).second[i]->knights += enemies->at(whichEnemyIsChoosen).second[i - 1]->knights;
-							enemies->at(whichEnemyIsChoosen).second[i]->horses += enemies->at(whichEnemyIsChoosen).second[i - 1]->horses;
-							enemies->at(whichEnemyIsChoosen).second[i]->to_delete = true;
-						}
-					}
-					if (turn > 15)
-					{
-						float x = enemies->at(whichEnemyIsChoosen).second[0]->moveShape.getPosition().x - closestEnemyCity(*districts, enemies->at(whichEnemyIsChoosen).second[0]).x;
-						float y = enemies->at(whichEnemyIsChoosen).second[0]->moveShape.getPosition().y - closestEnemyCity(*districts, enemies->at(whichEnemyIsChoosen).second[0]).y;
-
-						this->distance = sqrt((x * x) + (y * y));
-
-						if (distance > 600.f)
-						{
-							if (x > 17.5 && y > 17.5)
-							{
-								enemies->at(whichEnemyIsChoosen).second[0]->moveShape.move(17.5, 17.5);
-							}
-							else if (x > 17.5 && y < 17.5)
-							{
-								enemies->at(whichEnemyIsChoosen).second[0]->moveShape.move(17.5, -y);
-							}
-							else
-							{
-								enemies->at(whichEnemyIsChoosen).second[0]->moveShape.move(-x, 17.5);
-							}
-						}
-						else
-						{
-							//this->cityAttack(*cities[i]);
-						}
-					}
+					i.second->cities.back()->deployUnits = true;
 				}
+			}
+		}
+	}
+	if (turn /*> 10*/)
+	{
+		for (int i = enemies->at(whichEnemyIsChoosen).second.size() - 1; i > 0; i--)
+		{
+			cout << "I'm in\n";
+			float a1 = enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.getPosition().x;
+			float a2 = enemies->at(whichEnemyIsChoosen).second[i - 1]->UnitShape.getPosition().x;
+			float x = -(a1 - a2);
+
+			a1 = enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.getPosition().y;
+			a2 = enemies->at(whichEnemyIsChoosen).second[i - 1]->UnitShape.getPosition().y;
+			float y = -(a1 - a2);
+
+			this->distance = sqrt((x * x) + (y * y));
+
+			if (distance > 400.f)
+			{
+				if (x > 14 && y > 14)
+				{
+					enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.move(17.5, 17.5);
+				}
+				else if (x > 14 && y < 14)
+				{
+					enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.move(17.5, y);
+				}
+				else
+				{
+					enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.move(x, 17.5);
+				}
+			}
+			else
+			{
+				enemies->at(whichEnemyIsChoosen).second[i]->archers += enemies->at(whichEnemyIsChoosen).second[i - 1]->archers;
+				enemies->at(whichEnemyIsChoosen).second[i]->knights += enemies->at(whichEnemyIsChoosen).second[i - 1]->knights;
+				enemies->at(whichEnemyIsChoosen).second[i]->horses += enemies->at(whichEnemyIsChoosen).second[i - 1]->horses;
+				enemies->at(whichEnemyIsChoosen).second[i]->to_delete = true;
+			}
+		}
+		if (turn > 15)
+		{
+			float a1 = enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.getPosition().x;
+			float a2 = closestEnemyCity(*districts, enemies->at(whichEnemyIsChoosen).second[0]).x;
+			float x = -(a1 - a2);
+
+			a1 = enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.getPosition().y;
+			a2 = closestEnemyCity(*districts, enemies->at(whichEnemyIsChoosen).second[0]).y;
+			float y = -(a1 - a2);
+
+			this->distance = sqrt((x * x) + (y * y));
+
+			if (distance > 400.f)
+			{
+				if (x > 14 && y > 14)
+				{
+					enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.move(17.5, 17.5);
+				}
+				else if (x > 14 && y < 14)
+				{
+					enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.move(17.5, y);
+				}
+				else
+				{
+					enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.move(x, 17.5);
+				}
+			}
+			else
+			{
+				//this->cityAttack(*cities[i]);
 			}
 		}
 	}

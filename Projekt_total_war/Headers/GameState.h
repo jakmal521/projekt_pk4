@@ -49,7 +49,7 @@ private:
 
 	//Klasa jednostki
 	vector<Unit*> unit;
-	void initUnit(sf::Vector2f position, vector<int> amountOfTroops);
+	void initUnit(sf::Vector2f position, vector<int> amountOfTroops, Color color);
 
 	int howManyUnitsOnMap;
 	int whichUnit = 0;
@@ -60,7 +60,7 @@ private:
 	void initPlayer();
 	//Ile regionów ma gracz
 	int amountOfdistricts();
-	int amountOfEnemydistricts(Enemy *enemy);
+	int amountOfEnemydistricts(Enemy* enemy);
 
 	//Runda
 	int turn = 1;
