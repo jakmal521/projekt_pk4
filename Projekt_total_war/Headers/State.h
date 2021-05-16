@@ -22,7 +22,6 @@ public:
 	//Metody
 	virtual void update() = 0;
 	virtual void render(RenderTarget* target = nullptr) = 0;
-	virtual void end() = 0;
 	//Akcesorry i settery
 	const bool ifending();
 	void endState()

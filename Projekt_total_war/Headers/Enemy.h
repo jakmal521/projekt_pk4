@@ -11,5 +11,5 @@ public:
 	void updateEnemy(map<string, District*> districts);
 
 	friend class Unit;
-private:
+
 };

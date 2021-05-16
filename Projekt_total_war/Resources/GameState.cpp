@@ -1,40 +1,18 @@
 #include "..\Headers\GameState.h"
-/*
-Co ostatnio zrobione?
 
-2. Sprawdzenie koñca
-3. pare jednostek dla gracza
-4. jakaœ iloœæ w ka¿dym mieœcie
-3. pare jednostek dla gracza
-5. dzielenie + nazwy przycisków
-6. tekst jakie jednostki siê dodaje
-7. Sztuczna inteligencja - w koñcu xD ;)
 
-TO DO LIST
-
-Bugs:
-1. Przytrzymanie (ale zwyk³e klikniêcie tak samo) myszy ci¹gle dodaje jednostki, a te¿ przy wchodzeniu do miasta od razu klika w przycisk (przez co np. mo¿e od razu ulepszyæ miasto albo wejœæ do rekrutowania jednostek)
-
-Dodatkowe
-1. Czy chcemy mieæ inne ikonki dla ró¿nego rodzaju miast???- jak zd¹¿ymy XD
-2. Ma³e flagi przy jednostkach aby wiadomo do którego koloru nale¿¹???
-3. Komunikat po najechaniu miasta z jego nazw¹ i wielkoœci¹???
-
-*/
 
 //Konstruktory i destruktory
 GameState::GameState(RenderWindow* window, stack<State*>* _states, Font _font)
 	: State(window, _states), howManyUnitsOnMap(5)
 {
 	this->initDis();
-	this->initBackground();
 	this->initView();
 	this->initPlayer();
 	this->initEnemies();
 	this->initUnit(sf::Vector2f(0.f, 0.f), vector<int> {10, 30, 0}, Color::Red);
 	this->initUnit(sf::Vector2f(420.f, 50.f), vector<int> {10, 15, 12}, Color::Red);
 	this->initUnit(sf::Vector2f(550.f, 520.f), vector<int> {0, 100, 0}, Color::Red);
-	// testowe this->initUnit(sf::Vector2f(600.f, -200.f), vector<int> {0, 100, 0}, Color::White);
 	this->font = _font;
 	this->position->initHeadBar(&this->font, this->player);
 	this->won = false;
@@ -141,7 +119,7 @@ void GameState::update()
 			}
 			if (i.second->cities.back()->isToUpdate())
 			{
-				cout << "Ulepszylem miasto\n";
+				
 				if (this->player->getGold() > i.second->cities.back()->getGoldToUpgrade())
 				{
 					i.second->sizeOfCity++;
@@ -209,7 +187,7 @@ void GameState::update()
 			for (int i = 0; i < unit.size(); i++)
 				unit[i]->setDistance();
 
-			cout << "Teraz jest runda " << this->turn++ << "\n";
+			cout << "Runda " << ++this->turn << "\n";
 		}
 	}
 	else
@@ -223,14 +201,13 @@ void GameState::update()
 		endText.setPosition(0, 0);
 		this->window->draw(endText);
 	}
-	//cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
 }
 
 void GameState::render(RenderTarget* target)
 {
 	if (!target)
 		target = this->window;
-	//target->draw(this->background);
+	
 
 	//Renderowanie dystryktów
 	for (auto& i : this->districts)
@@ -300,18 +277,11 @@ void GameState::initDis()
 		std::getline(plik, line);
 		this->districts[name]->initCity(line);
 	}
-	//cout << this->districts.size();
+	
 
 	plik.close();
 }
 
-//Inicjacja t³a
-void GameState::initBackground()
-{
-	this->texture.loadFromFile("JPG/sea_texture.jpg");
-	this->background.setSize(Vector2f(window->getSize().x, window->getSize().y));
-	this->background.setTexture(&this->texture);
-}
 //Wychodzenie z rozgrywki
 void GameState::end()
 {
@@ -373,7 +343,7 @@ void GameState::changeUnit()
 void GameState::initView()
 {
 	this->view2 = window->getDefaultView();
-	//this->view1 = View(Vector2f(0.f, 0.f), Vector2f(400.f, 300.f));
+	
 	this->view1 = View(Vector2f(0.f, 0.f), Vector2f(1080.f, 720.f));
 	this->position = new Position(this->view1.getSize());
 }

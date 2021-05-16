@@ -29,11 +29,7 @@ Position::~Position()
 
 void Position::update(int amountOfDistricts, Vector2f mpos)
 {
-	/*
-		@param void
-		Funkcja aktualizujaca pozycjê ekranu
-		-float speed - predkosc przewijania kamery
-	*/
+	
 	float speed = 4.f;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
@@ -52,8 +48,7 @@ void Position::update(int amountOfDistricts, Vector2f mpos)
 void Position::render(sf::RenderTarget* window)
 {
 	this->headBar->render(window);
-	//this->window->draw;
-	//window.draw(shape);
+	
 }
 
 void Position::initHeadBar(Font* font, Player* player)

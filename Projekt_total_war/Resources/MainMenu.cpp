@@ -21,7 +21,7 @@ void MainMenu::update()
 {
 	this->mousepos();
 	this->updateButtons();
-	//this->end();
+	
 }
 
 void MainMenu::render(RenderTarget* target)
@@ -47,17 +47,14 @@ void MainMenu::initFont()
 {
 	this->font.loadFromFile("Fonts/RomanSD.ttf");
 }
-void MainMenu::end()
-{
-	;
-}
+
 
 //Przyciski
 void MainMenu::initButtons()
 {
 	this->buttons["Menu"] = new Button(this->window->getSize().x * 0.625, this->window->getSize().y * 0.42, 200, 100,& this->font, "Nowa Gra", Color(0, 0, 0, 0));
-	this->buttons["Opcje"] = new Button(this->window->getSize().x * 0.625, this->window->getSize().y * 0.66, 200, 100, 
-		&this->font, "Opcje", Color(0, 0, 0, 0));
+	this->buttons["Exit"] = new Button(this->window->getSize().x * 0.625, this->window->getSize().y * 0.66, 200, 100, 
+		&this->font, "Wyjscie", Color(0, 0, 0, 0));
 }
 
 void MainMenu::updateButtons()
@@ -66,6 +63,11 @@ void MainMenu::updateButtons()
 		i.second->update(this->mouseposview);
 	if (this->buttons["Menu"]->press())
 		this->states->push(new GameState(this->window, this->states,this->font));
+	if (this->buttons["Exit"]->press())
+	{
+		this->ifend = true;
+
+	}
 }
 
 void MainMenu::renderButtons(RenderTarget* target)

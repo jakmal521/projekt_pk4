@@ -193,7 +193,7 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, ve
 							}
 							else if (cities[i]->cityIcon.getGlobalBounds().contains(mpos) && this->colorOfOwner != cities[i]->colorOfOwner)
 							{
-								cout << "Atak na miasto\n";
+								
 								this->cityAttack(*cities[i]);
 							}
 						}
@@ -352,7 +352,7 @@ void Unit::hideButtons()
 //Ustawianie mo¿liwoœci do przejœcia
 void Unit::setDistance()
 {
-	this->distance = 600.f;
+	this->distance = 200.f;
 }
 //Walka dwóch oddzia³ów
 void Unit::fight(Unit& enemyUnit)
@@ -471,13 +471,13 @@ void Unit::updateAiUnits(int turn, vector <Unit*>* units, map<string, District*>
 				int ran = rand() % 100 + 1;
 				if (ran > 85 && i.second->sizeOfCity == 1 && enemies->at(whichEnemyIsChoosen).first->getGold() > 25000)
 				{
-					cout << "Ulepszylem miasto " << i.second->cities.back()->cityName << " rozmiar: " << i.second->sizeOfCity << "\n";
+					//cout << "Ulepszylem miasto " << i.second->cities.back()->cityName << " rozmiar: " << i.second->sizeOfCity << "\n";
 					enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - 25000);
 					i.second->cities.back()->toUpdate = 1;
 				}
 				else if (ran > 99 && i.second->sizeOfCity == 2 && enemies->at(whichEnemyIsChoosen).first->getGold() > 100000)
 				{
-					cout << "Ulepszylem miasto " << i.second->cities.back()->cityName << " rozmiar: " << i.second->sizeOfCity << "\n";
+					//cout << "Ulepszylem miasto " << i.second->cities.back()->cityName << " rozmiar: " << i.second->sizeOfCity << "\n";
 					enemies->at(whichEnemyIsChoosen).first->setGold(enemies->at(whichEnemyIsChoosen).first->getGold() - 100000);
 					i.second->cities.back()->toUpdate = 1;
 				}
@@ -489,7 +489,7 @@ void Unit::updateAiUnits(int turn, vector <Unit*>* units, map<string, District*>
 						int ran = rand() % 5 + 1;
 						if (enemies->at(whichEnemyIsChoosen).first->getGold() > 20000 && ran <= a)
 						{
-							cout << "Dodalem " << ran << " rycerzy do miasta " << i.second->cities.back()->cityName << "\n";
+							//cout << "Dodalem " << ran << " rycerzy do miasta " << i.second->cities.back()->cityName << "\n";
 							i.second->cities.back()->cityIcon.setFillColor(Color::Blue);
 							switch (ran)
 							{
@@ -598,7 +598,7 @@ void Unit::updateAiUnits(int turn, vector <Unit*>* units, map<string, District*>
 			}
 		}
 	}
-	if (turn /*> 10*/)
+	if (turn )
 	{
 		for (int i = enemies->at(whichEnemyIsChoosen).second.size() - 1; i > 0; i--)
 		{

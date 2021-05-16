@@ -25,7 +25,7 @@ CityState::~CityState()
 	{
 		delete i.second;
 	}
-	cout << this->ownerGold << endl;
+	
 	this->player->setGold(this->ownerGold);
 }
 
@@ -91,7 +91,6 @@ void CityState::initText(Font  font, City& city)
 	ss << "Witaj w " << city.cityName;
 	this->greeting.setFont(this->font);
 	this->greeting.setString(ss.str());
-	cout << city.cityName << endl;
 	this->greeting.setFillColor(Color::White);
 	this->greeting.setCharacterSize(30);
 	this->greeting.setPosition(this->window->getPosition().x, 50);
@@ -318,7 +317,6 @@ void CityState::updateButtons()
 		{
 			this->hiddenMainbuttons = false;
 			this->ownerGold -= sum;
-			cout << newArcher << endl;
 			this->city->archers += this->newArcher;
 			this->city->knights += this->newKnight;
 			this->city->horses += this->newHorse;

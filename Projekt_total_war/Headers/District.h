@@ -38,7 +38,7 @@ public:
 	//Nazwa obszaru
 	string name;
 
-	//Miasta
+	
 	//Miasta w obrêbie regionu
 	vector<City*> cities;
 
@@ -52,5 +52,5 @@ private:
 	//Sprawdzenie czy przycisk myszy nie jest przytrzymywany
 	bool mouseHeld;
 
-protected:
+
 };

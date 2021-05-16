@@ -10,7 +10,7 @@ public:
     //Konstruktor i  destruktor
     MainMenu(RenderWindow* window, stack<State*>* _states);
 
-    virtual ~MainMenu();
+    ~MainMenu();
 
 private:
     //t³o
@@ -29,8 +29,8 @@ private:
     //Inicjacja t³a
     void initBackground();
     void initFont();
-    //Sprawdzanie czy koniec stanu
-    void end();
+
+ 
    
     
 };

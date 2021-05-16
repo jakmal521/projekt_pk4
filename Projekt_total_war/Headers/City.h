@@ -15,7 +15,7 @@ class City
 {
 public:
 	//Konstruktor i destruktor
-	City();
+	
 	City(string name, int popMax, Vector2f cityPoints, Color color);
 	virtual ~City();
 

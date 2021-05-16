@@ -23,9 +23,6 @@ City::~City()
 
 void City::initCity(sf::Vector2f cityPos)
 {
-	/*this->nameFont.loadFromFile("Fonts/RomanSD.ttf");
-	this->nameShape.setSize(sf::Vector2f(50.f, 20.f));
-	this->nameText.setFont(nameFont);*/
 
 	this->cityIconTexture.loadFromFile("JPG/city.png");
 	this->cityIcon.setTexture(&this->cityIconTexture);
@@ -101,12 +98,6 @@ void City::update(Vector2f mpos)
 
 	if (this->cityIcon.getGlobalBounds().contains(mpos) /*&& this->colorOfOwner == sf::Color::Red*/)
 	{
-		/*this->nameShape.setPosition(this->cityIcon.getPosition().x, this->cityIcon.getPosition().y - 30);
-		this->nameShape.setFillColor(Color(127, 127, 127, 127));
-		this->nameText.setString(this->cityName);
-		//this->nameText.setColor(Color::White);
-		this->nameText.setCharacterSize(8);
-		this->nameText.setPosition(this->nameShape.getPosition());*/
 
 		this->cityIcon.setFillColor(sf::Color::Red);
 
@@ -119,14 +110,13 @@ void City::update(Vector2f mpos)
 				//Sprawdzenie czy nie minê³o za du¿o czasu od 1 klikniêcia na miasto
 				if (this->clickClock.getElapsedTime() <= sf::milliseconds(600.f))
 				{
-					std::cout << "Double click \n";
+				
 
 					this->doubleClicked = true;
 				}
 				else
 				{
-					std::cout << "Witamy w miescie " << this->cityName << "\n";
-					std::cout << "Single click\n";
+					
 					this->clickClock.restart();	//Zrestartowanie zegara (start zegara)
 				}
 			}

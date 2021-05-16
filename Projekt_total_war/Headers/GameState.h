@@ -37,11 +37,6 @@ private:
 	//Czcionka
 	Font font;
 
-	//T³o
-	RectangleShape background;
-	Texture texture;
-	void initBackground();
-
 	//Wektor regionów
 	map<string, District*> districts;
 	//updatowanie iloœci z³ota z podatków
