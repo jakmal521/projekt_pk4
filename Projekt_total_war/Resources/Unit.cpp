@@ -460,7 +460,7 @@ void Unit::cityAttack(City& city)
 }
 
 //Poruszanie jednostkami Ai
-void Unit::updateAiUnits(int turn, vector <Unit*>* units, map<string, District*>* districts, vector<pair<Enemy*, vector<Unit*>>>* enemies, int whichEnemyIsChoosen)
+void Unit::updateAiUnits(int turn, vector <Unit*>* units, map<string, District*>* districts, vector<pair<Enemy*, vector<Unit*>>>* enemies, int whichEnemyIsChoosen, int once)
 {
 	for (auto& i : *districts)
 	{
@@ -602,7 +602,6 @@ void Unit::updateAiUnits(int turn, vector <Unit*>* units, map<string, District*>
 	{
 		for (int i = enemies->at(whichEnemyIsChoosen).second.size() - 1; i > 0; i--)
 		{
-			cout << "I'm in\n";
 			float a1 = enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.getPosition().x;
 			float a2 = enemies->at(whichEnemyIsChoosen).second[i - 1]->UnitShape.getPosition().x;
 			float x = -(a1 - a2);
@@ -613,67 +612,166 @@ void Unit::updateAiUnits(int turn, vector <Unit*>* units, map<string, District*>
 
 			this->distance = sqrt((x * x) + (y * y));
 
-			if (distance > 400.f)
+			float dad = this->distance;
+
+			if (dad > 19.7)
 			{
-				if (x > 14 && y > 14)
+				if (x >= 14 && y >= 14)
 				{
-					enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.move(17.5, 17.5);
+					enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.move(14, 14);
 				}
-				else if (x > 14 && y < 14)
+				else if (x <= -14 && y <= -14)
 				{
-					enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.move(17.5, y);
+					enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.move(-14, -14);
+				}
+				else if (x >= 14 && y <= -14)
+				{
+					enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.move(14, -14);
+				}
+				else if (x <= -14 && y >= 14)
+				{
+					enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.move(-14, 14);
+				}
+				else if (x >= 14 && ((y >= 0 && y <= 14) || (y <= 0 && y >= -14)))
+				{
+					enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.move(14, y);
+				}
+				else if (x <= -14 && ((y >= 0 && y <= 14) || (y <= 0 && y >= -14)))
+				{
+					enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.move(-14, y);
+				}
+				else if (y >= 14 && ((x >= 0 && x <= 14) || (x <= 0 && x >= -14)))
+				{
+					enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.move(x, 14);
+				}
+				else if (y <= -14 && ((x >= 0 && x <= 14) || (x <= 0 && x >= -14)))
+				{
+					enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.move(x, -14);
 				}
 				else
 				{
-					enemies->at(whichEnemyIsChoosen).second[i]->UnitShape.move(x, 17.5);
+					cout << "Cos nie tak w przemieszczaniu sie AI-I po mapie (Unit.cpp -> updateAiUnits())\n";
 				}
 			}
 			else
 			{
-				enemies->at(whichEnemyIsChoosen).second[i]->archers += enemies->at(whichEnemyIsChoosen).second[i - 1]->archers;
-				enemies->at(whichEnemyIsChoosen).second[i]->knights += enemies->at(whichEnemyIsChoosen).second[i - 1]->knights;
-				enemies->at(whichEnemyIsChoosen).second[i]->horses += enemies->at(whichEnemyIsChoosen).second[i - 1]->horses;
-				enemies->at(whichEnemyIsChoosen).second[i]->to_delete = true;
+				enemies->at(whichEnemyIsChoosen).second[i - 1]->archers += enemies->at(whichEnemyIsChoosen).second[i]->archers;
+				enemies->at(whichEnemyIsChoosen).second[i - 1]->knights += enemies->at(whichEnemyIsChoosen).second[i]->knights;
+				enemies->at(whichEnemyIsChoosen).second[i - 1]->horses += enemies->at(whichEnemyIsChoosen).second[i]->horses;
+				enemies->at(whichEnemyIsChoosen).second.erase(enemies->at(whichEnemyIsChoosen).second.begin() + i);
 			}
 		}
-		if (turn > 15)
+		if (turn > 7 && once == 0)
 		{
-			float a1 = enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.getPosition().x;
-			float a2 = closestEnemyCity(*districts, enemies->at(whichEnemyIsChoosen).second[0]).x;
-			float x = -(a1 - a2);
+			bool enemyOnMap = false;
+			bool enemyCloser = false;
 
-			a1 = enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.getPosition().y;
-			a2 = closestEnemyCity(*districts, enemies->at(whichEnemyIsChoosen).second[0]).y;
-			float y = -(a1 - a2);
+			float xEnemy, yEnemy;
+			float distanceEnemy = numeric_limits<float>::max();
 
-			this->distance = sqrt((x * x) + (y * y));
-
-			if (distance > 400.f)
+			//Sprawdzenie czy s¹ wrogie jednostki na mapie (aby nie powsta³ b³¹d przy szukaniu pozycji nabli¿szej wrogiej jednostki)
+			for (auto& i : *units)
 			{
-				if (x > 14 && y > 14)
+				if (i->colorOfOwner != this->colorOfOwner)
 				{
-					enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.move(17.5, 17.5);
+					enemyOnMap = true;
+					break;
 				}
-				else if (x > 14 && y < 14)
+			}
+
+			//Liczenie X-sa
+			float a1 = enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.getPosition().x;
+			if (enemyOnMap)
+			{
+				float a2 = closestEnemyUnit(enemies->at(whichEnemyIsChoosen).second[0], *units, *enemies)->UnitShape.getPosition().x;
+				xEnemy = -(a1 - a2);
+			}
+			float a3 = closestEnemyCity(*districts, enemies->at(whichEnemyIsChoosen).second[0])->cities.back()->getPosition().x;
+			float xCity = -(a1 - a3);
+
+			//Liczenie Y-ka
+			a1 = enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.getPosition().y;
+			if (enemyOnMap)
+			{
+				float a2 = closestEnemyUnit(enemies->at(whichEnemyIsChoosen).second[0], *units, *enemies)->UnitShape.getPosition().y;
+				yEnemy = -(a1 - a2);
+			}
+			a3 = closestEnemyCity(*districts, enemies->at(whichEnemyIsChoosen).second[0])->cities.back()->getPosition().y;
+			float yCity = -(a1 - a3);
+
+			if (enemyOnMap)
+			{
+				distanceEnemy = sqrt((xEnemy * xEnemy) + (yEnemy * yEnemy));
+			}
+			float distanceCity = sqrt((xCity * xCity) + (yCity * yCity));
+
+			this->distance = min(distanceCity, distanceEnemy);
+			float x = xCity;
+			float y = yCity;
+
+			if (this->distance == distanceEnemy)
+			{
+				enemyCloser = true;
+				x = xEnemy;
+				y = yEnemy;
+			}
+
+			float d = this->distance;
+
+			if (d > 19.7)
+			{
+				if (x >= 14 && y >= 14)
 				{
-					enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.move(17.5, y);
+					enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.move(14, 14);
+				}
+				else if (x <= -14 && y <= -14)
+				{
+					enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.move(-14, -14);
+				}
+				else if (x >= 14 && y <= -14)
+				{
+					enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.move(14, -14);
+				}
+				else if (x <= -14 && y >= 14)
+				{
+					enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.move(-14, 14);
+				}
+				else if (x >= 14 && ((y >= 0 && y <= 14) || (y <= 0 && y >= -14)))
+				{
+					enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.move(14, y);
+				}
+				else if (x <= -14 && ((y >= 0 && y <= 14) || (y <= 0 && y >= -14)))
+				{
+					enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.move(-14, y);
+				}
+				else if (y >= 14 && ((x >= 0 && x <= 14) || (x <= 0 && x >= -14)))
+				{
+					enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.move(x, 14);
+				}
+				else if (y <= -14 && ((x >= 0 && x <= 14) || (x <= 0 && x >= -14)))
+				{
+					enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.move(x, -14);
 				}
 				else
 				{
-					enemies->at(whichEnemyIsChoosen).second[0]->UnitShape.move(x, 17.5);
+					cout << "Cos nie tak w przemieszczaniu sie AI-0 po mapie (Unit.cpp -> updateAiUnits())\n";
 				}
+			}
+			else if (enemyCloser)
+			{
+				this->fight(*closestEnemyUnit(enemies->at(whichEnemyIsChoosen).second[0], *units, *enemies));
 			}
 			else
 			{
-				//this->cityAttack(*cities[i]);
+				this->cityAttack(*closestEnemyCity(*districts, enemies->at(whichEnemyIsChoosen).second[0])->cities.back());
 			}
 		}
 	}
 }
 
-Vector2f Unit::closestEnemyCity(map<string, District*> districts, Unit* unit)
+District* Unit::closestEnemyCity(map<string, District*> districts, Unit* unit)
 {
-	Vector2f closest;
+	District* closestDistrict = nullptr;
 	float distance = numeric_limits<float>::max();
 	float distanceTemp;
 	for (auto& i : districts)
@@ -681,33 +779,58 @@ Vector2f Unit::closestEnemyCity(map<string, District*> districts, Unit* unit)
 		if (unit->colorOfOwner != i.second->cities.back()->colorOfOwner)
 		{
 			distanceTemp = sqrt(
-				pow(i.second->cities.back()->getPosition().x - unit->moveShape.getPosition().x, 2) +
-				pow(i.second->cities.back()->getPosition().y - unit->moveShape.getPosition().y, 2)
+				pow(i.second->cities.back()->getPosition().x - unit->UnitShape.getPosition().x, 2) +
+				pow(i.second->cities.back()->getPosition().y - unit->UnitShape.getPosition().y, 2)
 			);
 			if (distanceTemp < distance)
 			{
 				distance = distanceTemp;
-				closest = i.second->cities.back()->getPosition();
+				closestDistrict = i.second;
 			}
 		}
 	}
-	return closest;
+	return closestDistrict;
 }
 
-/*this->distance -=
-sqrt(
-	(this->UnitShape.getPosition().x - mpos.x) * (this->UnitShape.getPosition().x - mpos.x)
-	+ (this->UnitShape.getPosition().y - mpos.y) * (this->UnitShape.getPosition().y - mpos.y)
-);
-
-for (int i = 0; i < units.size(); i++)
+Unit* Unit::closestEnemyUnit(Unit* unit, vector <Unit*> playerUnit, vector<pair<Enemy*, vector<Unit*>>> enemies)
 {
-	//dodawanie jednostek tylko gdy s¹ tego samego gracza w innym przypadku walka
-	if (units[i]->UnitShape.getGlobalBounds().contains(mpos) && units[i]->UnitShape.getGlobalBounds().contains(mpos) != this->UnitShape.getGlobalBounds().contains(mpos) && this->colorOfOwner == units[i]->colorOfOwner)
+	Unit* closestUnit = nullptr;
+	float distance = numeric_limits<float>::max();
+	float distanceTemp = 0;
+	for (auto& j : enemies)
 	{
-		units[i]->archers += this->archers;
-		units[i]->knights += this->knights;
-		units[i]->horses += this->horses;
-		this->to_delete = true;
-		this->nextUnit = i;
-	}*/
+		for (auto& i : j.second)
+		{
+			if (i->colorOfOwner != this->colorOfOwner)
+			{
+				distanceTemp = sqrt(
+					pow(i->UnitShape.getPosition().x - this->UnitShape.getPosition().x, 2) +
+					pow(i->UnitShape.getPosition().y - this->UnitShape.getPosition().y, 2)
+				);
+				if (distanceTemp < distance)
+				{
+					{
+						distance = distanceTemp;
+						closestUnit = i;
+					}
+				}
+			}
+		}
+	}
+	for (auto& i : playerUnit)
+	{
+		distanceTemp = sqrt(
+			pow(i->UnitShape.getPosition().x - this->UnitShape.getPosition().x, 2) +
+			pow(i->UnitShape.getPosition().y - this->UnitShape.getPosition().y, 2)
+		);
+		if (distanceTemp < distance)
+		{
+			{
+				distance = distanceTemp;
+				closestUnit = i;
+			}
+		}
+	}
+
+	return closestUnit;
+}

@@ -93,7 +93,9 @@ private:
 	void cityAttack(City& city);
 
 	//Poruszanie jednostkami Ai
-	void updateAiUnits(int turn, vector <Unit*>* units, map<string, District*>* districts, vector<pair<Enemy*, vector<Unit*>>>* enemies, int whichEnemyIsChoosen);
+	void updateAiUnits(int turn, vector <Unit*>* units, map<string, District*>* districts, vector<pair<Enemy*, vector<Unit*>>>* enemies, int whichEnemyIsChoosen, int once);
 
-	Vector2f closestEnemyCity(map<string, District*> districts, Unit* unit);
+	District* closestEnemyCity(map<string, District*> districts, Unit* unit);
+
+	Unit* closestEnemyUnit(Unit* unit, vector<Unit*> playerUnit, vector<pair<Enemy*, vector<Unit*>>> enemies);
 };

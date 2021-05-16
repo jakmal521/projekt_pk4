@@ -36,6 +36,7 @@ GameState::GameState(RenderWindow* window, stack<State*>* _states, Font _font)
 	this->initUnit(sf::Vector2f(0.f, 0.f), vector<int> {10, 30, 0}, Color::Red);
 	this->initUnit(sf::Vector2f(420.f, 50.f), vector<int> {10, 15, 12}, Color::Red);
 	this->initUnit(sf::Vector2f(550.f, 520.f), vector<int> {0, 100, 0}, Color::Red);
+	this->initUnit(sf::Vector2f(600.f, -200.f), vector<int> {0, 100, 0}, Color::White);
 	this->font = _font;
 	this->position->initHeadBar(&this->font, this->player);
 	this->won = false;
@@ -192,8 +193,17 @@ void GameState::update()
 				{
 					//for (auto& k : this->districts)
 
-					cout << "Przesun \n";
-					this->enemies[i].second[j]->updateAiUnits(this->turn, &this->unit, &this->districts, &this->enemies, i); //Do zrobienia updateAiUnits
+					this->enemies[i].second[j]->updateAiUnits(this->turn, &this->unit, &this->districts, &this->enemies, i, j); //Do zrobienia updateAiUnits
+					for (int k = 0; k < unit.size(); k++)
+					{
+						if (this->unit[k]->to_delete)
+						{
+							int a = this->unit[this->whichUnit]->nextUnit;
+							if (this->whichUnit < a) a--;	//przy ³¹czeniu w górê trzeba odj¹æ 1 (np. gdy ³¹czymy z 1 do 3 to usunie nam 1-sz¹ jednostkê wiêc musimy wybraæ 2 miejse bo tam wskoczy jednostka nr.3)
+							this->unit.erase(this->unit.begin() + k);
+							this->whichUnit = a;
+						}
+					}
 				}
 			}
 			this->updateGold();
@@ -204,7 +214,8 @@ void GameState::update()
 			cout << "Teraz jest runda " << this->turn++ << "\n";
 		}
 	}
-	else {
+	else
+	{
 		Text endText;
 
 		endText.setFont(this->font);
@@ -214,7 +225,7 @@ void GameState::update()
 		endText.setPosition(0, 0);
 		this->window->draw(endText);
 	}
-	cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
+	//cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
 }
 
 void GameState::render(RenderTarget* target)
