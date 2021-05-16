@@ -2,8 +2,6 @@
 /*
 Co ostatnio zrobione?
 
-TO DO LIST
-1. Sztuczna inteligencja - w trakcie ;)
 2. Sprawdzenie koñca
 3. pare jednostek dla gracza
 4. jakaœ iloœæ w ka¿dym mieœcie
@@ -12,7 +10,7 @@ TO DO LIST
 6. tekst jakie jednostki siê dodaje
 TO DO LIST
 1. Sztuczna inteligencja - w trakcie ;)
-2. Sprawdzenie koñca
+
 
 Bugs:
 1. Przytrzymanie (ale zwyk³e klikniêcie tak samo) myszy ci¹gle dodaje jednostki, a te¿ przy wchodzeniu do miasta od razu klika w przycisk (przez co np. mo¿e od razu ulepszyæ miasto albo wejœæ do rekrutowania jednostek)
@@ -263,7 +261,16 @@ void GameState::initDis()
 	string name;
 	int points;
 	char color;
-	fstream plik("Resources/districts.txt");
+	string fileName = ("Resources/districts.txt");
+	smatch result;
+	regex pattern("^.+\.txt$");
+	if (!regex_match(fileName, result, pattern))
+
+	{
+		cout << "Nieprawidlowy plik TXT z mapa. Moga pojawic sie bledy!";
+	}
+	fstream plik;
+	plik.open(fileName);
 	while (plik >> name)
 	{
 		plik >> color;
@@ -405,7 +412,16 @@ void GameState::initEnemies()
 	int three;
 	float posX;
 	float posY;
-	fstream plik("Resources/enemies.txt");
+	string fileName = ("Resources/enemies.txt");
+	smatch result;
+	regex pattern("^.+\.txt$");
+	if (!regex_match(fileName, result, pattern))
+
+	{
+		cout<< "Nieprawidlowy plik TXT z przeciwnikami. Moga pojawic sie bledy!";
+	}
+	fstream plik;
+	plik.open(fileName);
 	while (plik >> one)
 	{
 		plik >> two;

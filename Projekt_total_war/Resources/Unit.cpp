@@ -151,7 +151,6 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, ve
 							{
 								if (enemies[j].second[k]->UnitShape.getGlobalBounds().contains(mpos) && enemies[j].first->playerColor() != this->colorOfOwner)
 								{
-									cout << "walka!!!";
 									this->fight(*enemies[j].second[k]);
 								}
 							}
@@ -405,12 +404,12 @@ void Unit::fight(Unit& enemyUnit)
 //atakowanie miasta
 void Unit::cityAttack(City& city)
 {
-	if (!city.archers && !city.knights && !city.horses)
-	{
+	//if (!city.archers && !city.knights && !city.horses)
+	//{
 		city.colorOfOwner = this->colorOfOwner;
 		return;
-	}
-	float cityChance = 10 * city.archers + 5 * city.knights + 5 * city.horses;
+	//}
+	/*float cityChance = 10 * city.archers + 5 * city.knights + 5 * city.horses;
 	float unitChance = 8 * this->archers + 4 * this->knights + 2 * this->horses;
 
 	float chanceToSaveCity = (cityChance / unitChance) * 100;
@@ -456,7 +455,7 @@ void Unit::cityAttack(City& city)
 			}
 			this->to_delete = true;
 		}
-	}
+	}*/
 }
 
 //Poruszanie jednostkami Ai
