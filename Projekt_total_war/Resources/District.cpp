@@ -25,7 +25,7 @@ void District::update(Vector2f mpos)
 		for (auto& i : this->cities)
 			i->update(mpos);
 
-	if (this->shape.getGlobalBounds().contains(mpos)) // Trzeba potem to zmieniæ - convex nie wspiera GlobalBounds i trzeba u¿yæ coœ innego albo jakoœ sprawdzaæ inaczej
+	if (this->shape.getGlobalBounds().contains(mpos)) 
 	{
 		this->isCursor = true;	//Jeœli nad dystryktem to true
 
@@ -34,7 +34,7 @@ void District::update(Vector2f mpos)
 		{
 			if (this->mouseHeld == false) {
 				this->mouseHeld = true;
-				//std::cout << "Elo\n";
+				
 			}
 		}
 		else
@@ -93,4 +93,3 @@ void District::initCity(string line)
 	this->cities.back()->initCity(sf::Vector2f(pointA, pointB));
 }
 
-//Inicjowanie kszta³tu

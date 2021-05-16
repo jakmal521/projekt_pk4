@@ -23,8 +23,8 @@ Unit::Unit(Color color, vector<int> amountOfTroops, sf::Vector2f position)
 	else if (amountOfTroops.size() == 3)
 	{
 		this->knights = amountOfTroops[0];
-		this->archers = amountOfTroops[1];
-		this->horses = amountOfTroops[2];
+		this->archers = amountOfTroops[2];
+		this->horses = amountOfTroops[1];
 	}
 	else
 	{
@@ -84,6 +84,19 @@ Unit::Unit(Color color, vector<int> amountOfTroops, sf::Vector2f position)
 		this->buttonBackgroundText.setFont(this->font);
 		this->buttonBackgroundText.setFillColor(Color::White);
 		this->buttonBackgroundText.setCharacterSize(8);
+		
+		this->cancel.setFont(this->font);
+		this->cancel.setFillColor(Color::White);
+		this->cancel.setCharacterSize(8);
+		this->cancel.setString("Zamknij");
+		
+		this->split.setFont(this->font);
+		this->split.setFillColor(Color::White);
+		this->split.setCharacterSize(8);
+		this->split.setString("Dziel");
+
+
+		
 	}
 }
 
@@ -221,7 +234,7 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, ve
 			{
 				if (this->clickClock.getElapsedTime() <= sf::milliseconds(600.f))
 				{
-					std::cout << "Kliknales go lewym mordo\n";
+					
 
 					this->clicked = true;
 					this->UnitShape.setFillColor(sf::Color::Red);
@@ -268,7 +281,7 @@ void Unit::updateAll(sf::Vector2f mpos, bool iCOD)
 		this->UnitShape.setFillColor(this->UnitShapeColor);
 	if (this->UnitShape.getGlobalBounds().contains(mpos))
 	{
-		//this->UnitShape.setFillColor(this->colorOfOwner); podœwietlanie aby sprawdziæ czy ten oddzia³ nale¿y do gracza
+		
 		this->UnitShape.setFillColor(Color::Red);
 	}
 }
@@ -283,6 +296,9 @@ void Unit::render(sf::RenderTarget* target)
 		target->draw(this->buttonBackgroundText);
 		target->draw(this->buttonSplit);
 		target->draw(this->buttonCancel);
+		target->draw(this->cancel);
+		target->draw(this->split);
+
 	}
 }
 
@@ -312,6 +328,9 @@ void Unit::showButtons()
 	ss << "Licznosc jednostki\n\n" << "Rycerze: " << this->knights << "\nKonni: " << this->horses << "\nLucznicy: " << this->archers;
 	this->buttonBackgroundText.setString(ss.str());
 	this->buttonBackgroundText.setPosition(this->buttonBackground.getPosition().x + (this->buttonBackground.getGlobalBounds().width / 2) - this->buttonBackgroundText.getGlobalBounds().width / 2, this->buttonBackground.getPosition().y - 100);
+
+	this->cancel.setPosition(this->buttonCancel.getPosition().x + (this->buttonCancel.getGlobalBounds().width / 2) - this->cancel.getGlobalBounds().width / 2, this->buttonCancel.getPosition().y + (this->buttonCancel.getGlobalBounds().height / 2) - this->cancel.getGlobalBounds().height / 2);
+	this->split.setPosition(this->buttonSplit.getPosition().x + (this->buttonSplit.getGlobalBounds().width / 2) - this->split.getGlobalBounds().width / 2, this->buttonSplit.getPosition().y + (this->buttonSplit.getGlobalBounds().height / 2) - this->split.getGlobalBounds().height / 2);
 }
 
 void Unit::hideButtons()

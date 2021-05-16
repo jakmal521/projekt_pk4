@@ -57,6 +57,9 @@ void CityState::render(RenderTarget* target)
 	target->draw(this->newKnightsText);
 	target->draw(this->newHorsesText);
 	target->draw(this->newArchersText);
+	target->draw(this->knightsText);
+	target->draw(this->horsesText);
+	target->draw(this->archersText);
 }
 
 void CityState::end()
@@ -99,16 +102,37 @@ void CityState::initText(Font  font, City& city)
 	this->newKnightsText.setFillColor(Color::White);
 	this->newKnightsText.setCharacterSize(20);
 	this->newKnightsText.setPosition(-100, this->window->getSize().y * 0.25);
+
 	this->newHorsesText.setFont(this->font);
 	this->newHorsesText.setString("0");
 	this->newHorsesText.setFillColor(Color::White);
 	this->newHorsesText.setCharacterSize(20);
 	this->newHorsesText.setPosition(-100, this->window->getSize().y * 0.50);
+
 	this->newArchersText.setFont(this->font);
 	this->newArchersText.setString("0");
 	this->newArchersText.setFillColor(Color::White);
 	this->newArchersText.setCharacterSize(20);
 	this->newArchersText.setPosition(-100, this->window->getSize().y * 0.75);
+
+	this->knightsText.setFont(this->font);
+	this->knightsText.setString("Nowi rycerze");
+	this->knightsText.setFillColor(Color::Red);
+	this->knightsText.setCharacterSize(30);
+	this->knightsText.setPosition(-300, this->window->getSize().y * 0.75);
+
+	this->horsesText.setFont(this->font);
+	this->horsesText.setString("Nowi konni");
+	this->horsesText.setFillColor(Color::Red);
+	this->horsesText.setCharacterSize(30);
+	this->horsesText.setPosition(-300, this->window->getSize().y * 0.50);
+
+	this->archersText.setFont(this->font);
+	this->archersText.setString("Nowi lucznicy");
+	this->archersText.setFillColor(Color::Red);
+	this->archersText.setCharacterSize(30);
+	this->archersText.setPosition(-300, this->window->getSize().y * 0.75);
+
 }
 
 //inicjalizacja informacji o mieœcie
@@ -354,6 +378,11 @@ void CityState::hidingMainButtons()
 	this->buttons["-horses"]->setText();
 	this->buttons["-archers"]->setText();
 	this->buttons["submit"]->setText();
+
+	
+	this->knightsText.setPosition(this->window->getSize().x * 0.3125 + 25, this->window->getSize().y * 0.25 - 40);
+	this->horsesText.setPosition(this->window->getSize().x * 0.3125 + 25, this->window->getSize().y * 0.5 - 40);
+	this->archersText.setPosition(this->window->getSize().x * 0.3125 + 25, this->window->getSize().y * 0.75 - 40);
 }
 
 void CityState::showingMainButtons()
@@ -398,4 +427,8 @@ void CityState::showingMainButtons()
 	this->newArcher = 0;
 	this->newHorse = 0;
 	this->newKnight = 0;
+
+	this->archersText.setPosition(-300, this->window->getSize().y * 0.25 - 30);
+	this->knightsText.setPosition(-300, this->window->getSize().y * 0.5 - 30);
+	this->horsesText.setPosition(-300, this->window->getSize().y * 0.75 - 30);
 }

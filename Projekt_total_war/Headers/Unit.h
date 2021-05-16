@@ -50,6 +50,9 @@ private:
 	RectangleShape buttonBackground;
 	RectangleShape buttonSplit;
 	RectangleShape buttonCancel;
+	//teksty do klawiszy
+	Text cancel;
+	Text split;
 	sf::Font buttonsFont;
 	void showButtons();
 	void hideButtons();

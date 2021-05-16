@@ -12,9 +12,6 @@ City::City(std::string name, int popMax, sf::Vector2f cityPoints, Color color)
 	this->populationMax = popMax;
 	this->population = rand() % popMax + 1;
 	this->cityPos = cityPoints;
-	this->knights = 0;
-	this->archers = 0;
-	this->horses = 0;
 	this->colorOfOwner = color;
 	this->deployUnits = false;
 	this->toUpdate = 0;
