@@ -401,15 +401,16 @@ void Unit::fight(Unit& enemyUnit)
 		}
 	}
 }
+
 //atakowanie miasta
 void Unit::cityAttack(City& city)
 {
-	//if (!city.archers && !city.knights && !city.horses)
-	//{
+	if (!city.archers && !city.knights && !city.horses)
+	{
 		city.colorOfOwner = this->colorOfOwner;
 		return;
-	//}
-	/*float cityChance = 10 * city.archers + 5 * city.knights + 5 * city.horses;
+	}
+	float cityChance = 10 * city.archers + 5 * city.knights + 5 * city.horses;
 	float unitChance = 8 * this->archers + 4 * this->knights + 2 * this->horses;
 
 	float chanceToSaveCity = (cityChance / unitChance) * 100;
@@ -455,7 +456,7 @@ void Unit::cityAttack(City& city)
 			}
 			this->to_delete = true;
 		}
-	}*/
+	}
 }
 
 //Poruszanie jednostkami Ai
@@ -773,18 +774,18 @@ District* Unit::closestEnemyCity(map<string, District*> districts, Unit* unit)
 	District* closestDistrict = nullptr;
 	float distance = numeric_limits<float>::max();
 	float distanceTemp;
-	for (auto& i : districts)
+	for (map<string, District*>::iterator it = districts.begin(); it != districts.end(); it++)
 	{
-		if (unit->colorOfOwner != i.second->cities.back()->colorOfOwner)
+		if (unit->colorOfOwner != (*it).second->cities.back()->colorOfOwner)
 		{
 			distanceTemp = sqrt(
-				pow(i.second->cities.back()->getPosition().x - unit->UnitShape.getPosition().x, 2) +
-				pow(i.second->cities.back()->getPosition().y - unit->UnitShape.getPosition().y, 2)
+				pow((*it).second->cities.back()->getPosition().x - unit->UnitShape.getPosition().x, 2) +
+				pow((*it).second->cities.back()->getPosition().y - unit->UnitShape.getPosition().y, 2)
 			);
 			if (distanceTemp < distance)
 			{
 				distance = distanceTemp;
-				closestDistrict = i.second;
+				closestDistrict = (*it).second;
 			}
 		}
 	}
@@ -796,9 +797,9 @@ Unit* Unit::closestEnemyUnit(Unit* unit, vector <Unit*> playerUnit, vector<pair<
 	Unit* closestUnit = nullptr;
 	float distance = numeric_limits<float>::max();
 	float distanceTemp = 0;
-	for (auto& j : enemies)
+	for (vector<pair<Enemy*, vector<Unit*>>>::iterator it = enemies.begin(); it != enemies.end(); it++)
 	{
-		for (auto& i : j.second)
+		for (auto& i : (*it).second)
 		{
 			if (i->colorOfOwner != this->colorOfOwner)
 			{
@@ -816,17 +817,17 @@ Unit* Unit::closestEnemyUnit(Unit* unit, vector <Unit*> playerUnit, vector<pair<
 			}
 		}
 	}
-	for (auto& i : playerUnit)
+	for (vector <Unit*>::iterator it = playerUnit.begin(); it != playerUnit.end(); it++)
 	{
 		distanceTemp = sqrt(
-			pow(i->UnitShape.getPosition().x - this->UnitShape.getPosition().x, 2) +
-			pow(i->UnitShape.getPosition().y - this->UnitShape.getPosition().y, 2)
+			pow((*it)->UnitShape.getPosition().x - this->UnitShape.getPosition().x, 2) +
+			pow((*it)->UnitShape.getPosition().y - this->UnitShape.getPosition().y, 2)
 		);
 		if (distanceTemp < distance)
 		{
 			{
 				distance = distanceTemp;
-				closestUnit = i;
+				closestUnit = (*it);
 			}
 		}
 	}

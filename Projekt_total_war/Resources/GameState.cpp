@@ -8,9 +8,9 @@ Co ostatnio zrobione?
 3. pare jednostek dla gracza
 5. dzielenie + nazwy przycisków
 6. tekst jakie jednostki siê dodaje
-TO DO LIST
-1. Sztuczna inteligencja - w trakcie ;)
+7. Sztuczna inteligencja - w koñcu xD ;)
 
+TO DO LIST
 
 Bugs:
 1. Przytrzymanie (ale zwyk³e klikniêcie tak samo) myszy ci¹gle dodaje jednostki, a te¿ przy wchodzeniu do miasta od razu klika w przycisk (przez co np. mo¿e od razu ulepszyæ miasto albo wejœæ do rekrutowania jednostek)
@@ -34,7 +34,7 @@ GameState::GameState(RenderWindow* window, stack<State*>* _states, Font _font)
 	this->initUnit(sf::Vector2f(0.f, 0.f), vector<int> {10, 30, 0}, Color::Red);
 	this->initUnit(sf::Vector2f(420.f, 50.f), vector<int> {10, 15, 12}, Color::Red);
 	this->initUnit(sf::Vector2f(550.f, 520.f), vector<int> {0, 100, 0}, Color::Red);
-	this->initUnit(sf::Vector2f(600.f, -200.f), vector<int> {0, 100, 0}, Color::White);
+	// testowe this->initUnit(sf::Vector2f(600.f, -200.f), vector<int> {0, 100, 0}, Color::White);
 	this->font = _font;
 	this->position->initHeadBar(&this->font, this->player);
 	this->won = false;
@@ -387,9 +387,14 @@ void GameState::initPlayer()
 int GameState::amountOfdistricts()
 {
 	int sum = 0;
-	for (auto& i : this->districts)
-		if (i.second->shape.getFillColor() == this->player->playerColor())
+
+	for (map<string, District*>::iterator it = districts.begin(); it != districts.end(); it++)
+	{
+		if ((*it).second->shape.getFillColor() == this->player->playerColor())
+		{
 			sum++;
+		}
+	}
 
 	return sum;
 }
@@ -397,9 +402,11 @@ int GameState::amountOfdistricts()
 int GameState::amountOfEnemydistricts(Enemy* enemy)
 {
 	int sum = 0;
-	for (auto& i : this->districts)
-		if (i.second->shape.getFillColor() == enemy->playerColor())
+	for (map<string, District*>::iterator it = districts.begin(); it != districts.end(); it++)
+	{
+		if ((*it).second->shape.getFillColor() == enemy->playerColor())
 			sum++;
+	}
 
 	return sum;
 }
@@ -418,7 +425,7 @@ void GameState::initEnemies()
 	if (!regex_match(fileName, result, pattern))
 
 	{
-		cout<< "Nieprawidlowy plik TXT z przeciwnikami. Moga pojawic sie bledy!";
+		cout << "Nieprawidlowy plik TXT z przeciwnikami. Moga pojawic sie bledy!";
 	}
 	fstream plik;
 	plik.open(fileName);
