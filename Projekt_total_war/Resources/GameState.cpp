@@ -2,13 +2,20 @@
 /*
 Co ostatnio zrobione?
 
+
 TO DO LIST
 1. Sztuczna inteligencja - w trakcie ;)
 2. Sprawdzenie koñca
 3. pare jednostek dla gracza
 4. jakaœ iloœæ w ka¿dym mieœcie
+3. pare jednostek dla gracza
 5. dzielenie + nazwy przycisków
 6. tekst jakie jednostki siê dodaje
+TO DO LIST
+1. Sztuczna inteligencja - w trakcie ;)
+2. Sprawdzenie koñca
+
+
 Bugs:
 1. Przytrzymanie (ale zwyk³e klikniêcie tak samo) myszy ci¹gle dodaje jednostki, a te¿ przy wchodzeniu do miasta od razu klika w przycisk (przez co np. mo¿e od razu ulepszyæ miasto albo wejœæ do rekrutowania jednostek)
 
@@ -28,7 +35,9 @@ GameState::GameState(RenderWindow* window, stack<State*>* _states, Font _font)
 	this->initView();
 	this->initPlayer();
 	this->initEnemies();
-	this->initUnit(sf::Vector2f(0.f, 0.f), vector<int> {});
+	this->initUnit(sf::Vector2f(0.f, 0.f), vector<int> {10, 30 ,0});
+	this->initUnit(sf::Vector2f(420.f, 50.f), vector<int> {10,15,12});
+	this->initUnit(sf::Vector2f(550.f, 520.f), vector<int> {0,100,0});
 	this->font = _font;
 	this->position->initHeadBar(&this->font, this->player);
 }
@@ -89,9 +98,13 @@ void GameState::update()
 			this->unit[this->whichUnit]->updateChoosen(mouseposview, i.second->returnIsCursorOnDistrict(), this->unit, i.second->cities, this->enemies);
 			if (this->unit[whichUnit])
 			{
-				if (this->unit[this->whichUnit]->ifNewUnit())
+				if (this->unit[this->whichUnit]->ifNewUnit() && (this->unit[this->whichUnit]->archers + this->unit[this->whichUnit]->knights + this->unit[this->whichUnit]->horses )>6 )
 				{
-					initUnit(sf::Vector2f(this->unit[this->whichUnit]->UnitShape.getPosition().x + 30, this->unit[this->whichUnit]->UnitShape.getPosition().y + 30), vector<int> {});
+
+					initUnit(sf::Vector2f(this->unit[this->whichUnit]->UnitShape.getPosition().x + 30, this->unit[this->whichUnit]->UnitShape.getPosition().y + 30), vector<int> {this->unit[this->whichUnit]->knights/2, this->unit[this->whichUnit]->horses/2, this->unit[this->whichUnit]->archers/2});
+					this->unit[this->whichUnit]->archers -= this->unit[this->whichUnit]->archers / 2;
+					this->unit[this->whichUnit]->knights -= this->unit[this->whichUnit]->knights / 2;
+					this->unit[this->whichUnit]->horses -= this->unit[this->whichUnit]->horses / 2;
 				}
 			}
 			if (this->unit[this->whichUnit]->to_delete)
@@ -107,7 +120,7 @@ void GameState::update()
 	//Wyœwieltanie menu miasta po podwójnym klikniêciu i wyprowadzanie z niego wojska
 	for (auto& i : this->districts)
 	{
-		if (i.second->cities.back()->isInCity())
+		if (i.second->cities.back()->isInCity() && this->player->playerColor()== i.second->cities.back()->colorOfOwner)
 		{
 			this->window->setView(this->view2);
 
@@ -195,8 +208,7 @@ void GameState::update()
 		cout << "Teraz jest runda " << this->turn++ << "\n";
 	}
 
-	//Wyœwietlanie pozycji myszki(czasem przydatne)
-	// << this->mouseposview.x << " " << this->mouseposview.y << "\n";
+	
 }
 
 void GameState::render(RenderTarget* target)
@@ -288,14 +300,10 @@ void GameState::end()
 //Inicjalizacja jednostek
 void GameState::initUnit(sf::Vector2f position, vector<int> amountOfTroops)
 {
-	if (this->unit.size() >= howManyUnitsOnMap)
-	{
-		cout << "Nie mozna miec na raz wiecej niz howManyUnitsOnMap(5) jednostek na mapie\n";
-	}
-	else
-	{
+	
+	
 		this->unit.push_back(new Unit(this->player->playerColor(), amountOfTroops, position));
-	}
+	
 }
 
 //Zmienia wybran¹ jednostkê po klikniêciu na ni¹ lewym przyciskiem myszy i schowanie okienka split jeœli zosta³a wybrana inna
