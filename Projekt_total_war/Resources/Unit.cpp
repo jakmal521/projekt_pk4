@@ -159,7 +159,6 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, ve
 						for (int i = 0; i < cities.size(); i++)
 						{	//Dodawanie z jednostki do miasta bior¹c pod uwagê limity, w innym przypadku atak miasta
 							if (cities[i]->cityIcon.getGlobalBounds().contains(mpos) && this->colorOfOwner == cities[i]->colorOfOwner)
-
 							{
 								if (cities[i]->archers < cities[i]->archersMax)
 								{
@@ -193,7 +192,6 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, ve
 									this->to_delete = true;
 								}
 							}
-							//cities[i]->cityIcon.getPosition();
 							else if (cities[i]->cityIcon.getGlobalBounds().contains(mpos) && this->colorOfOwner != cities[i]->colorOfOwner)
 							{
 								cout << "Atak na miasto\n";
@@ -372,25 +370,42 @@ void Unit::fight(Unit& enemyUnit)
 	{
 		if (rand() % 500 + 1 > chanceToDefend)
 		{
-			this->knights -= rand() % this->knights;
-			this->archers -= rand() % this->archers;
-			this->horses -= rand() % this->horses;
+			if (this->knights)
+			{
+				this->knights -= rand() % this->knights;
+			}
+			if (this->archers)
+			{
+				this->archers -= rand() % this->archers;
+			}
+			if (this->horses)
+			{
+				this->horses -= rand() % this->horses;
+			}
 			enemyUnit.to_delete = true;
 		}
 		else
 		{
+			if (enemyUnit.knights)
+			{
+				enemyUnit.knights -= rand() % enemyUnit.knights;
+			}
+			if (enemyUnit.archers)
+			{
+				enemyUnit.archers -= rand() % enemyUnit.archers;
+			}
+			if (enemyUnit.horses)
+			{
+				enemyUnit.horses -= rand() % enemyUnit.horses;
+			}
 			this->to_delete = true;
-			enemyUnit.knights -= rand() %enemyUnit.knights;
-			enemyUnit.archers -= rand() % enemyUnit.archers;
-			enemyUnit.horses -= rand() % enemyUnit.horses;
-		}	
+		}
 	}
 }
 //atakowanie miasta
 void Unit::cityAttack(City& city)
 {
 	if (!city.archers && !city.knights && !city.horses)
-
 	{
 		city.colorOfOwner = this->colorOfOwner;
 		return;
@@ -403,9 +418,6 @@ void Unit::cityAttack(City& city)
 	if (chanceToSaveCity > 500)
 	{
 		this->to_delete = true;
-		city.knights -= rand() % city.knights;
-		city.archers -= rand() % city.archers;
-		city.horses -= rand() % city.horses;
 	}
 	else
 	{
@@ -415,15 +427,33 @@ void Unit::cityAttack(City& city)
 			city.archers = 0;
 			city.knights = 0;
 			city.horses = 0;
-			this->knights -= rand() % this->knights;
-			this->archers -= rand() % this->archers;
-			this->horses -= rand() % this->horses;
+			if (this->knights)
+			{
+				this->knights -= rand() % this->knights;
+			}
+			if (this->archers)
+			{
+				this->archers -= rand() % this->archers;
+			}
+			if (this->horses)
+			{
+				this->horses -= rand() % this->horses;
+			}
 		}
 		else
 		{
-			city.knights -= rand() % city.knights;
-			city.archers -= rand() % city.archers;
-			city.horses -= rand() % city.horses;
+			if (city.knights)
+			{
+				city.knights -= rand() % city.knights;
+			}
+			if (city.archers)
+			{
+				city.archers -= rand() % city.archers;
+			}
+			if (city.horses)
+			{
+				city.horses -= rand() % city.horses;
+			}
 			this->to_delete = true;
 		}
 	}

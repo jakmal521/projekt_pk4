@@ -64,155 +64,157 @@ GameState::~GameState()
 }
 //Wyœwietlanie i update ekranu
 void GameState::update()
-{this->end();
-this->ifPlayerWon();
-if (!won)
 {
-	this->mousepos();
-	//update pozycji view i headBar
-	position->update(this->amountOfdistricts(), this->mouseposview);
-
-	//podœwietlanie dystryktów po najechaniu myszk¹
-	for (auto& i : this->districts)
+	this->end();
+	this->ifPlayerWon();
+	if (!won)
 	{
-		i.second->update(this->mouseposview);
-	}
+		this->mousepos();
+		//update pozycji view i headBar
+		position->update(this->amountOfdistricts(), this->mouseposview);
 
-	//Sprawdzenie czy gracz zmieni³ obs³ugiwan¹ jednostkê
-	this->changeUnit();
-
-	//wyœwietlanie X-sa i jednostek na mapie
-	for (auto& i : this->districts)
-	{
-		if (this->unit.size())
+		//podœwietlanie dystryktów po najechaniu myszk¹
+		for (auto& i : this->districts)
 		{
-			//Update wizualny wszystkich jednostek (bez mechaniki gry)
-			for (int j = 0; j < unit.size(); j++)
-			{
-				this->unit[j]->updateAll(mouseposview, i.second->returnIsCursorOnDistrict());
-			}
+			i.second->update(this->mouseposview);
+		}
 
-			//Update jednostki która zosta³a wybrana (tworzenie nowych armi, poruszanie itd.)
-			if (this->whichUnit >= this->unit.size())
-				this->whichUnit = 0;
-			this->unit[this->whichUnit]->updateChoosen(mouseposview, i.second->returnIsCursorOnDistrict(), this->unit, i.second->cities, this->enemies);
-			if (this->unit[whichUnit])
+		//Sprawdzenie czy gracz zmieni³ obs³ugiwan¹ jednostkê
+		this->changeUnit();
+
+		//wyœwietlanie X-sa i jednostek na mapie
+		for (auto& i : this->districts)
+		{
+			if (this->unit.size())
 			{
-				if (this->unit[this->whichUnit]->ifNewUnit() && (this->unit[this->whichUnit]->archers + this->unit[this->whichUnit]->knights + this->unit[this->whichUnit]->horses) > 6)
+				//Update wizualny wszystkich jednostek (bez mechaniki gry)
+				for (int j = 0; j < unit.size(); j++)
 				{
-					initUnit(sf::Vector2f(this->unit[this->whichUnit]->UnitShape.getPosition().x + 30, this->unit[this->whichUnit]->UnitShape.getPosition().y + 30), vector<int> {this->unit[this->whichUnit]->knights / 2, this->unit[this->whichUnit]->horses / 2, this->unit[this->whichUnit]->archers / 2}, this->unit[this->whichUnit]->colorOfOwner);
-					this->unit[this->whichUnit]->archers -= this->unit[this->whichUnit]->archers / 2;
-					this->unit[this->whichUnit]->knights -= this->unit[this->whichUnit]->knights / 2;
-					this->unit[this->whichUnit]->horses -= this->unit[this->whichUnit]->horses / 2;
+					this->unit[j]->updateAll(mouseposview, i.second->returnIsCursorOnDistrict());
 				}
-			}
-			if (this->unit[this->whichUnit]->to_delete)
-			{
-				int a = this->unit[this->whichUnit]->nextUnit;
-				if (this->whichUnit < a) a--;	//przy ³¹czeniu w górê trzeba odj¹æ 1 (np. gdy ³¹czymy z 1 do 3 to usunie nam 1-sz¹ jednostkê wiêc musimy wybraæ 2 miejse bo tam wskoczy jednostka nr.3)
-				this->unit.erase(this->unit.begin() + this->whichUnit);
-				this->whichUnit = a;
-			}
-		}
-	}
 
-	//Wyœwieltanie menu miasta po podwójnym klikniêciu i wyprowadzanie z niego wojska
-	for (auto& i : this->districts)
-	{
-		if (i.second->cities.back()->isInCity() && this->player->playerColor() == i.second->cities.back()->colorOfOwner)
-		{
-			this->window->setView(this->view2);
-
-			this->states->push(new CityState(this->window, this->font, this->states, i.second->cities.back()[0], this->player->gold, this->player));
-			i.second->cities.back()->setNotInCity();
-		}
-		if (i.second->cities.back()->isUnitsDeployed())
-		{
-			if (i.second->cities.back()->colorOfOwner == Color::Red)
-			{
-				initUnit(i.second->cities.back()->getPosition(), i.second->cities.back()->howManyUnits(), i.second->cities.back()->colorOfOwner);
-				i.second->cities.back()->deleteTroops();
-			}
-			else
-			{
-				initUnit(i.second->cities.back()->getPosition(), i.second->cities.back()->howManyUnits(), i.second->cities.back()->colorOfOwner);
-				i.second->cities.back()->deleteTroops();
-			}
-		}
-		if (i.second->cities.back()->isToUpdate())
-		{
-			cout << "Ulepszylem miasto\n";
-			if (this->player->getGold() > i.second->cities.back()->getGoldToUpgrade())
-			{
-				i.second->sizeOfCity++;
-				if (Settlement* ob = dynamic_cast<Settlement*>(i.second->cities.back()))
+				//Update jednostki która zosta³a wybrana (tworzenie nowych armi, poruszanie itd.)
+				if (this->whichUnit >= this->unit.size())
+					this->whichUnit = 0;
+				this->unit[this->whichUnit]->updateChoosen(mouseposview, i.second->returnIsCursorOnDistrict(), this->unit, i.second->cities, this->enemies);
+				if (this->unit[whichUnit])
 				{
-					i.second->cities.push_back(new Village(i.second->cities.back()));
-					i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
-
-					i.second->cities.erase(i.second->cities.begin());
-					this->position->update(amountOfdistricts(), this->mouseposview);
-				}
-				else if (Village* ob = dynamic_cast<Village*>(i.second->cities.back()))
-				{
-					if (i.second->cities.back()->colorOfOwner == Color::Red)
+					if (this->unit[this->whichUnit]->ifNewUnit() && (this->unit[this->whichUnit]->archers + this->unit[this->whichUnit]->knights + this->unit[this->whichUnit]->horses) > 6)
 					{
-						this->player->setGold(this->player->getGold() - i.second->cities.back()->getGoldToUpgrade());
+						initUnit(sf::Vector2f(this->unit[this->whichUnit]->UnitShape.getPosition().x + 30, this->unit[this->whichUnit]->UnitShape.getPosition().y + 30), vector<int> {this->unit[this->whichUnit]->knights / 2, this->unit[this->whichUnit]->horses / 2, this->unit[this->whichUnit]->archers / 2}, this->unit[this->whichUnit]->colorOfOwner);
+						this->unit[this->whichUnit]->archers -= this->unit[this->whichUnit]->archers / 2;
+						this->unit[this->whichUnit]->knights -= this->unit[this->whichUnit]->knights / 2;
+						this->unit[this->whichUnit]->horses -= this->unit[this->whichUnit]->horses / 2;
 					}
-					i.second->cities.push_back(new Town(i.second->cities.back()));
-					i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
-
-					i.second->cities.erase(i.second->cities.begin());
-					this->position->update(amountOfdistricts(), this->mouseposview);
+				}
+				if (this->unit[this->whichUnit]->to_delete)
+				{
+					int a = this->unit[this->whichUnit]->nextUnit;
+					if (this->whichUnit < a) a--;	//przy ³¹czeniu w górê trzeba odj¹æ 1 (np. gdy ³¹czymy z 1 do 3 to usunie nam 1-sz¹ jednostkê wiêc musimy wybraæ 2 miejse bo tam wskoczy jednostka nr.3)
+					this->unit.erase(this->unit.begin() + this->whichUnit);
+					this->whichUnit = a;
 				}
 			}
 		}
-	}
-	for (auto& i : this->enemies)
-	{
-		for (int j = 0; j < i.second.size(); j++)
+
+		//Wyœwieltanie menu miasta po podwójnym klikniêciu i wyprowadzanie z niego wojska
+		for (auto& i : this->districts)
 		{
-			if (i.second[j]->to_delete)
+			if (i.second->cities.back()->isInCity() && this->player->playerColor() == i.second->cities.back()->colorOfOwner)
 			{
-				i.second.erase(i.second.begin() + j);
-				j--;
+				this->window->setView(this->view2);
+
+				this->states->push(new CityState(this->window, this->font, this->states, i.second->cities.back()[0], this->player->gold, this->player));
+				i.second->cities.back()->setNotInCity();
+			}
+			if (i.second->cities.back()->isUnitsDeployed())
+			{
+				if (i.second->cities.back()->colorOfOwner == Color::Red)
+				{
+					initUnit(i.second->cities.back()->getPosition(), i.second->cities.back()->howManyUnits(), i.second->cities.back()->colorOfOwner);
+					i.second->cities.back()->deleteTroops();
+				}
+				else
+				{
+					initUnit(i.second->cities.back()->getPosition(), i.second->cities.back()->howManyUnits(), i.second->cities.back()->colorOfOwner);
+					i.second->cities.back()->deleteTroops();
+				}
+			}
+			if (i.second->cities.back()->isToUpdate())
+			{
+				cout << "Ulepszylem miasto\n";
+				if (this->player->getGold() > i.second->cities.back()->getGoldToUpgrade())
+				{
+					i.second->sizeOfCity++;
+					if (Settlement* ob = dynamic_cast<Settlement*>(i.second->cities.back()))
+					{
+						i.second->cities.push_back(new Village(i.second->cities.back()));
+						i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
+
+						i.second->cities.erase(i.second->cities.begin());
+						this->position->update(amountOfdistricts(), this->mouseposview);
+					}
+					else if (Village* ob = dynamic_cast<Village*>(i.second->cities.back()))
+					{
+						if (i.second->cities.back()->colorOfOwner == Color::Red)
+						{
+							this->player->setGold(this->player->getGold() - i.second->cities.back()->getGoldToUpgrade());
+						}
+						i.second->cities.push_back(new Town(i.second->cities.back()));
+						i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
+
+						i.second->cities.erase(i.second->cities.begin());
+						this->position->update(amountOfdistricts(), this->mouseposview);
+					}
+				}
 			}
 		}
-	}
-	//Rozpoczynanie nowej tury - poruszanie Ai
-	if (this->position->isNextTurn())
-	{
-		for (int i = 0; i < this->enemies.size(); i++)
+		for (auto& i : this->enemies)
 		{
-			//Zauktalizowanie z³ota wroga
-			this->enemies[i].first->updateEnemy(this->districts);
-		//Zauktalizowanie jednostek wroga
-			for (int j = 0; j < this->enemies[i].second.size(); j++)
+			for (int j = 0; j < i.second.size(); j++)
 			{
-				//for (auto& k : this->districts)
-
-				cout << "Przesun \n";
-				this->enemies[i].second[j]->updateAiUnits(this->turn, &this->unit, &this->districts, &this->enemies, i); //Do zrobienia updateAiUnits
+				if (i.second[j]->to_delete)
+				{
+					i.second.erase(i.second.begin() + j);
+					j--;
+				}
 			}
 		}
-		this->updateGold();
+		//Rozpoczynanie nowej tury - poruszanie Ai
+		if (this->position->isNextTurn())
+		{
+			for (int i = 0; i < this->enemies.size(); i++)
+			{
+				//Zauktalizowanie z³ota wroga
+				this->enemies[i].first->updateEnemy(this->districts);
+				//Zauktalizowanie jednostek wroga
+				for (int j = 0; j < this->enemies[i].second.size(); j++)
+				{
+					//for (auto& k : this->districts)
 
-		for (int i = 0; i < unit.size(); i++)
-			unit[i]->setDistance();
+					cout << "Przesun \n";
+					this->enemies[i].second[j]->updateAiUnits(this->turn, &this->unit, &this->districts, &this->enemies, i); //Do zrobienia updateAiUnits
+				}
+			}
+			this->updateGold();
 
-		cout << "Teraz jest runda " << this->turn++ << "\n";
-	}
+			for (int i = 0; i < unit.size(); i++)
+				unit[i]->setDistance();
+
+			cout << "Teraz jest runda " << this->turn++ << "\n";
+		}
 	}
 	else {
-	Text endText;
+		Text endText;
 
-	endText.setFont(this->font);
-	endText.setString("Gratulacje, pokonales wszystkich! To czas zeby odpoczac, nacisnij klawisz delete aby wyjsc z gry. ");
-	endText.setFillColor(Color::Red);
-	endText.setCharacterSize(60);
-	endText.setPosition(0,0);
-	this->window->draw(endText);
-}
+		endText.setFont(this->font);
+		endText.setString("Gratulacje, pokonales wszystkich! To czas zeby odpoczac, nacisnij klawisz delete aby wyjsc z gry. ");
+		endText.setFillColor(Color::Red);
+		endText.setCharacterSize(60);
+		endText.setPosition(0, 0);
+		this->window->draw(endText);
+	}
+	cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
 }
 
 void GameState::render(RenderTarget* target)
