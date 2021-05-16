@@ -4,6 +4,7 @@
 #include "..\Headers\City.h"
 #include "..\Headers\Town.h"
 #include "..\Headers\Button.h"
+#include "..\Headers\Player.h"
 
 #include <sstream>
 #include <fstream>
@@ -13,7 +14,7 @@ class CityState :
 	public State
 {
 public:
-	CityState(RenderWindow* window, Font _font, stack<State*>* _states, City& city, int gold);
+	CityState(RenderWindow* window, Font _font, stack<State*>* _states, City& city, int gold, Player * player);
 
 	~CityState();
 
@@ -33,7 +34,7 @@ private:
 	map<string, Button*>buttons;
 
 	void initButtons();
-	void updateButtons(int playerGold);
+	void updateButtons();
 	void renderButtons(RenderTarget* target);
 	//Wyœwietlanie i update ekranu*/
 
@@ -56,6 +57,8 @@ private:
 	int timeToSeeAlert;
 	//Ile zlota ma wlasciciel
 	int ownerGold;
+	//Obiekt gracz
+	Player* player;
 	//Ukrywanie przycisków i pokazywanie g³ownych przycisków
 	void hidingMainButtons();
 	void showingMainButtons();

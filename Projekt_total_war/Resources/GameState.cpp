@@ -38,6 +38,7 @@ GameState::GameState(RenderWindow* window, stack<State*>* _states, Font _font)
 	this->initUnit(sf::Vector2f(550.f, 520.f), vector<int> {0, 100, 0}, Color::Red);
 	this->font = _font;
 	this->position->initHeadBar(&this->font, this->player);
+	this->won = false;
 }
 
 GameState::~GameState()
@@ -63,10 +64,11 @@ GameState::~GameState()
 }
 //Wyœwietlanie i update ekranu
 void GameState::update()
+{this->end();
+this->ifPlayerWon();
+if (!won)
 {
 	this->mousepos();
-	this->end();
-
 	//update pozycji view i headBar
 	position->update(this->amountOfdistricts(), this->mouseposview);
 
@@ -121,7 +123,7 @@ void GameState::update()
 		{
 			this->window->setView(this->view2);
 
-			this->states->push(new CityState(this->window, this->font, this->states, i.second->cities.back()[0], this->player->getGold()));
+			this->states->push(new CityState(this->window, this->font, this->states, i.second->cities.back()[0], this->player->gold, this->player));
 			i.second->cities.back()->setNotInCity();
 		}
 		if (i.second->cities.back()->isUnitsDeployed())
@@ -145,10 +147,6 @@ void GameState::update()
 				i.second->sizeOfCity++;
 				if (Settlement* ob = dynamic_cast<Settlement*>(i.second->cities.back()))
 				{
-					if (i.second->cities.back()->colorOfOwner == Color::Red)
-					{
-						this->player->setGold(this->player->getGold() - i.second->cities.back()->getGoldToUpgrade());
-					}
 					i.second->cities.push_back(new Village(i.second->cities.back()));
 					i.second->cities.back()->initCity(i.second->cities.front()->getPosition());
 
@@ -187,7 +185,7 @@ void GameState::update()
 		for (int i = 0; i < this->enemies.size(); i++)
 		{
 			//Zauktalizowanie z³ota wroga
-			this->enemies[i].first->updateEnemy(this->districts); //Do zrobienia update enemy
+			this->enemies[i].first->updateEnemy(this->districts);
 		//Zauktalizowanie jednostek wroga
 			for (int j = 0; j < this->enemies[i].second.size(); j++)
 			{
@@ -204,7 +202,17 @@ void GameState::update()
 
 		cout << "Teraz jest runda " << this->turn++ << "\n";
 	}
-	//cout << this->mouseposview.x << " " << this->mouseposview.y << "\n";
+	}
+	else {
+	Text endText;
+
+	endText.setFont(this->font);
+	endText.setString("Gratulacje, pokonales wszystkich! To czas zeby odpoczac, nacisnij klawisz delete aby wyjsc z gry. ");
+	endText.setFillColor(Color::Red);
+	endText.setCharacterSize(60);
+	endText.setPosition(0,0);
+	this->window->draw(endText);
+}
 }
 
 void GameState::render(RenderTarget* target)
@@ -291,6 +299,17 @@ void GameState::end()
 	{
 		this->ifend = true;
 	}
+}
+
+bool GameState::ifPlayerWon()
+{
+	for (auto& i : this->districts)
+	{
+		if (i.second->shape.getFillColor() != this->player->playerColor())
+			return false;
+	}
+
+	return true;
 }
 
 //Inicjalizacja jednostek
