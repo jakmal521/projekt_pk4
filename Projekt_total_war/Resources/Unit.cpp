@@ -15,7 +15,7 @@ Unit::Unit(Color color, vector<int> amountOfTroops, sf::Vector2f position)
 {
 	//Atrybuty jednostki
 	this->colorOfOwner = color;
-	this->distance = 700.f;
+	this->distance = 200.f;
 	if (amountOfTroops.size() == 0)
 	{
 		this->knights = 1;
@@ -193,7 +193,6 @@ void Unit::updateChoosen(sf::Vector2f mpos, bool iCOD, vector <Unit*>& units, ve
 							}
 							else if (cities[i]->cityIcon.getGlobalBounds().contains(mpos) && this->colorOfOwner != cities[i]->colorOfOwner)
 							{
-								
 								this->cityAttack(*cities[i]);
 							}
 						}
@@ -598,7 +597,7 @@ void Unit::updateAiUnits(int turn, vector <Unit*>* units, map<string, District*>
 			}
 		}
 	}
-	if (turn )
+	if (turn)
 	{
 		for (int i = enemies->at(whichEnemyIsChoosen).second.size() - 1; i > 0; i--)
 		{
